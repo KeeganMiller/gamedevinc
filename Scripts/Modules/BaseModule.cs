@@ -25,6 +25,7 @@ public class BaseModule
 {
     public string ModuleName { get; private set;  }
     public EModuleJobType ModuleJobType { get; private set; }
+    public Image ModuleIcon { get; private set; }
 
     // == Number Sets == //
     private int m_MinIndiePoints;
@@ -35,6 +36,19 @@ public class BaseModule
 
     private int m_MinAAAPoints;
     private int m_MaxAAAPoints;
+
+    public BaseModule(string name, EModuleJobType jobType, int indieMin, int indieMax, int iiiMin, int iiiMax, int aaaMin, int aaaMax, string pathToIcon)
+    {
+        m_MinAAAPoints = aaaMin;
+        m_MaxAAAPoints = aaaMax;
+        m_MinIIIPoints = iiiMin;
+        m_MaxIIIPoints = iiiMax;
+        m_MinIndiePoints = indieMin;
+        m_MaxIndiePoints = indieMax; 
+        ModuleJobType = jobType;
+
+        // TODO: Load Path to Icon
+    }
 
     public int GetRequiredProgrammingPoints(EGameSize gameSize, float pointModifier = 1f)
     {
@@ -48,7 +62,7 @@ public class BaseModule
                 return Mathf.FloorToInt(rand.RandiRange(m_MinIIIPoints, m_MaxIIIPoints) * pointModifier);
             case EGameSize.GAME_AAA:
                 return Mathf.FloorToInt(rand.RandfRange(m_MinAAAPoints, m_MaxAAAPoints) * pointModifier);
-            default: return 0;
+            default: return 0; 
         }
     }
     
