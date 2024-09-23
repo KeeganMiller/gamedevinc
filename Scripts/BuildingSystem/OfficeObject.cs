@@ -23,6 +23,15 @@ public partial class OfficeObject : Node3D
     public bool IsPlacing = false;
     public List<GridCell> PlacedInCells { get; protected set; }
 
+    // == Purchase Settings == //
+    [Export]
+    protected int m_Cost;                       // How much this item cost
+    protected float Quality = 1.0f;                             // Reference to the quality of this item (Wears down over time)
+    protected Date m_PurchaseDate;                  // Date the item was purchased
+
+    // TODO: Where down quality over time
+
+
     public override void _Process(double delta)
     {
         base._Process(delta);
