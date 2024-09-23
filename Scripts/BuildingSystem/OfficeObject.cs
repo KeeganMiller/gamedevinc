@@ -15,12 +15,13 @@ public partial class OfficeObject : Node3D
 {
     // == Placing Settings == //
     [Export]
-    private int m_CellsX;
+    protected int m_CellsX;
     [Export]
-    private int m_CellsY;
-    private EFacingDirection m_FacingDirection = EFacingDirection.FACING_Up;
+    protected int m_CellsY;
+    protected EFacingDirection m_FacingDirection = EFacingDirection.FACING_Up;
 
     public bool IsPlacing = false;
+    public List<GridCell> PlacedInCells { get; protected set; }
 
     public override void _Process(double delta)
     {
@@ -49,6 +50,12 @@ public partial class OfficeObject : Node3D
                 }
             }
         }
+    }
+
+    public void PlaceObject(List<GridCell> cells)
+    {
+        IsPlacing = false;
+        PlacedInCells = cells;
     }
 
     public void GetCellSize(out int x, out int y)

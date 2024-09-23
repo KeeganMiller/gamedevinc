@@ -194,6 +194,7 @@ PointIndicator = ExtResource("2_ho2ig")
 m_GridCellsX = 14
 m_GridCellsY = 14
 m_GridCellSize = 1.0
+d_DrawGrid = true
 
 [node name="PlacementController" type="Node3D" parent="GridSystem"]
 script = ExtResource("3_kg0o3")

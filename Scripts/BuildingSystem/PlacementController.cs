@@ -13,6 +13,8 @@ public partial class PlacementController : Node3D
 
     private Camera3D? m_Camera;
 
+    private GridCell m_MouseOverCell;                       // Reference to the cell the mouse is currently over
+
     public override void _Ready()
     {
         base._Ready();
@@ -58,27 +60,45 @@ public partial class PlacementController : Node3D
 
             if(m_GridSystem != null)
             {
-                var cell = m_GridSystem.GetCell(gridPoint);
+                m_MouseOverCell = m_GridSystem.GetCell(gridPoint);
                 
-                if (cell != null)
+                if (m_MouseOverCell != null)
                 {
-                    PlacingObject.GetGridPlacementModifiers(out int up, out int down, out int left, out int right);
 
-                    if(IsPlacementValid(cell.GridCellX, cell.GridCellY, up, down, left, right))
+                    if(IsPlacementValid(m_MouseOverCell.GridCellX, m_MouseOverCell.GridCellY))
                     {
-                        PlacingObject.GlobalPosition = new Vector3(cell.GridCellPosition.X, m_GridSystem.Position.Y, cell.GridCellPosition.Y);
+                        PlacingObject.GlobalPosition = new Vector3(m_MouseOverCell.GridCellPosition.X, m_GridSystem.Position.Y, m_MouseOverCell.GridCellPosition.Y);
                     }
                 }  
             }
         }
+
+        if(IsPlacing && Input.IsActionJustPressed("LeftMouseClick"))
+        {
+            PlaceObject();
+        }
     }
 
-    private bool IsPlacementValid(int currentX, int currentY, int up, int down, int left, int right)
+    private void PlaceObject()
+    {
+        if (m_GridSystem == null || m_MouseOverCell == null || PlacingObject == null)
+            return;
+
+        PlacingObject.GetCellSize(out int sizeX, out int sizeY);
+        if(m_GridSystem.CanPlaceObject(m_MouseOverCell.GridCellX, m_MouseOverCell.GridCellY, sizeX, sizeY))
+        {
+            m_GridSystem.UpdatePlacedCells(m_MouseOverCell.GridCellX, m_MouseOverCell.GridCellY, sizeX, sizeY, out List<GridCell> cells);
+            PlacingObject.PlaceObject(cells);
+            SetPlacingObject(GD.Load<PackedScene>("res://Prefabs/Desk_LevelOne_01.tscn"));
+        }
+    }
+
+    private bool IsPlacementValid(int currentX, int currentY)
     {
         // Get the Cell Size
         PlacingObject.GetCellSize(out int x, out int y);
 
-        if(m_GridSystem != null && m_GridSystem.IsWithinGrid(currentX + x, currentY + y, up, down, left, right))
+        if(m_GridSystem != null && m_GridSystem.IsWithinGrid(currentX + x, currentY + y))
         {
             return true;
         }
