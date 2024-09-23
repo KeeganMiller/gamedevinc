@@ -12,12 +12,13 @@ public partial class GameController : Node3D
         // Load All Modules
         ModuleDatabase = GetNode<ModuleDatabase>("/root/ModuleDatabase");
         if(ModuleDatabase != null)
-        {
             ModuleDatabase.LoadModules();
-            var modules = ModuleDatabase.GetAllModules();
-        } else
-        {
+        else
             GD.PushError("ModuleDatabase::_Ready -> Failed to get reference to the module database");
-        }
+
+        // Load all names
+        StaffMember.LoadNames();
+        var staff = new Programmer();
+        GD.Print($"GameController::_Ready -> {staff.Name}");
     }
 }

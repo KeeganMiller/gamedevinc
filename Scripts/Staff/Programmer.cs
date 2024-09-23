@@ -12,7 +12,7 @@ public class Programmer : StaffMember
     public float ArtificalIntelligence { get; protected set; }
     public float Networking { get; protected set; }
 
-    public Programmer(EModuleJobType jobType) : base(jobType)
+    public Programmer() : base(EModuleJobType.JOB_Programmer)
     {
     }
 
