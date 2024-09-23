@@ -15,6 +15,8 @@ public partial class PlacementController : Node3D
 
     private GridCell m_MouseOverCell;                       // Reference to the cell the mouse is currently over
 
+    private Company m_PlayersCompany;                       // Reference to the players company
+
     public override void _Ready()
     {
         base._Ready();
@@ -26,6 +28,15 @@ public partial class PlacementController : Node3D
         m_GridSystem = (GridSystem)GetTree().GetFirstNodeInGroup("BuildingSystem");
         if (m_GridSystem == null)
             GD.PushWarning("PlacementController::_Ready -> Failed to find reference to the grid system");
+
+        // Get the players company
+        var companyDb = GetNode<CompanyDatabase>("/root/CompanyDatabase");
+        if (companyDb != null)
+            m_PlayersCompany = companyDb.PlayersCompany;
+
+        // Validate the players company
+        if (m_PlayersCompany == null)
+            GD.PushWarning("PlacementController::_Ready -> Failed to find reference to the players company");
 
         // Testing placing object
         SetPlacingObject(GD.Load<PackedScene>("res://Prefabs/Desk_LevelOne_01.tscn"));
@@ -82,6 +93,9 @@ public partial class PlacementController : Node3D
     private void PlaceObject()
     {
         if (m_GridSystem == null || m_MouseOverCell == null || PlacingObject == null)
+            return;
+
+        if (m_PlayersCompany == null || m_PlayersCompany.CompanyFans < PlacingObject.Cost)
             return;
 
         PlacingObject.GetCellSize(out int sizeX, out int sizeY);

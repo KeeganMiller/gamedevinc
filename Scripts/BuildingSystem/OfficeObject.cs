@@ -25,8 +25,8 @@ public partial class OfficeObject : Node3D
 
     // == Purchase Settings == //
     [Export]
-    protected int m_Cost;                       // How much this item cost
-    protected float Quality = 1.0f;                             // Reference to the quality of this item (Wears down over time)
+    public int Cost { get; protected set; }                       // How much this item cost
+    public float Quality { get; protected set; } = 1.0f;                             // Reference to the quality of this item (Wears down over time)
     protected Date m_PurchaseDate;                  // Date the item was purchased
 
     // TODO: Where down quality over time
