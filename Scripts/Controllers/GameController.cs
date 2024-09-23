@@ -6,6 +6,9 @@ namespace GameDevInc;
 public partial class GameController : Node3D
 {
     public ModuleDatabase ModuleDatabase { get; private set; }
+
+    private StaffMember staff;
+    private BaseModule module;
     public override void _Ready()
     {
         base._Ready();
@@ -18,7 +21,20 @@ public partial class GameController : Node3D
 
         // Load all names
         StaffMember.LoadNames();
-        var staff = new Programmer();
+        staff = new Programmer();
         GD.Print($"GameController::_Ready -> {staff.Name}");
+
+        // Test out the module work
+        module = ModuleDatabase.GetAllModules()[0].CreateModule(EGameSize.GAME_Indie);
+        staff.AddModule(module);
+        
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (staff != null)
+            staff._Update((float)delta);
     }
 }

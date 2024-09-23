@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Diagnostics;
 
 namespace GameDevInc;
 
@@ -27,11 +28,16 @@ public enum EGameSize
 
 public class BaseModule
 {
-    
+    // == Production Min/Max Values == //
+    private const float c_MinPointsProduced = 0.33f;
+    private const float c_MaxPointsProduced = 1.33f;
+    private const float c_MinQualityProduced = 0.012f;
+    private const float c_MaxQualityProduced = 0.634f;
+
+
     public string ModuleName { get; private set;  }
     public EModuleJobType ModuleJobType { get; private set; }
     public Image ModuleIcon { get; private set; }
-
 
     // == Number Sets == //
     private int m_MinIndiePoints;
@@ -42,6 +48,10 @@ public class BaseModule
 
     private int m_MinAAAPoints;
     private int m_MaxAAAPoints;
+
+    public float CurrentPoints { get; protected set; }
+    public float RequiredPoints { get; protected set; }
+    public float ModuleQuality { get; protected set; }
 
     public BaseModule(string name, EModuleJobType jobType, int indieMin, int indieMax, int iiiMin, int iiiMax, int aaaMin, int aaaMax, string pathToIcon)
     {
@@ -56,6 +66,23 @@ public class BaseModule
 
         if(!string.IsNullOrEmpty(pathToIcon))
             ModuleIcon = GD.Load<Image>(pathToIcon);
+
+    }
+
+    public BaseModule(string name, EModuleJobType jobType, int indieMin, int indieMax, int iiiMin, int iiiMax, int aaaMin, int aaaMax, Image icon)
+    {
+        ModuleName = name;
+        m_MinAAAPoints = aaaMin;
+        m_MaxAAAPoints = aaaMax;
+        m_MinIIIPoints = iiiMin;
+        m_MaxIIIPoints = iiiMax;
+        m_MinIndiePoints = indieMin;
+        m_MaxIndiePoints = indieMax;
+        ModuleJobType = jobType;
+
+
+        ModuleIcon = icon;
+
     }
 
     /// <summary>
@@ -64,7 +91,7 @@ public class BaseModule
     /// <param name="gameSize">Size of the game we are creating</param>
     /// <param name="pointModifier">Modifier</param>
     /// <returns></returns>
-    public int GetRequiredProgrammingPoints(EGameSize gameSize, float pointModifier = 1f)
+    public int SetRequiredPoints(EGameSize gameSize, float pointModifier = 1f)
     {
         RandomNumberGenerator rand = new RandomNumberGenerator();
         rand.Randomize();  
@@ -78,6 +105,29 @@ public class BaseModule
                 return Mathf.FloorToInt(rand.RandiRange(m_MinAAAPoints, m_MaxAAAPoints) * pointModifier);
             default: return 0; 
         }
+    }
+
+    public bool WorkOnModule(StaffMember worker)
+    {
+        RandomNumberGenerator rand = new RandomNumberGenerator();
+        rand.Randomize();
+        CurrentPoints += rand.RandfRange(c_MinPointsProduced, c_MaxPointsProduced) * ((worker.GeneralStats.WorkSpeed / 100) + 1);
+        ModuleQuality += rand.RandfRange(c_MinQualityProduced, c_MaxQualityProduced) * ((worker.GeneralStats.WorkQuality / 100) + 1);
+
+        if(CurrentPoints > RequiredPoints)
+        {
+            ModuleDatabase.ModuleInventory.Add(this);
+            return true;
+        }
+
+        return false;
+    }
+
+    public BaseModule CreateModule(EGameSize size)
+    {
+        var module = new BaseModule(ModuleName, ModuleJobType, m_MinIndiePoints, m_MaxIndiePoints, m_MinIIIPoints, m_MaxIIIPoints, m_MinAAAPoints, m_MaxIIIPoints, ModuleIcon);
+        module.SetRequiredPoints(size);
+        return module;
     }
 }
 

@@ -41,9 +41,12 @@ public abstract class StaffMember
     private const string c_NameResourcePath = "res://Data/Names.json";
     private static List<StaffNameData> Names = new List<StaffNameData>();
 
+    // == Current Task Data == //
+    private List<BaseModule> m_CurrentWorkList = new List<BaseModule>();                    // List of current task queued
+    private Timer m_WorkTimer;
 
     // Assigned Desk
-    // Task Queue
+
     // Boss/Team
     // Burnout
     // Hours
@@ -60,6 +63,8 @@ public abstract class StaffMember
         GenerateStats();                    // Call the generate stats method on the inheritied classes
 
         GeneralStats = new GeneralStaffStats();
+
+        m_WorkTimer = new Timer(3f, WorkOnModules, true, true);
     }
 
     public void AddXP(float xp)
@@ -81,6 +86,32 @@ public abstract class StaffMember
         rand.Randomize();
         AddXP(rand.RandfRange(1, 1000));
     }
+
+    public virtual void _Update(float deltaTime)
+    {
+        if (m_WorkTimer != null)
+            m_WorkTimer._Update(deltaTime);
+    }
+
+    public void WorkOnModules()
+    {
+        if (m_CurrentWorkList.Count <= 0)
+            return;
+
+        // Work on the module and remove it if it's complete
+        if (m_CurrentWorkList[0].WorkOnModule(this))
+            m_CurrentWorkList.RemoveAt(0);
+
+        RandomNumberGenerator rand = new RandomNumberGenerator();
+        rand.Randomize();
+        if (m_WorkTimer != null)
+            m_WorkTimer.TimerLength = rand.RandfRange(1, 7);
+    }
+
+    public void AddModule(BaseModule module)
+        => m_CurrentWorkList.Add(module);
+    public void RemoveModule(BaseModule module)
+        => m_CurrentWorkList.Remove(module);
 
     public static void LoadNames()
     {

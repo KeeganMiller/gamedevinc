@@ -11,6 +11,8 @@ public partial class ModuleDatabase : Node3D
     public const string c_ModuleDataPath = "res://Data/Modules.json";
     private List<BaseModule> m_Modules = new List<BaseModule>();
 
+    public static List<BaseModule> ModuleInventory = new List<BaseModule>();
+
     /// <summary>
     /// Handles loading all the available modules
     /// </summary>
