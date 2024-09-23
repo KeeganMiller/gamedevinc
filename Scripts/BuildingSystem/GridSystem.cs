@@ -63,6 +63,34 @@ public partial class GridSystem : Node3D
             }
         }
     }
+
+    public GridCell GetCell(Vector2 position)
+    {
+        for(var y = 0; y < m_GridCellsY; ++y)
+        {
+            for(var x = 0; x < m_GridCellsX; ++x)
+            {
+                var cell = m_Grid[x, y];
+                if(position.X >= cell.GridCellPosition.X && position.X < (cell.GridCellPosition.X + m_GridCellSize))
+                {
+                    if(position.Y >= cell.GridCellPosition.Y && position.Y < (cell.GridCellY + m_GridCellSize))
+                    {
+                        return cell;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public GridCell GetCell(int x, int y)
+    {
+        if(x >= 0 && x < m_Grid.GetLength(0) && y >= 0 && y < m_Grid.GetLength(1))
+            return m_Grid[x, y];
+
+        return null;
+    }
 }
 
 public class GridCell
