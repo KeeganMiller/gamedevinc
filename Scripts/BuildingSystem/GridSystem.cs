@@ -80,7 +80,7 @@ public partial class GridSystem : Node3D
                 var cell = m_Grid[x, y];
                 if(position.X >= cell.GridCellPosition.X && position.X < (cell.GridCellPosition.X + m_GridCellSize))
                 {
-                    if(position.Y >= cell.GridCellPosition.Y && position.Y < (cell.GridCellY + m_GridCellSize))
+                    if(position.Y >= cell.GridCellPosition.Y && position.Y < (cell.GridCellPosition.Y + m_GridCellSize))
                     {
                         return cell;
                     }

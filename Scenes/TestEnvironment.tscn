@@ -185,7 +185,7 @@ transform = Transform3D(0.701556, 0, 0.712614, -0.633315, 0.458448, 0.623488, -0
 light_energy = 3.0
 
 [node name="CornerDesk1_C1_01" type="Node3D" parent="."]
-transform = Transform3D(2.29197, 0, 0, 0, 2.29197, 0, 0, 0, 2.29197, 1.15575, 0.815036, -5.12137)
+transform = Transform3D(2.29197, 0, 0, 0, 2.29197, 0, 0, 0, 2.29197, 7.44042, 0.815036, 6.92804)
 
 [node name="GridSystem" type="Node3D" parent="." groups=["BuildingSystem"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9022, 0.802484, -6.39923)
