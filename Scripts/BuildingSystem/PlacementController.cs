@@ -8,7 +8,7 @@ public partial class PlacementController : Node3D
 {
     public bool IsPlacing = true;
 
-    public Node3D PlacingObject;                        // Object that we are placing
+    public OfficeObject PlacingObject;                        // Object that we are placing
     private GridSystem m_GridSystem;
 
     private Camera3D? m_Camera;
