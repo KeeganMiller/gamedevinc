@@ -21,7 +21,7 @@ public class Theme
     {
         if(FileAccess.FileExists(c_ThemeResourcePath))
         {
-            var file = FileAccess.Open(c_ThemeResourcePath);
+            var file = FileAccess.Open(c_ThemeResourcePath, FileAccess.ModeFlags.Read);
             if(file != null && file.IsOpen())
             {
                 var data = file.GetAsText();
