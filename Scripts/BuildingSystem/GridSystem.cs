@@ -17,11 +17,15 @@ public partial class GridSystem : Node3D
 
     private GridCell[,] m_Grid;
 
+    [Export]
+    private bool d_DrawGrid = false;
+
     public override void _Ready()
     {
         base._Ready();
         CreateGrid();
-        DrawDebugPoints();
+        if(d_DrawGrid)
+            DrawDebugPoints();
     }
 
     private void CreateGrid()
@@ -89,6 +93,19 @@ public partial class GridSystem : Node3D
         }
 
         return null;
+    }
+
+    public bool IsWithinGrid(int x, int y)
+        => x >= 0 && x < m_Grid.GetLength(0) && y > 0 && y < m_Grid.GetLength(1);
+
+    public bool IsWithinGrid(int x, int y, int up, int down, int left, int right)
+    {
+        var minX = 0 - left;
+        var maxX = m_Grid.GetLength(0) + right;
+        var minY = 0 - up;
+        var maxY = m_Grid.GetLength(1) + down;
+
+        return x >= minX && x < maxX && y >= minY && y < maxY;
     }
 
     public GridCell GetCell(int x, int y)

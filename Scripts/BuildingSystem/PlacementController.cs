@@ -62,12 +62,28 @@ public partial class PlacementController : Node3D
                 
                 if (cell != null)
                 {
-                    GD.Print($"X: {cell.GridCellX}, Y: {cell.GridCellY}");
-                    PlacingObject.GlobalPosition = new Vector3(cell.GridCellPosition.X, m_GridSystem.Position.Y, cell.GridCellPosition.Y);
-                }
-                    
+                    PlacingObject.GetGridPlacementModifiers(out int up, out int down, out int left, out int right);
+
+                    if(IsPlacementValid(cell.GridCellX, cell.GridCellY, up, down, left, right))
+                    {
+                        PlacingObject.GlobalPosition = new Vector3(cell.GridCellPosition.X, m_GridSystem.Position.Y, cell.GridCellPosition.Y);
+                    }
+                }  
             }
         }
+    }
+
+    private bool IsPlacementValid(int currentX, int currentY, int up, int down, int left, int right)
+    {
+        // Get the Cell Size
+        PlacingObject.GetCellSize(out int x, out int y);
+
+        if(m_GridSystem != null && m_GridSystem.IsWithinGrid(currentX + x, currentY + y, up, down, left, right))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void SetPlacingObject(PackedScene obj)

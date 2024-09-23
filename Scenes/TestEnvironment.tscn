@@ -191,8 +191,8 @@ transform = Transform3D(2.29197, 0, 0, 0, 2.29197, 0, 0, 0, 2.29197, 7.44042, 0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9022, 0.802484, -6.39923)
 script = ExtResource("1_52iae")
 PointIndicator = ExtResource("2_ho2ig")
-m_GridCellsX = 13
-m_GridCellsY = 13
+m_GridCellsX = 14
+m_GridCellsY = 14
 m_GridCellSize = 1.0
 
 [node name="PlacementController" type="Node3D" parent="GridSystem"]
