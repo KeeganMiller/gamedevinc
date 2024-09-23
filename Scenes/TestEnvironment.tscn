@@ -152,7 +152,7 @@ mesh = SubResource("BoxMesh_nqayi")
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.688165, -0.323265, 0.649561, -1.98949e-08, 0.895261, 0.445542, -0.725555, -0.306606, 0.616087, 17.0372, 17.7337, 17.4694)
+transform = Transform3D(0.766044, -0.28681, 0.575253, 0, 0.894935, 0.446198, -0.642788, -0.341807, 0.68556, 15.1799, 17.7337, 18.7621)
 projection = 1
 current = true
 size = 20.0
