@@ -17,10 +17,20 @@ public enum ENameType
     NAME_Last,  
 }
 
-public class StaffMember
+public abstract class StaffMember
 {
     public string Name { get; protected set; }                    // Name of the staff member
     public EModuleJobType JobType { get; protected set; }                 // Reference to the staff members job type
+
+    // == Leveling Properties == //
+    // XP Leveling
+    public float XP { get; protected set; }
+    protected float m_NextLevelXP = 125;
+    protected const float c_NextLevelXPModifier = 1.4f;
+    // Level properties
+    public int Level { get; protected set; }
+    public int SkillPoints { get; protected set; }
+    public float XP_Modifier = 1f;
 
 
     // == Generator Properties == //
@@ -34,10 +44,36 @@ public class StaffMember
     // Burnout
     // Hours
 
-    public StaffMember(string name, EModuleJobType jobType)
+    public StaffMember(EModuleJobType jobType)
     {
-        Name = name;
-        JobType = jobType;
+        // Generate Random Name
+        RandomNumberGenerator rand = new RandomNumberGenerator();
+        rand.Randomize();
+        Name = GetNewName(rand.Randi() > 0 ? EStaffSex.SEX_Male : EStaffSex.SEX_Female);
+
+        JobType = jobType;              // Set the job type
+        GenerateLevelDetails();                 // Generate the staff members level
+        GenerateStats();                    // Call the generate stats method on the inheritied classes
+    }
+
+    public void AddXP(float xp)
+    {
+        var lastXP = XP;
+        XP += xp * XP_Modifier;
+        while(XP < m_NextLevelXP)
+        {
+            Level += 1;
+            SkillPoints += 1;
+            m_NextLevelXP = lastXP * c_NextLevelXPModifier;
+        }
+    }
+
+    protected abstract void GenerateStats();
+    protected virtual void GenerateLevelDetails()
+    {
+        RandomNumberGenerator rand = new RandomNumberGenerator();
+        rand.Randomize();
+        AddXP(rand.RandfRange(1, 1000));
     }
 
     public static void LoadNames()
@@ -65,11 +101,6 @@ public class StaffMember
         {
             GD.PushError("StafFMember::LoadNames -> Failed to locate name json file");
         }
-    }
-
-    public static void Generate(EModuleJobType jobType)
-    {
-        
     }
 
     /// <summary>
