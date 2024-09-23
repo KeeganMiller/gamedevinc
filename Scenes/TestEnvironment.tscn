@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=4 uid="uid://c75djsxvf0tdm"]
+[gd_scene load_steps=22 format=4 uid="uid://c75djsxvf0tdm"]
 
 [ext_resource type="Script" path="res://Scripts/BuildingSystem/GridSystem.cs" id="1_52iae"]
 [ext_resource type="Texture2D" uid="uid://bmdgcmnc2f86t" path="res://Textures/WoodenFloor.png" id="1_jeplt"]
 [ext_resource type="Texture2D" uid="uid://dji3qpkk52ti0" path="res://Textures/RedBrickWall.png" id="1_xxfr0"]
 [ext_resource type="PackedScene" uid="uid://crsu68rnhijxc" path="res://Meshes/PointIndicator.fbx" id="2_ho2ig"]
 [ext_resource type="Script" path="res://Scripts/BuildingSystem/PlacementController.cs" id="3_kg0o3"]
+[ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="3_nmql5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pte0c"]
 resource_name = "Trunk"
@@ -175,7 +176,10 @@ surface_material_override/0 = SubResource("ORMMaterial3D_u5tb8")
 transform = Transform3D(0.766044, -0.468211, 0.440403, 0, 0.685145, 0.728407, -0.642788, -0.557992, 0.524851, 13.2903, 23.7307, 16.4594)
 projection = 1
 current = true
-size = 20.5228
+size = 20.0
+script = ExtResource("3_nmql5")
+m_MinCameraZoom = 8.0
+m_MaxCameraZoom = 35.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xcfrt")
