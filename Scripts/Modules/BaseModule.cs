@@ -27,12 +27,11 @@ public enum EGameSize
 
 public class BaseModule
 {
-    public const string c_ModuleDataPath = "res://Data/Modules.json";
+    
     public string ModuleName { get; private set;  }
     public EModuleJobType ModuleJobType { get; private set; }
     public Image ModuleIcon { get; private set; }
 
-    private static List<BaseModule> m_Modules = new List<BaseModule>();
 
     // == Number Sets == //
     private int m_MinIndiePoints;
@@ -46,6 +45,7 @@ public class BaseModule
 
     public BaseModule(string name, EModuleJobType jobType, int indieMin, int indieMax, int iiiMin, int iiiMax, int aaaMin, int aaaMax, string pathToIcon)
     {
+        ModuleName = name;
         m_MinAAAPoints = aaaMin;
         m_MaxAAAPoints = aaaMax;
         m_MinIIIPoints = iiiMin;
@@ -54,7 +54,8 @@ public class BaseModule
         m_MaxIndiePoints = indieMax; 
         ModuleJobType = jobType;
 
-        ModuleIcon = GD.Load<Image>(pathToIcon);
+        if(!string.IsNullOrEmpty(pathToIcon))
+            ModuleIcon = GD.Load<Image>(pathToIcon);
     }
 
     /// <summary>
@@ -78,78 +79,6 @@ public class BaseModule
             default: return 0; 
         }
     }
-
-    /// <summary>
-    /// Handles loading all the available modules
-    /// </summary>
-    public static void LoadModules()
-    {
-        // check the file exist
-        if(FileAccess.FileExists(c_ModuleDataPath))
-        {
-            // Open the file
-            var file = FileAccess.Open(c_ModuleDataPath, FileAccess.ModeFlags.Read);
-            var data = file.GetAsText();                    // Read the file data
-
-            var tokens = JArray.Parse(data);                    // Create tokens
-            foreach(var token in tokens)
-            {
-                // Create the json data
-                var tokenData = JsonConvert.DeserializeObject<BaseModuleJsonData>(token.ToString());     
-                // Validate the token data
-                if(tokenData != null)
-                {
-                    // Create and add the newly created module
-                    var module = new BaseModule(tokenData.ModuleName, (EModuleJobType)tokenData.ModuleJobType,
-                        tokenData.MinIndie, tokenData.MaxIndie,
-                        tokenData.MinIII, tokenData.MaxIII,
-                        tokenData.MinAAA, tokenData.MaxAAA, tokenData.IconPath);
-                    m_Modules.Add(module);
-                } else
-                {
-                    GD.PushError("BaseModule::LoadModules -> Token data not valid");
-                }
-            }
-        } else
-        {
-            GD.PushError("BaseModule::LoadModules -> Module files don't exist");
-        }
-    }
-
-    public static List<BaseModule> GetAllModules()
-        => m_Modules;
-
-    /// <summary>
-    /// Gets the module by a specific name
-    /// </summary>
-    /// <param name="name">Name of the module</param>
-    /// <returns>Base Module</returns>
-    public static BaseModule GetModule(string name)
-    {
-        foreach(var module in m_Modules)
-        {
-            if (module.ModuleName == name)
-                return module;
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// Gets all modules related to the passed in job type
-    /// </summary>
-    /// <param name="jobType">Modules job type</param>
-    /// <returns>List of related modules</returns>
-    public static List<BaseModule> GetModulesByJob(EModuleJobType jobType)
-    {
-        List<BaseModule> modules = new List<BaseModule>();
-        foreach (var module in m_Modules)
-            if (module.ModuleJobType == jobType)
-                modules.Add(module);
-
-        return modules;
-    }
-    
 }
 
 public class BaseModuleJsonData
