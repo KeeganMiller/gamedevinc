@@ -1,6 +1,17 @@
 [
 	{
-		"ModuleName": "TestModuleOne",
+		"ModuleName": "Core Mechanic",
+		"ModuleJobType": 0,
+		"IconPath": "",
+		"MinAAA": 75,
+		"MaxAAA": 150,
+		"MinIII": 43,
+		"MaxIII": 82,
+		"MinIndie": 12,
+		"MaxIndie": 22
+	},
+	{
+		"ModuleName": "Core Shader",
 		"ModuleJobType": 0,
 		"IconPath": "",
 		"MinAAA": 75,
@@ -11,18 +22,7 @@
 		"MaxIndie": 57
 	},
 	{
-		"ModuleName": "TestModuleTwo",
-		"ModuleJobType": 0,
-		"IconPath": "",
-		"MinAAA": 75,
-		"MaxAAA": 150,
-		"MinIII": 43,
-		"MaxIII": 82,
-		"MinIndie": 33,
-		"MaxIndie": 57
-	},
-	{
-		"ModuleName": "TestModuleThree",
+		"ModuleName": "Super Basic AI",
 		"ModuleJobType": 0,
 		"IconPath": "",
 		"MinAAA": 75,
