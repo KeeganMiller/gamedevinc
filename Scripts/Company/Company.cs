@@ -32,5 +32,13 @@ public class Company
             m_OwnedStudios.Remove(studio);
         }
     }
+
+    public virtual void _Update(float deltaTime)
+    {
+        foreach(var staff in StaffMembers)
+        {
+            staff._Update(deltaTime);
+        }
+    }
     
 }
