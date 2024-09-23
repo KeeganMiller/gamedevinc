@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=4 uid="uid://c75djsxvf0tdm"]
+[gd_scene load_steps=15 format=4 uid="uid://c75djsxvf0tdm"]
 
 [ext_resource type="Script" path="res://Scripts/BuildingSystem/GridSystem.cs" id="1_52iae"]
 [ext_resource type="PackedScene" uid="uid://crsu68rnhijxc" path="res://Meshes/PointIndicator.fbx" id="2_ho2ig"]
+[ext_resource type="Script" path="res://Scripts/BuildingSystem/PlacementController.cs" id="3_kg0o3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pte0c"]
 resource_name = "Trunk"
@@ -86,6 +87,9 @@ albedo_color = Color(0, 0.725207, 0.43195, 1)
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_6btng"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3xoy3"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
 [sub_resource type="BoxMesh" id="BoxMesh_nqayi"]
 
 [sub_resource type="Environment" id="Environment_xcfrt"]
@@ -127,6 +131,11 @@ mesh = SubResource("BoxMesh_rnbql")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ORMMaterial3D_6btng")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Building/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building/Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3xoy3")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Building"]
 transform = Transform3D(0.375589, 0, 0, 0, 6.53864, 0, 0, 0, 13.6977, -6.16448, 4.12883, 0)
 mesh = SubResource("BoxMesh_nqayi")
@@ -143,7 +152,10 @@ mesh = SubResource("BoxMesh_nqayi")
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.799013, -0.26791, 0.538332, -1.31643e-08, 0.895261, 0.445542, -0.601313, -0.355994, 0.715326, 11.1382, 17.7337, 16.3853)
+transform = Transform3D(0.688165, -0.323265, 0.649561, -1.98949e-08, 0.895261, 0.445542, -0.725555, -0.306606, 0.616087, 17.0372, 17.7337, 17.4694)
+projection = 1
+current = true
+size = 20.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xcfrt")
@@ -158,3 +170,6 @@ PointIndicator = ExtResource("2_ho2ig")
 m_GridCellsX = 13
 m_GridCellsY = 13
 m_GridCellSize = 1.0
+
+[node name="PlacementController" type="Node3D" parent="GridSystem"]
+script = ExtResource("3_kg0o3")
