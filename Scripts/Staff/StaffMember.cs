@@ -33,6 +33,9 @@ public abstract class StaffMember
     public int SkillPoints { get; protected set; }
     public float XP_Modifier = 1f;
 
+    // == Stats == //
+    public GeneralStaffStats GeneralStats { get; protected set; }
+
 
     // == Generator Properties == //
     private const string c_NameResourcePath = "res://Data/Names.json";
@@ -55,6 +58,8 @@ public abstract class StaffMember
         JobType = jobType;              // Set the job type
         GenerateLevelDetails();                 // Generate the staff members level
         GenerateStats();                    // Call the generate stats method on the inheritied classes
+
+        GeneralStats = new GeneralStaffStats();
     }
 
     public void AddXP(float xp)
