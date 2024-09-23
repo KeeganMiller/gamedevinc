@@ -19,4 +19,18 @@ public partial class OfficeObject : Node3D
     [Export]
     private int m_CellsY;
     private EFacingDirection m_FacingDirection;
+
+    public bool IsPlacing = false;
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if(IsPlacing)
+        {
+            if(Input.IsActionJustPressed("RotateObject"))
+            {
+                this.Rotate(Vector3.Up, Mathf.DegToRad(90f));
+            }
+        }
+    }
 }

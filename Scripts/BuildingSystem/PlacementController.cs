@@ -77,6 +77,7 @@ public partial class PlacementController : Node3D
             var spawned = (OfficeObject)obj.Instantiate();
             AddChild(spawned);
             PlacingObject = spawned;
+            PlacingObject.IsPlacing = true;
         }
     }
 }
