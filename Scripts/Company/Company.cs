@@ -10,13 +10,18 @@ public class Company
 
     public Company ParentCompany;
 
-    public int CompanyFans = 0;
-    public int CompanyCurrency = 200000;
+    public int CompanyFans { get; private set; } = 0;
+    public int CompanyFunds { get; private set; } = 200000;
 
     public List<StaffMember> StaffMembers = new List<StaffMember>();
 
     private List<Company> m_OwnedStudios = new List<Company>();                     // List of children studios
     // TODO: Add List of games
+
+    public Company(string name)
+    {
+        CompanyName = name;
+    }
 
     /// <summary>
     /// Adds a new game studio to this as owned
@@ -52,5 +57,10 @@ public class Company
             staff._Update(deltaTime);
         }
     }
+
+    public virtual void TakeFunds(int amount)
+        => CompanyFunds -= amount;
+    public virtual void AddFunds(int amount)
+        => CompanyFunds += amount;
     
 }
