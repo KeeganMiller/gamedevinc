@@ -20,6 +20,7 @@ public partial class GameController : Node3D
             GD.PushError("ModuleDatabase::_Ready -> Failed to get reference to the module database");
 
         Genre.LoadGenres();
+        Theme.LoadThemes();
 
         // Load all names
         StaffMember.LoadNames();
