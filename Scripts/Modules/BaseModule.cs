@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GameDevInc;
 
@@ -23,9 +26,12 @@ public enum EGameSize
 
 public class BaseModule
 {
+    public const string c_ModuleDataPath = "res://Data/Modules.json";
     public string ModuleName { get; private set;  }
     public EModuleJobType ModuleJobType { get; private set; }
     public Image ModuleIcon { get; private set; }
+
+    private static List<BaseModule> m_Modules = new List<BaseModule>();
 
     // == Number Sets == //
     private int m_MinIndiePoints;
@@ -47,9 +53,15 @@ public class BaseModule
         m_MaxIndiePoints = indieMax; 
         ModuleJobType = jobType;
 
-        // TODO: Load Path to Icon
+        ModuleIcon = GD.Load<Image>(pathToIcon);
     }
 
+    /// <summary>
+    /// Determine how many Programing points are required
+    /// </summary>
+    /// <param name="gameSize">Size of the game we are creating</param>
+    /// <param name="pointModifier">Modifier</param>
+    /// <returns></returns>
     public int GetRequiredProgrammingPoints(EGameSize gameSize, float pointModifier = 1f)
     {
         RandomNumberGenerator rand = new RandomNumberGenerator();
@@ -61,9 +73,68 @@ public class BaseModule
             case EGameSize.GAME_III:
                 return Mathf.FloorToInt(rand.RandiRange(m_MinIIIPoints, m_MaxIIIPoints) * pointModifier);
             case EGameSize.GAME_AAA:
-                return Mathf.FloorToInt(rand.RandfRange(m_MinAAAPoints, m_MaxAAAPoints) * pointModifier);
+                return Mathf.FloorToInt(rand.RandiRange(m_MinAAAPoints, m_MaxAAAPoints) * pointModifier);
             default: return 0; 
         }
     }
+
+    /// <summary>
+    /// Handles loading all the available modules
+    /// </summary>
+    public static void LoadModules()
+    {
+        // check the file exist
+        if(FileAccess.FileExists(c_ModuleDataPath))
+        {
+            // Open the file
+            var file = FileAccess.Open(c_ModuleDataPath, FileAccess.ModeFlags.Read);
+            var data = file.GetAsText();                    // Read the file data
+
+            var tokens = JArray.Parse(data);                    // Create tokens
+            foreach(var token in tokens)
+            {
+                // Create the json data
+                var tokenData = JsonConvert.DeserializeObject<BaseModuleJsonData>(token.ToString());     
+                // Validate the token data
+                if(tokenData != null)
+                {
+                    // Create and add the newly created module
+                    var module = new BaseModule(tokenData.ModuleName, (EModuleJobType)tokenData.ModuleJobType,
+                        tokenData.MinIndie, tokenData.MaxIndie,
+                        tokenData.MinIII, tokenData.MaxIII,
+                        tokenData.MinAAA, tokenData.MaxAAA, tokenData.IconPath);
+                    m_Modules.Add(module);
+                } else
+                {
+                    GD.PushError("BaseModule::LoadModules -> Token data not valid");
+                }
+            }
+        } else
+        {
+            GD.PushError("BaseModule::LoadModules -> Module files don't exist");
+        }
+    }
     
+}
+
+public class BaseModuleJsonData
+{
+    [JsonProperty]
+    public string ModuleName;
+    [JsonProperty]
+    public int ModuleJobType;
+    [JsonProperty]
+    public string IconPath;
+    [JsonProperty]
+    public int MinAAA;
+    [JsonProperty]
+    public int MaxAAA;
+    [JsonProperty]
+    public int MinIII;
+    [JsonProperty]
+    public int MaxIII;
+    [JsonProperty]
+    public int MinIndie;
+    [JsonProperty]
+    public int MaxIndie;    
 }
