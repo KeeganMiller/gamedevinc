@@ -1,4 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://c75djsxvf0tdm"]
+[gd_scene load_steps=13 format=4 uid="uid://c75djsxvf0tdm"]
+
+[ext_resource type="Script" path="res://Scripts/BuildingSystem/GridSystem.cs" id="1_52iae"]
+[ext_resource type="PackedScene" uid="uid://crsu68rnhijxc" path="res://Meshes/PointIndicator.fbx" id="2_ho2ig"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pte0c"]
 resource_name = "Trunk"
@@ -146,4 +149,12 @@ transform = Transform3D(0.799013, -0.26791, 0.538332, -1.31643e-08, 0.895261, 0.
 environment = SubResource("Environment_xcfrt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.701556, 0, 0.712614, -0.633315, 0.458448, 0.623488, -0.326696, -0.888721, 0.321627, 15.8303, 14.0286, 10.0532)
+transform = Transform3D(0.701556, 0, 0.712614, -0.633315, 0.458448, 0.623488, -0.326696, -0.888721, 0.321627, 15.8465, 14.0286, 10.0328)
+
+[node name="GridSystem" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50639, 0.802484, -5.18852)
+script = ExtResource("1_52iae")
+PointIndicator = ExtResource("2_ho2ig")
+m_GridCellsX = 13
+m_GridCellsY = 13
+m_GridCellSize = 1.0

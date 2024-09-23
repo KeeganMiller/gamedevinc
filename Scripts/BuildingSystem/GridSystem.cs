@@ -1,0 +1,84 @@
+﻿using System.Collections.Generic;
+using Godot;
+
+namespace GameDevInc.BuildingSystem;
+
+public partial class GridSystem : Node3D
+{
+    [Export]
+    private PackedScene PointIndicator;
+
+    [Export]
+    private int m_GridCellsX;
+    [Export]
+    private int m_GridCellsY;
+    [Export]
+    private float m_GridCellSize;
+
+    private GridCell[,] m_Grid;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        CreateGrid();
+        DrawDebugPoints();
+    }
+
+    private void CreateGrid()
+    {
+        if(m_GridCellsX > 0 && m_GridCellsY > 0 && m_GridCellSize > 0)
+        {
+            m_Grid = new GridCell[m_GridCellsX, m_GridCellsY];
+
+            var startPos = new Vector2(Position.X, Position.Z);
+            var currentPos = new Vector2(Position.X, Position.Z);
+
+            for(var y = 0; y < m_GridCellsY; ++y)
+            {
+                for(var x = 0; x < m_GridCellsX; ++x)
+                {
+                    m_Grid[x, y] = new GridCell(this, x, y, currentPos);
+                    currentPos.X += m_GridCellSize;
+                }
+
+                currentPos.X = startPos.X;
+                currentPos.Y += m_GridCellSize;
+            }
+        }
+    }
+
+    private void DrawDebugPoints()
+    {
+        if(m_Grid != null)
+        {
+            for(var y = 0; y < m_GridCellsY; ++y)
+            {
+                for(var x = 0; x < m_GridCellsX; ++x)
+                {
+                    var cell = m_Grid[x, y];
+                    var point = PointIndicator.Instantiate<Node3D>();
+                    point.Position = new Vector3(cell.GridCellPosition.X, this.Position.Y, cell.GridCellY);
+                    AddChild(point);
+                }
+            }
+        }
+    }
+}
+
+public class GridCell
+{
+    private GridSystem m_Owner;
+    public int GridCellX { get; }
+    public int GridCellY { get; }
+    public Vector2 GridCellPosition { get; }
+
+    public bool HasObject = false;
+
+    public GridCell(GridSystem owner, int x, int y, Vector2 pos)
+    {
+        m_Owner = owner;
+        GridCellX = x;
+        GridCellY = y;
+        GridCellPosition = pos;
+    }
+}
