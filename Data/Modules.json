@@ -1,0 +1,35 @@
+[
+	{
+		"ModuleName": "TestModuleOne",
+		"ModuleJobType": 0,
+		"IconPath": "",
+		"MinAAA": 75,
+		"MaxAAA": 150,
+		"MinIII": 43,
+		"MaxIII": 82,
+		"MinIndie": 33,
+		"MaxIndie": 57
+	},
+	{
+		"ModuleName": "TestModuleTwo",
+		"ModuleJobType": 0,
+		"IconPath": "",
+		"MinAAA": 75,
+		"MaxAAA": 150,
+		"MinIII": 43,
+		"MaxIII": 82,
+		"MinIndie": 33,
+		"MaxIndie": 57
+	},
+	{
+		"ModuleName": "TestModuleThree",
+		"ModuleJobType": 0,
+		"IconPath": "",
+		"MinAAA": 75,
+		"MaxAAA": 150,
+		"MinIII": 43,
+		"MaxIII": 82,
+		"MinIndie": 33,
+		"MaxIndie": 57
+	}
+]
