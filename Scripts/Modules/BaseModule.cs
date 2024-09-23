@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace GameDevInc;
 
@@ -113,6 +114,40 @@ public class BaseModule
         {
             GD.PushError("BaseModule::LoadModules -> Module files don't exist");
         }
+    }
+
+    public static List<BaseModule> GetAllModules()
+        => m_Modules;
+
+    /// <summary>
+    /// Gets the module by a specific name
+    /// </summary>
+    /// <param name="name">Name of the module</param>
+    /// <returns>Base Module</returns>
+    public static BaseModule GetModule(string name)
+    {
+        foreach(var module in m_Modules)
+        {
+            if (module.ModuleName == name)
+                return module;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Gets all modules related to the passed in job type
+    /// </summary>
+    /// <param name="jobType">Modules job type</param>
+    /// <returns>List of related modules</returns>
+    public static List<BaseModule> GetModulesByJob(EModuleJobType jobType)
+    {
+        List<BaseModule> modules = new List<BaseModule>();
+        foreach (var module in m_Modules)
+            if (module.ModuleJobType == jobType)
+                modules.Add(module);
+
+        return modules;
     }
     
 }
