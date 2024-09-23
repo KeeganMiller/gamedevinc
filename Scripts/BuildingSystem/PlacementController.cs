@@ -8,7 +8,7 @@ public partial class PlacementController : Node3D
 {
     public bool IsPlacing = true;
 
-    public OfficeObject PlacingObject;                        // Object that we are placing
+    public OfficeObject PlacingObject { get; private set; }                        // Object that we are placing
     private GridSystem m_GridSystem;
 
     private Camera3D? m_Camera;
@@ -24,6 +24,9 @@ public partial class PlacementController : Node3D
         m_GridSystem = (GridSystem)GetTree().GetFirstNodeInGroup("BuildingSystem");
         if (m_GridSystem == null)
             GD.PushWarning("PlacementController::_Ready -> Failed to find reference to the grid system");
+
+        // Testing placing object
+        SetPlacingObject(GD.Load<PackedScene>("res://Prefabs/Desk_LevelOne_01.tscn"));
     }
 
     public override void _Process(double delta)
@@ -35,7 +38,7 @@ public partial class PlacementController : Node3D
         var mousePos = GetViewport().GetMousePosition();
         var rayOrigin = m_Camera.ProjectRayOrigin(mousePos);
         var rayDirection = m_Camera.ProjectRayNormal(mousePos);
-        var rayLength = 1000f;
+        var rayLength = 5000f;
         var rayEnd = rayOrigin + rayDirection * rayLength;
 
         var space = GetWorld3D().DirectSpaceState;
@@ -56,9 +59,24 @@ public partial class PlacementController : Node3D
             if(m_GridSystem != null)
             {
                 var cell = m_GridSystem.GetCell(gridPoint);
+                
                 if (cell != null)
+                {
+                    GD.Print($"X: {cell.GridCellX}, Y: {cell.GridCellY}");
                     PlacingObject.GlobalPosition = new Vector3(cell.GridCellPosition.X, m_GridSystem.Position.Y, cell.GridCellPosition.Y);
+                }
+                    
             }
+        }
+    }
+
+    public void SetPlacingObject(PackedScene obj)
+    {
+        if(obj != null)
+        {
+            var spawned = (OfficeObject)obj.Instantiate();
+            AddChild(spawned);
+            PlacingObject = spawned;
         }
     }
 }

@@ -30,8 +30,8 @@ public partial class GridSystem : Node3D
         {
             m_Grid = new GridCell[m_GridCellsX, m_GridCellsY];
 
-            var startPos = new Vector2(Position.X, Position.Z);
-            var currentPos = new Vector2(Position.X, Position.Z);
+            var startPos = new Vector2(GlobalPosition.X, GlobalPosition.Z);
+            var currentPos = new Vector2(GlobalPosition.X, GlobalPosition.Z);
 
             for(var y = 0; y < m_GridCellsY; ++y)
             {
@@ -51,15 +51,22 @@ public partial class GridSystem : Node3D
     {
         if(m_Grid != null)
         {
+            var startPos = Vector2.Zero;
+            var currentPos = Vector2.Zero;
             for(var y = 0; y < m_GridCellsY; ++y)
             {
                 for(var x = 0; x < m_GridCellsX; ++x)
                 {
                     var cell = m_Grid[x, y];
                     var point = PointIndicator.Instantiate<Node3D>();
-                    point.Position = new Vector3(cell.GridCellPosition.X, this.Position.Y, cell.GridCellY);
                     AddChild(point);
+                    point.Position = new Vector3(currentPos.X, this.Position.Y, currentPos.Y);
+                    
+                    currentPos.X += m_GridCellSize;
                 }
+
+                currentPos.X = 0;
+                currentPos.Y += m_GridCellSize;
             }
         }
     }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://c75djsxvf0tdm"]
+[gd_scene load_steps=21 format=4 uid="uid://c75djsxvf0tdm"]
 
 [ext_resource type="Script" path="res://Scripts/BuildingSystem/GridSystem.cs" id="1_52iae"]
+[ext_resource type="Texture2D" uid="uid://bmdgcmnc2f86t" path="res://Textures/WoodenFloor.png" id="1_jeplt"]
+[ext_resource type="Texture2D" uid="uid://dji3qpkk52ti0" path="res://Textures/RedBrickWall.png" id="1_xxfr0"]
 [ext_resource type="PackedScene" uid="uid://crsu68rnhijxc" path="res://Meshes/PointIndicator.fbx" id="2_ho2ig"]
 [ext_resource type="Script" path="res://Scripts/BuildingSystem/PlacementController.cs" id="3_kg0o3"]
-[ext_resource type="PackedScene" uid="uid://5ek3nyotclqw" path="res://Meshes/Desk/Desk1_01.fbx" id="4_ikp74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pte0c"]
 resource_name = "Trunk"
@@ -87,21 +88,42 @@ albedo_color = Color(0, 0.725207, 0.43195, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_rnbql"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_6btng"]
+albedo_texture = ExtResource("1_jeplt")
+uv1_scale = Vector3(0.6, 0.6, 0.6)
+uv1_triplanar = true
+uv1_world_triplanar = true
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3xoy3"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_nqayi"]
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_w1qi5"]
+albedo_texture = ExtResource("1_xxfr0")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_u5tb8"]
+albedo_texture = ExtResource("1_xxfr0")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
 [sub_resource type="Environment" id="Environment_xcfrt"]
 background_mode = 1
 background_color = Color(0.197539, 0.505986, 0.685533, 1)
 ambient_light_color = Color(1, 1, 1, 1)
 
+[sub_resource type="SphereMesh" id="SphereMesh_k3ird"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_qu1tr"]
+albedo_color = Color(0, 0.285712, 0.652605, 1)
+
 [node name="SceneRoot" type="Node3D"]
 
 [node name="Trees" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.28775, 0, -2.4931)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27995, 0.0274391, -2.53107)
 
 [node name="Cube" type="MeshInstance3D" parent="Trees"]
 transform = Transform3D(60, 0, 0, 0, -2.62268e-06, 60, 0, -60, -2.62268e-06, 0, 0, 10.5444)
@@ -141,29 +163,32 @@ shape = SubResource("ConcavePolygonShape3D_3xoy3")
 transform = Transform3D(0.377089, 0, 0, 0, 4.46218, 0, 0, 0, 13.7524, -6.17786, 3.07993, 0.0136883)
 mesh = SubResource("BoxMesh_nqayi")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ORMMaterial3D_w1qi5")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Building"]
 transform = Transform3D(-1.64831e-08, 0, 13.7524, 0, 4.46218, 0, -0.377089, 0, -6.01135e-07, 0.550016, 3.05237, -6.86916)
 mesh = SubResource("BoxMesh_nqayi")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ORMMaterial3D_u5tb8")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.766044, -0.28681, 0.575253, 0, 0.894934, 0.446198, -0.642788, -0.341807, 0.68556, 15.2076, 17.7481, 18.7443)
+transform = Transform3D(0.766044, -0.468211, 0.440403, 0, 0.685145, 0.728407, -0.642788, -0.557992, 0.524851, 13.2903, 23.7307, 16.4594)
 projection = 1
 current = true
-size = 20.0
+size = 20.5228
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xcfrt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.701556, 0, 0.712614, -0.633315, 0.458448, 0.623488, -0.326696, -0.888721, 0.321627, 15.8465, 14.0286, 10.0328)
+light_energy = 3.0
 
 [node name="CornerDesk1_C1_01" type="Node3D" parent="."]
 transform = Transform3D(2.29197, 0, 0, 0, 2.29197, 0, 0, 0, 2.29197, 1.15575, 0.815036, -5.12137)
 
-[node name="GridSystem" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50639, 0.802484, -5.18852)
+[node name="GridSystem" type="Node3D" parent="." groups=["BuildingSystem"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9022, 0.802484, -6.39923)
 script = ExtResource("1_52iae")
 PointIndicator = ExtResource("2_ho2ig")
 m_GridCellsX = 13
@@ -173,5 +198,7 @@ m_GridCellSize = 1.0
 [node name="PlacementController" type="Node3D" parent="GridSystem"]
 script = ExtResource("3_kg0o3")
 
-[node name="Desk1_01" parent="." instance=ExtResource("4_ikp74")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.19609, 0.814914, -5.85781)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GridSystem"]
+visible = false
+mesh = SubResource("SphereMesh_k3ird")
+surface_material_override/0 = SubResource("ORMMaterial3D_qu1tr")

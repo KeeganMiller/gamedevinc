@@ -19,5 +19,4 @@ public partial class OfficeObject : Node3D
     [Export]
     private int m_CellsY;
     private EFacingDirection m_FacingDirection;
-
 }
