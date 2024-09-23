@@ -5,12 +5,12 @@ namespace GameDevInc;
 
 public class Programmer : StaffMember
 {
-    public float Proficiency { get; protected set; }
-    public float Mathematics { get; protected set; }
-    public float Debugging { get; protected set; }
-    public float GraphicsProgramming { get; protected set; }
-    public float ArtificalIntelligence { get; protected set; }
-    public float Networking { get; protected set; }
+    public int Proficiency { get; protected set; }
+    public int Mathematics { get; protected set; }
+    public int Debugging { get; protected set; }
+    public int GraphicsProgramming { get; protected set; }
+    public int ArtificalIntelligence { get; protected set; }
+    public int Networking { get; protected set; }
 
     public Programmer() : base(EModuleJobType.JOB_Programmer)
     {
@@ -45,5 +45,71 @@ public class Programmer : StaffMember
                     break;
             }
         }
+    }
+
+    public bool IncreaseProficency(int amount = 1)
+    {
+        if(Proficiency + amount <= StaffMember.c_MaxStatLevel)
+        {
+            Proficiency += 1;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IncreaseMathematics(int amount = 1)
+    {
+        if(Mathematics + amount <= StaffMember.c_MaxStatLevel)
+        {
+            Mathematics += 1;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IncreaseDebugging(int amount = 1)
+    {
+        if(Debugging + amount <= StaffMember.c_MaxStatLevel)
+        {
+            Debugging += 1;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IncreaseGraphicsProgramming(int amount = 1)
+    {
+        if(GraphicsProgramming + amount <= StaffMember.c_MaxStatLevel)
+        {
+            GraphicsProgramming += 1;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IncreaseArtificalIntelligence(int amount = 1)
+    { 
+        if(ArtificalIntelligence + amount <= StaffMember.c_MaxStatLevel)
+        {
+            ArtificalIntelligence += 1;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IncreaseNetworking(int amount = 1)
+    {
+        if(Networking + amount <= StaffMember.c_MaxStatLevel)
+        {
+            Networking += 1;
+            return true;
+        }
+
+        return false;
     }
 }

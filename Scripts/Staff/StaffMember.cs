@@ -19,6 +19,7 @@ public enum ENameType
 
 public abstract class StaffMember
 {
+    public const int c_MaxStatLevel = 25;
     public string Name { get; protected set; }                    // Name of the staff member
     public EModuleJobType JobType { get; protected set; }                 // Reference to the staff members job type
 
@@ -157,4 +158,41 @@ public class StaffNameData
     public string Name;
     [JsonProperty]
     public int NameType;
+}
+
+public class GeneralStaffStats
+{
+    public float WorkSpeed { get; private set; }
+    public float WorkQuality { get; private set; }
+    
+    public GeneralStaffStats()
+    {
+        RandomNumberGenerator rand = new RandomNumberGenerator();
+        rand.Randomize();
+
+        WorkSpeed = rand.RandiRange(1, StaffMember.c_MaxStatLevel);
+        WorkQuality = rand.RandiRange(1, StaffMember.c_MaxStatLevel);
+    }
+
+    public bool IncreaseWorkSpeed(int amount = 1)
+    {
+        if (WorkSpeed + amount <= StaffMember.c_MaxStatLevel)
+        {
+            WorkSpeed += amount;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IncreaseWorkQuality(int amount = 1)
+    {
+        if(WorkQuality + 1 <= StaffMember.c_MaxStatLevel)
+        {
+            WorkQuality += amount;
+            return true;
+        }
+
+        return false;
+    }
 }
