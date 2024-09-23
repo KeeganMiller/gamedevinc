@@ -19,6 +19,8 @@ public partial class GameController : Node3D
         else
             GD.PushError("ModuleDatabase::_Ready -> Failed to get reference to the module database");
 
+        Genre.LoadGenres();
+
         // Load all names
         StaffMember.LoadNames();
         staff = new Programmer();
