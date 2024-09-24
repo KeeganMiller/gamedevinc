@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvwoii5bnxv5h"]
+[gd_scene load_steps=15 format=3 uid="uid://bvwoii5bnxv5h"]
 
 [ext_resource type="Texture2D" uid="uid://bpwfhwv8c18gm" path="res://UserInterface/CompanyDetailsPanels.png" id="1_8c830"]
+[ext_resource type="Script" path="res://Scripts/Controllers/HudController.cs" id="1_crta8"]
 [ext_resource type="FontFile" uid="uid://bejtufm8j63as" path="res://UserInterface/Roboto-Regular.ttf" id="2_ggmmw"]
 [ext_resource type="Texture2D" uid="uid://bpqf3x1kgmfif" path="res://UserInterface/YeahnahBackground.png" id="3_dup6y"]
 [ext_resource type="Texture2D" uid="uid://c23o684rhyqv5" path="res://UserInterface/ActionBar.png" id="4_emfsm"]
@@ -17,13 +18,25 @@
 font = ExtResource("2_ggmmw")
 font_color = Color(0, 0, 0, 1)
 
-[node name="UserHUD" type="Control"]
+[node name="UserHUD" type="Control" node_paths=PackedStringArray("m_NewDevBtn", "m_ResearchBtn", "m_MarketingBtn", "m_InventoryBtn", "m_StaffBtn", "m_MarketplaceBtn", "m_ChartsBtn", "m_TownBtn", "m_CompanyName", "m_CompanyFunds", "m_CurrentDate")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_crta8")
+m_NewDevBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/NewDevBtn")
+m_ResearchBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/ResearchBtn")
+m_MarketingBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/MarketingBtn")
+m_InventoryBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/InventoryBtn")
+m_StaffBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/StaffBtn")
+m_MarketplaceBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/MarketplaceBtn")
+m_ChartsBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/ChartsBtn")
+m_TownBtn = NodePath("ActionBar/ActionBarTexture/HBoxContainer/TownBtn")
+m_CompanyName = NodePath("CompanyDetails/CompanyData/CompanyName")
+m_CompanyFunds = NodePath("CompanyDetails/CompanyData/CompanyFunds")
+m_CurrentDate = NodePath("CompanyDetails/CompanyData/Date")
 
 [node name="CompanyDetails" type="Control" parent="."]
 layout_mode = 1

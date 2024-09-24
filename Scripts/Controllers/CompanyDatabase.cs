@@ -24,7 +24,7 @@ public partial class CompanyDatabase : Node3D
         staff = new Programmer();
 
         // Create the players company
-        PlayersCompany = new Company("YeahNah Studios");
+        PlayersCompany = new Company("Syndicate Games");
         PlayersCompany.StaffMembers.Add(staff);
     }
 

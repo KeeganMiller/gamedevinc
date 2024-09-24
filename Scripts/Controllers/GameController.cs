@@ -10,6 +10,8 @@ public partial class GameController : Node3D
     {
         base._Ready();
 
+        CompanyDatabase.LoadCompanyDetails();
+
         StaffMember.LoadNames();
         // Load All Modules
         ModuleDatabase = GetNode<ModuleDatabase>("/root/ModuleDatabase");

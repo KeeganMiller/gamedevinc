@@ -34,7 +34,7 @@ public partial class HudController : Control
 
         // Setup the company details
         m_CompanyName.Text = m_PlayerCompany != null ? m_PlayerCompany.CompanyName : "No Company Set";
-        m_CompanyFunds.Text = m_PlayerCompany != null ? m_PlayerCompany.CompanyFunds.ToString() : "$0";
+        m_CompanyFunds.Text = m_PlayerCompany != null ? ConvertFundsToString(m_PlayerCompany.CompanyFunds) : "$0";
         m_PlayerCompany.e_FundsChange += UpdateFundsText;
         // TODO: Load current date
 
@@ -44,6 +44,9 @@ public partial class HudController : Control
     public void UpdateFundsText(int funds)
     {
         if (m_CompanyFunds != null)
-            m_CompanyFunds.Text = funds.ToString();
+            m_CompanyFunds.Text = ConvertFundsToString(funds);
     }
+
+    public string ConvertFundsToString(int funds)
+        => funds.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo("en-US"));
 }

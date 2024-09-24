@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameController="*res://Scripts/Controllers/GameController.cs"
 ModuleDatabase="*res://Scripts/Modules/ModuleDatabase.cs"
+CompanyDatabase="*res://Scripts/Controllers/CompanyDatabase.cs"
 
 [display]
 
