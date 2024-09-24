@@ -6,6 +6,7 @@ namespace GameDevInc;
 public partial class GameController : Node3D
 {
     public ModuleDatabase ModuleDatabase { get; private set; }
+
     public override void _Ready()
     {
         base._Ready();

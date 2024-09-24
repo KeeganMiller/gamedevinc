@@ -7,7 +7,8 @@ namespace GameDevInc;
 public class Company
 {
     public string CompanyName { get; protected set; }
-    public Image CompanyLogo { get; protected set; }
+    public Texture2D CompanyLogo { get; protected set; }
+    public ESpeciality Speciality { get; protected set; }
 
     public Company ParentCompany;
 
@@ -21,9 +22,11 @@ public class Company
 
     public Action<int> e_FundsChange;
 
-    public Company(string name)
+    public Company(string name, Texture2D logo, ESpeciality speciality)
     {
         CompanyName = name;
+        CompanyLogo = logo;
+        Speciality = speciality;
     }
 
     /// <summary>

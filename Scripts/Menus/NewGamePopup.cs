@@ -7,12 +7,15 @@ namespace GameDevInc.Menus;
 public partial class NewGamePopup : Control
 {
     [Export] private Button m_ExitBtn;
+    [Export] private TextureButton m_NextFormBtn;
+    [Export] private Label m_ErrorMessage;
 
     [ExportGroup("Logo's")]
     [Export] private NewGameCompanyLogoSelect m_CompanyLogoOne;
     [Export] private NewGameCompanyLogoSelect m_CompanyLogoTwo;
     [Export] private NewGameCompanyLogoSelect m_CompanyLogoThree;
     private NewGameCompanyLogoSelect m_SelectedCompanyLogo;
+    
 
     [ExportGroup("Specialties")]
     [Export] private NewGameSpecialitySelect m_ActionBtn;
@@ -23,13 +26,21 @@ public partial class NewGamePopup : Control
     [Export] private NewGameSpecialitySelect m_CasualBtn;
     [Export] private NewGameSpecialitySelect m_AdventureBtn;
     [Export] private NewGameSpecialitySelect m_Puzzle;
-
-    private ESpeciality m_CurrentlySelectedSpec;
     private NewGameSpecialitySelect? m_CurrentlySelected = null;
+    private ESpeciality m_CurrentlySelectedSpec;
+
+
+    [ExportGroup("Form Inputs")]
+    [Export] private LineEdit m_CompanyNameInput;
+
+    
 
     public override void _Ready()
     {
         base._Ready();
+
+        if (m_ExitBtn != null)
+            m_ExitBtn.Connect("pressed", new Callable(this, "ClosePopup"));
 
         // Link company logo to function
         if (m_CompanyLogoOne != null)
@@ -56,6 +67,10 @@ public partial class NewGamePopup : Control
             m_AdventureBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectAdventureSpec"));
         if (m_Puzzle != null && m_Puzzle.ButtonRef != null)
             m_Puzzle.ButtonRef.Connect("pressed", new Callable(this, "SelectPuzzleSpec"));
+
+        // Complete form btn
+        if (m_NextFormBtn != null)
+            m_NextFormBtn.Connect("pressed", new Callable(this, "CompleteForm"));
     }
 
     #region Company Selection
@@ -114,4 +129,35 @@ public partial class NewGamePopup : Control
         => SetSelectedSpecialty(ESpeciality.SPEC_Puzzle, m_Puzzle);
 
     #endregion
+
+    public void CompleteForm()
+    {
+        // Validate the form
+        if(m_CompanyNameInput.Text == null)
+        {
+            m_ErrorMessage.Text = "Please enter a company name";
+            return;
+        }
+
+        if(m_SelectedCompanyLogo == null)
+        {
+            m_ErrorMessage.Text = ("Please select a logo for your company");
+            return;
+        }
+
+        if(m_CurrentlySelected == null)
+        {
+            m_ErrorMessage.Text = "Please select a specialty for your company";
+            return;
+        }
+
+        // Form is valid so create and add the company
+        var company = new Company(m_CompanyNameInput.Text, m_SelectedCompanyLogo.TextureNormal, m_CurrentlySelectedSpec);
+        var companyDb = GetNode<CompanyDatabase>("/root/CompanyDatabase");
+        if (companyDb != null)
+            companyDb.SetPlayersCompany(company);
+    }
+
+    private void ClosePopup()
+        => this.QueueFree();
 }

@@ -20,12 +20,6 @@ public partial class CompanyDatabase : Node3D
     public override void _Ready()
     {
         base._Ready();
-
-        staff = new Programmer();
-
-        // Create the players company
-        PlayersCompany = new Company("Syndicate Games");
-        PlayersCompany.StaffMembers.Add(staff);
     }
 
     public override void _Process(double delta)
@@ -80,10 +74,6 @@ public partial class CompanyDatabase : Node3D
                     break;
                 }
             }
-
-            // Create the new company
-            if (!hasCompany)
-                return new Company(company.CompanyName);
         }
 
         // Failed to create company
@@ -107,6 +97,15 @@ public partial class CompanyDatabase : Node3D
         }
 
         return null;
+    }
+
+    public void SetPlayersCompany(Company company, bool createSave = false)
+    {
+        PlayersCompany = company;
+        if(createSave)
+        {
+            // TODO: Create Save File
+        }
     }
 }
 
