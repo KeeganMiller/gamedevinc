@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcj0hmrkjowds"]
+
+[ext_resource type="Texture2D" uid="uid://c2up7hpt3wmpa" path="res://UserInterface/MainMenu/Background.png" id="1_h2c2v"]
+[ext_resource type="FontFile" uid="uid://bfxiavdcx0g3i" path="res://UserInterface/Comic Shark.ttf" id="2_uhvx6"]
+[ext_resource type="Texture2D" uid="uid://bpqf3x1kgmfif" path="res://UserInterface/YeahnahBackground.png" id="3_caajt"]
+[ext_resource type="Texture2D" uid="uid://btjxqrmcy5pjs" path="res://UserInterface/MainMenu/MenuButton.png" id="4_o5tb6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qalgy"]
+font = ExtResource("2_uhvx6")
+font_size = 250
+font_color = Color(0.903535, 0.59109, 1.92523e-06, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jvkot"]
+font = ExtResource("2_uhvx6")
+font_size = 42
+font_color = Color(0.901961, 0.592157, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_h2c2v")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.5
+offset_top = -390.5
+offset_right = 576.5
+offset_bottom = 190.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Dev 
+Inc"
+label_settings = SubResource("LabelSettings_qalgy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1758.0
+offset_top = 923.0
+offset_right = 1898.0
+offset_bottom = 1063.0
+texture = ExtResource("3_caajt")
+
+[node name="NewGameBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 763.0
+offset_right = 545.0
+offset_bottom = 831.0
+texture_normal = ExtResource("4_o5tb6")
+
+[node name="Label" type="Label" parent="NewGameBtn"]
+layout_mode = 0
+offset_left = 31.0
+offset_right = 478.0
+offset_bottom = 59.0
+text = "New Game"
+label_settings = SubResource("LabelSettings_jvkot")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewGameBtn2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 835.0
+offset_right = 545.0
+offset_bottom = 903.0
+texture_normal = ExtResource("4_o5tb6")
+
+[node name="Label" type="Label" parent="NewGameBtn2"]
+layout_mode = 0
+offset_left = 31.0
+offset_right = 478.0
+offset_bottom = 59.0
+text = "Load Game"
+label_settings = SubResource("LabelSettings_jvkot")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewGameBtn3" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 907.0
+offset_right = 545.0
+offset_bottom = 975.0
+texture_normal = ExtResource("4_o5tb6")
+
+[node name="Label" type="Label" parent="NewGameBtn3"]
+layout_mode = 0
+offset_left = 31.0
+offset_right = 478.0
+offset_bottom = 59.0
+text = "Settings"
+label_settings = SubResource("LabelSettings_jvkot")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewGameBtn4" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 979.0
+offset_right = 545.0
+offset_bottom = 1047.0
+texture_normal = ExtResource("4_o5tb6")
+
+[node name="Label" type="Label" parent="NewGameBtn4"]
+layout_mode = 0
+offset_left = 31.0
+offset_right = 478.0
+offset_bottom = 59.0
+text = "Exit"
+label_settings = SubResource("LabelSettings_jvkot")
+horizontal_alignment = 1
+vertical_alignment = 1

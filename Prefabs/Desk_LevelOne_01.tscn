@@ -6,7 +6,6 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig4a1"]
 resource_name = "Office_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2y0it"]
@@ -47,13 +46,11 @@ albedo_texture = ExtResource("1_i22et")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4c3i"]
 resource_name = "Office_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgo2w"]
 resource_name = "Office_03"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_km1ut"]
@@ -123,7 +120,6 @@ emission = Color(0.660643, 0.547686, 0.247414, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1l6i4"]
 resource_name = "Office_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_d5jm7"]
@@ -164,7 +160,6 @@ albedo_texture = ExtResource("1_i22et")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0juh"]
 resource_name = "Office_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qo3au"]
@@ -205,7 +200,6 @@ albedo_texture = ExtResource("1_i22et")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3iau3"]
 resource_name = "Office_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_i1xm2"]

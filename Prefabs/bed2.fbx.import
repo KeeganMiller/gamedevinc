@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://co1mynjvlfwxx"
-path="res://.godot/imported/AirConditioner_01.fbx-f673f92ac42a3b684d1871d094b99e8d.scn"
+uid="uid://cnn18pur4rrr3"
+path="res://.godot/imported/bed2.fbx-9e690a6d36c1dcfaf35e98e7c04bea05.scn"
 
 [deps]
 
-source_file="res://Meshes/Props/AirConditioner_01.fbx"
-dest_files=["res://.godot/imported/AirConditioner_01.fbx-f673f92ac42a3b684d1871d094b99e8d.scn"]
+source_file="res://Prefabs/bed2.fbx"
+dest_files=["res://.godot/imported/bed2.fbx-9e690a6d36c1dcfaf35e98e7c04bea05.scn"]
 
 [params]
 

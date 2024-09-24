@@ -125,7 +125,7 @@ albedo_color = Color(0, 0.285712, 0.652605, 1)
 [node name="SceneRoot" type="Node3D"]
 
 [node name="Trees" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27995, 0.0274391, -2.53107)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.33732, 0.0652504, -2.5687)
 
 [node name="Cube" type="MeshInstance3D" parent="Trees"]
 transform = Transform3D(60, 0, 0, 0, -2.62268e-06, 60, 0, -60, -2.62268e-06, 0, 0, 10.5444)

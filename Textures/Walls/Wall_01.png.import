@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpqf3x1kgmfif"
-path.s3tc="res://.godot/imported/YeahnahBackground.png-a9721781427607c8e791784c9cd9f339.s3tc.ctex"
+uid="uid://ca3w845a03alj"
+path.s3tc="res://.godot/imported/Wall_01.png-6cb7998c09e561c593675aad09cdc255.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://UserInterface/YeahnahBackground.png"
-dest_files=["res://.godot/imported/YeahnahBackground.png-a9721781427607c8e791784c9cd9f339.s3tc.ctex"]
+source_file="res://Textures/Walls/Wall_01.png"
+dest_files=["res://.godot/imported/Wall_01.png-6cb7998c09e561c593675aad09cdc255.s3tc.ctex"]
 
 [params]
 
