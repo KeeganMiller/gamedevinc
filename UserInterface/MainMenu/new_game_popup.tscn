@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://npv0frxd00f8"]
+[gd_scene load_steps=31 format=3 uid="uid://npv0frxd00f8"]
 
 [ext_resource type="Texture2D" uid="uid://dgfhj0axjsd76" path="res://UserInterface/MainMenu/NewGame/MM_NewGameBackground.png" id="1_iw8bh"]
 [ext_resource type="Script" path="res://Scripts/Menus/NewGamePopup.cs" id="1_p6us3"]
 [ext_resource type="FontFile" uid="uid://bfxiavdcx0g3i" path="res://UserInterface/Comic Shark.ttf" id="2_ix7pq"]
+[ext_resource type="PackedScene" uid="uid://dd7y7o6erpetc" path="res://Prefabs/HelpIcon.tscn" id="3_86nte"]
 [ext_resource type="Texture2D" uid="uid://bpqf3x1kgmfif" path="res://UserInterface/YeahnahBackground.png" id="3_ojoop"]
 [ext_resource type="Texture2D" uid="uid://fccb6i4hv0gc" path="res://CompanyLogos/CompanyLogo_01.png" id="4_m16u7"]
 [ext_resource type="Script" path="res://Scripts/Menus/NewGameCompanyLogoSelect.cs" id="5_n7pa8"]
@@ -18,6 +19,14 @@
 [ext_resource type="Texture2D" uid="uid://byo7qgede6crp" path="res://UserInterface/GenreIcons/CasualIcon.png" id="12_bdiq3"]
 [ext_resource type="Texture2D" uid="uid://jiv78im2qt42" path="res://UserInterface/GenreIcons/AdventureIcon.png" id="13_bh724"]
 [ext_resource type="Texture2D" uid="uid://dgax3ulq437pi" path="res://UserInterface/GenreIcons/PuzzleIcon.png" id="14_14vvw"]
+[ext_resource type="Texture2D" uid="uid://cj1e1jy1mop48" path="res://UserInterface/CharacterRenders/Male_01.png" id="20_3lt0o"]
+[ext_resource type="Texture2D" uid="uid://gf8tphep58lt" path="res://UserInterface/CharacterRenders/Male_02.png" id="21_77sst"]
+[ext_resource type="Texture2D" uid="uid://yy5g7a4wqsk8" path="res://UserInterface/CharacterRenders/Male_03.png" id="22_3ihhg"]
+[ext_resource type="Texture2D" uid="uid://4ifba6xq70qk" path="res://UserInterface/CharacterRenders/Male_04.png" id="23_d6ird"]
+[ext_resource type="Texture2D" uid="uid://djfjtl4di5i2v" path="res://UserInterface/CharacterRenders/Female_01.png" id="24_ms3gb"]
+[ext_resource type="Texture2D" uid="uid://si777mrf4pyw" path="res://UserInterface/CharacterRenders/Female_02.png" id="25_q7b7l"]
+[ext_resource type="Texture2D" uid="uid://d3j3rt8glsiyw" path="res://UserInterface/CharacterRenders/Female_03.png" id="26_hni7b"]
+[ext_resource type="Texture2D" uid="uid://c72k0vkdwx2op" path="res://UserInterface/CharacterRenders/Female_04.png" id="27_j0yva"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_luyef"]
 font = ExtResource("2_ix7pq")
@@ -29,6 +38,11 @@ font = ExtResource("2_ix7pq")
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_3t2b7"]
+font = ExtResource("2_ix7pq")
+font_size = 32
+font_color = Color(0.612771, 0.0351491, 1.44392e-07, 1)
+
 [node name="NewGamePopup" type="Control" node_paths=PackedStringArray("m_ExitBtn", "m_CompanyLogoOne", "m_CompanyLogoTwo", "m_CompanyLogoThree", "m_ActionBtn", "m_RPGBtn", "m_SimulationBtn", "m_StrategyBtn", "m_PlatformerBtn", "m_CasualBtn", "m_AdventureBtn", "m_Puzzle")]
 layout_mode = 3
 anchors_preset = 15
@@ -38,17 +52,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p6us3")
 m_ExitBtn = NodePath("ExitBtn")
-m_CompanyLogoOne = NodePath("TextureRect/CompanyLogo1")
-m_CompanyLogoTwo = NodePath("TextureRect/CompanyLogo2")
-m_CompanyLogoThree = NodePath("TextureRect/CompanyLogo3")
-m_ActionBtn = NodePath("TextureRect/GenreContainer/ActionBtn")
-m_RPGBtn = NodePath("TextureRect/GenreContainer/RPGBtn")
-m_SimulationBtn = NodePath("TextureRect/GenreContainer/SimBtn")
-m_StrategyBtn = NodePath("TextureRect/GenreContainer/StrategyBtn")
-m_PlatformerBtn = NodePath("TextureRect/GenreContainer/PlatfomerBtn")
-m_CasualBtn = NodePath("TextureRect/GenreContainer/CasualBtn")
-m_AdventureBtn = NodePath("TextureRect/GenreContainer/AdventureBtn")
-m_Puzzle = NodePath("TextureRect/GenreContainer/PuzzleBtn")
+m_CompanyLogoOne = NodePath("TextureRect/CompanyInformation/CompanyLogo1")
+m_CompanyLogoTwo = NodePath("TextureRect/CompanyInformation/CompanyLogo2")
+m_CompanyLogoThree = NodePath("TextureRect/CompanyInformation/CompanyLogo3")
+m_ActionBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/ActionBtn")
+m_RPGBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/RPGBtn")
+m_SimulationBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/SimBtn")
+m_StrategyBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/StrategyBtn")
+m_PlatformerBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/PlatfomerBtn")
+m_CasualBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/CasualBtn")
+m_AdventureBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/AdventureBtn")
+m_Puzzle = NodePath("TextureRect/CompanyInformation/GenreContainer/PuzzleBtn")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -65,70 +79,87 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_iw8bh")
 
-[node name="CompanyNameHeader" type="Label" parent="TextureRect"]
+[node name="CompanyInformation" type="Control" parent="TextureRect"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" parent="TextureRect/CompanyInformation" instance=ExtResource("3_86nte")]
+layout_mode = 0
+
+[node name="TextureRect3" type="TextureRect" parent="TextureRect/CompanyInformation"]
+layout_mode = 0
+offset_left = 588.5
+offset_top = 670.0
+offset_right = 632.5
+offset_bottom = 714.0
+texture = ExtResource("7_5uim5")
+
+[node name="CompanyNameHeader" type="Label" parent="TextureRect/CompanyInformation"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -364.5
-offset_top = 112.0
-offset_right = 361.5
-offset_bottom = 168.0
+offset_left = 82.0
+offset_top = 169.0
+offset_right = 808.0
+offset_bottom = 225.0
 grow_horizontal = 2
 text = "Company Name"
 label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 1
 
-[node name="LogoContainerHeader" type="Label" parent="TextureRect"]
+[node name="LogoContainerHeader" type="Label" parent="TextureRect/CompanyInformation"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -364.5
-offset_top = 280.0
-offset_right = 365.5
-offset_bottom = 336.0
+offset_left = 82.0
+offset_top = 337.0
+offset_right = 812.0
+offset_bottom = 393.0
 grow_horizontal = 2
 text = "Company Logo"
 label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 1
 
-[node name="LogoContainerHeader2" type="Label" parent="TextureRect"]
+[node name="LogoContainerHeader2" type="Label" parent="TextureRect/CompanyInformation"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -364.5
-offset_top = 602.0
-offset_right = 365.5
-offset_bottom = 658.0
+offset_left = 82.0
+offset_top = 659.0
+offset_right = 812.0
+offset_bottom = 715.0
 grow_horizontal = 2
 text = "Speciality"
 label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="TextureRect"]
+[node name="LineEdit" type="LineEdit" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
 offset_left = 236.5
-offset_top = 188.0
+offset_top = 245.0
 offset_right = 694.5
-offset_bottom = 254.0
+offset_bottom = 311.0
 theme_override_fonts/font = ExtResource("2_ix7pq")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "YeahNah Studios"
 alignment = 1
 
-[node name="CompanyLogo1" type="TextureButton" parent="TextureRect"]
+[node name="CompanyLogo1" type="TextureButton" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
 offset_left = 190.0
-offset_top = 330.0
+offset_top = 387.0
 offset_right = 381.0
-offset_bottom = 521.0
+offset_bottom = 578.0
 texture_normal = ExtResource("3_ojoop")
 stretch_mode = 0
 script = ExtResource("5_n7pa8")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyLogo1"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/CompanyLogo1"]
 visible = false
 layout_mode = 0
 offset_left = 5.0
@@ -138,16 +169,16 @@ offset_bottom = 184.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="CompanyLogo2" type="TextureButton" parent="TextureRect"]
+[node name="CompanyLogo2" type="TextureButton" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
 offset_left = 386.5
-offset_top = 331.0
+offset_top = 388.0
 offset_right = 571.5
-offset_bottom = 516.0
+offset_bottom = 573.0
 texture_normal = ExtResource("4_m16u7")
 script = ExtResource("5_n7pa8")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyLogo2"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/CompanyLogo2"]
 visible = false
 offset_left = 5.0
 offset_top = 10.0
@@ -156,16 +187,16 @@ offset_bottom = 183.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="CompanyLogo3" type="TextureButton" parent="TextureRect"]
+[node name="CompanyLogo3" type="TextureButton" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
 offset_left = 583.5
-offset_top = 330.0
+offset_top = 387.0
 offset_right = 768.5
-offset_bottom = 515.0
+offset_bottom = 572.0
 texture_normal = ExtResource("5_qs8gd")
 script = ExtResource("5_n7pa8")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyLogo3"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/CompanyLogo3"]
 visible = false
 offset_left = 5.0
 offset_top = 10.0
@@ -174,15 +205,15 @@ offset_bottom = 183.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="ImpotLogoBtn" type="TextureButton" parent="TextureRect"]
+[node name="ImpotLogoBtn" type="TextureButton" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
 offset_left = 218.5
-offset_top = 526.0
+offset_top = 583.0
 offset_right = 732.5
-offset_bottom = 594.0
+offset_bottom = 651.0
 texture_normal = ExtResource("6_wkdwn")
 
-[node name="Label" type="Label" parent="TextureRect/ImpotLogoBtn"]
+[node name="Label" type="Label" parent="TextureRect/CompanyInformation/ImpotLogoBtn"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 4.0
@@ -193,7 +224,7 @@ label_settings = SubResource("LabelSettings_3l4jb")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NextBtn" type="TextureButton" parent="TextureRect"]
+[node name="NextBtn" type="TextureButton" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
 offset_left = 218.5
 offset_top = 998.0
@@ -201,7 +232,7 @@ offset_right = 732.5
 offset_bottom = 1066.0
 texture_normal = ExtResource("6_wkdwn")
 
-[node name="Label" type="Label" parent="TextureRect/NextBtn"]
+[node name="Label" type="Label" parent="TextureRect/CompanyInformation/NextBtn"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 4.0
@@ -213,20 +244,20 @@ label_settings = SubResource("LabelSettings_3l4jb")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GenreContainer" type="GridContainer" parent="TextureRect"]
+[node name="GenreContainer" type="GridContainer" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
 offset_left = 187.5
-offset_top = 681.0
+offset_top = 738.0
 offset_right = 728.5
-offset_bottom = 949.0
+offset_bottom = 1006.0
 columns = 5
 
-[node name="ActionBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="ActionBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/ActionBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/ActionBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -234,7 +265,7 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("7_08kn2")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/ActionBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/ActionBtn"]
 visible = false
 layout_mode = 0
 offset_right = 101.0
@@ -242,12 +273,12 @@ offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="RPGBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="RPGBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/RPGBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/RPGBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -255,19 +286,19 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("8_2bfd3")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/RPGBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/RPGBtn"]
 visible = false
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="SimBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="SimBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/SimBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/SimBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -275,19 +306,19 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("9_famnk")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/SimBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/SimBtn"]
 visible = false
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="StrategyBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="StrategyBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/StrategyBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/StrategyBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -295,19 +326,19 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("10_mem1r")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/StrategyBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/StrategyBtn"]
 visible = false
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="PlatfomerBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="PlatfomerBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/PlatfomerBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/PlatfomerBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -315,19 +346,19 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("11_i82aj")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/PlatfomerBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/PlatfomerBtn"]
 visible = false
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="CasualBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="CasualBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/CasualBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/CasualBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -335,19 +366,19 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("12_bdiq3")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/CasualBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/CasualBtn"]
 visible = false
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="AdventureBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="AdventureBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/AdventureBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/AdventureBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -355,19 +386,19 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("13_bh724")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/AdventureBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/AdventureBtn"]
 visible = false
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="PuzzleBtn" type="Control" parent="TextureRect/GenreContainer"]
+[node name="PuzzleBtn" type="Control" parent="TextureRect/CompanyInformation/GenreContainer"]
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 2
 script = ExtResource("7_d4m8i")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/GenreContainer/PuzzleBtn"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CompanyInformation/GenreContainer/PuzzleBtn"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -375,28 +406,244 @@ scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("14_14vvw")
 stretch_mode = 4
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/GenreContainer/PuzzleBtn"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/PuzzleBtn"]
 visible = false
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
 editor_only = false
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="Label" type="Label" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
-offset_left = 1234.0
-offset_top = 498.0
-offset_right = 1278.0
-offset_bottom = 542.0
-texture = ExtResource("7_5uim5")
+offset_left = 223.0
+offset_top = 108.0
+offset_right = 684.0
+offset_bottom = 171.0
+label_settings = SubResource("LabelSettings_3t2b7")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TextureRect3" type="TextureRect" parent="."]
+[node name="Control" type="Control" parent="TextureRect"]
+anchors_preset = 0
+offset_left = 107.0
+offset_top = 78.0
+offset_right = 828.0
+offset_bottom = 1091.0
+
+[node name="CompanyNameHeader" type="Label" parent="TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -363.0
+offset_top = 73.0
+offset_right = 363.0
+offset_bottom = 129.0
+grow_horizontal = 2
+text = "CEO Name"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 1
+
+[node name="CompanyNameHeader2" type="Label" parent="TextureRect/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -363.0
+offset_top = 233.0
+offset_right = 363.0
+offset_bottom = 289.0
+grow_horizontal = 2
+text = "Select CEO"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TextureRect/Control"]
+offset_left = 124.5
+offset_top = 144.0
+offset_right = 582.5
+offset_bottom = 210.0
+theme_override_fonts/font = ExtResource("2_ix7pq")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Keegan Miller"
+alignment = 1
+
+[node name="TextureRect2" parent="TextureRect/Control" instance=ExtResource("3_86nte")]
 layout_mode = 0
-offset_left = 1082.0
-offset_top = 573.0
-offset_right = 1126.0
-offset_bottom = 617.0
-texture = ExtResource("7_5uim5")
+offset_left = 489.5
+offset_top = 244.0
+offset_right = 533.5
+offset_bottom = 288.0
+
+[node name="OptionButton" type="OptionButton" parent="TextureRect/Control"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 310.0
+offset_right = 585.0
+offset_bottom = 360.0
+theme_override_fonts/font = ExtResource("2_ix7pq")
+theme_override_font_sizes/font_size = 32
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Male"
+popup/item_1/text = "Female"
+popup/item_1/id = 1
+
+[node name="MaleCharacters" type="GridContainer" parent="TextureRect/Control"]
+visible = false
+layout_mode = 0
+offset_left = 110.0
+offset_top = 394.0
+offset_right = 602.0
+offset_bottom = 727.0
+columns = 4
+
+[node name="Control" type="Control" parent="TextureRect/Control/MaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("20_3lt0o")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control"]
+visible = false
+layout_mode = 0
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
+
+[node name="Control2" type="Control" parent="TextureRect/Control/MaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("21_77sst")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control2"]
+visible = false
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
+
+[node name="Control3" type="Control" parent="TextureRect/Control/MaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("22_3ihhg")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control3"]
+visible = false
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
+
+[node name="Control4" type="Control" parent="TextureRect/Control/MaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("23_d6ird")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control4"]
+visible = false
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
+
+[node name="FemaleCharacters" type="GridContainer" parent="TextureRect/Control"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 394.0
+offset_right = 602.0
+offset_bottom = 727.0
+columns = 4
+
+[node name="Control" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("24_ms3gb")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control"]
+visible = false
+layout_mode = 0
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
+
+[node name="Control2" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("25_q7b7l")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control2"]
+visible = false
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
+
+[node name="Control3" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("26_hni7b")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control3"]
+visible = false
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
+
+[node name="Control4" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+custom_minimum_size = Vector2(120, 333)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("27_j0yva")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control4"]
+visible = false
+offset_left = -6.0
+offset_right = 105.0
+offset_bottom = 337.0
+border_color = Color(0, 0, 0, 1)
 
 [node name="ExitBtn" type="Button" parent="."]
 layout_mode = 1

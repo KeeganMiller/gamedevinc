@@ -10,6 +10,8 @@ public partial class NewGamePopup : Control
     [Export] private TextureButton m_NextFormBtn;
     [Export] private Label m_ErrorMessage;
 
+
+    #region Company Properties
     [ExportGroup("Logo's")]
     [Export] private NewGameCompanyLogoSelect m_CompanyLogoOne;
     [Export] private NewGameCompanyLogoSelect m_CompanyLogoTwo;
@@ -33,7 +35,32 @@ public partial class NewGamePopup : Control
     [ExportGroup("Form Inputs")]
     [Export] private LineEdit m_CompanyNameInput;
 
-    
+    #endregion
+
+
+    #region CEO Setup
+
+    [Export] private GridContainer m_MaleCharacters;
+    [Export] private GridContainer m_FemaleCharacters;
+
+    [ExportGroup("Selectable Characters")]
+    [ExportCategory("Male")]
+    [Export] private NewGameSelectCharacter m_MaleOne;
+    [Export] private NewGameSelectCharacter m_MaleTwo;
+    [Export] private NewGameSelectCharacter m_MaleThree;
+    [Export] private NewGameSelectCharacter m_MaleFour;
+
+    [ExportCategory("Female")]
+    [Export] private NewGameSelectCharacter m_FemaleOne;
+    [Export] private NewGameSelectCharacter m_FemaleTwo;
+    [Export] private NewGameSelectCharacter m_FemaleThree;
+    [Export] private NewGameSelectCharacter m_FemaleFour;
+
+    private NewGameSelectCharacter m_SelectedCharacter;
+
+    #endregion
+
+
 
     public override void _Ready()
     {
@@ -71,6 +98,26 @@ public partial class NewGamePopup : Control
         // Complete form btn
         if (m_NextFormBtn != null)
             m_NextFormBtn.Connect("pressed", new Callable(this, "CompleteForm"));
+
+
+        // Link the character selection buttons
+        if (m_MaleOne != null && m_MaleOne.ButtonRef != null)
+            m_MaleOne.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleOne"));
+        if (m_MaleTwo != null && m_MaleTwo.ButtonRef != null)
+            m_MaleTwo.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleTwo"));
+        if (m_MaleThree != null && m_MaleThree.ButtonRef != null)
+            m_MaleThree.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleThree"));
+        if (m_MaleFour != null && m_MaleFour.ButtonRef != null)
+            m_MaleFour.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleFour"));
+
+        if (m_FemaleOne != null && m_FemaleOne.ButtonRef != null)
+            m_FemaleOne.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleOne"));
+        if (m_FemaleTwo != null && m_FemaleTwo.ButtonRef != null)
+            m_FemaleTwo.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleTwo"));
+        if (m_FemaleThree != null && m_FemaleThree.ButtonRef != null)
+            m_FemaleThree.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleThree"));
+        if (m_FemaleFour != null && m_FemaleFour.ButtonRef != null)
+            m_FemaleFour.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleFour"));
     }
 
     #region Company Selection
@@ -157,6 +204,38 @@ public partial class NewGamePopup : Control
         if (companyDb != null)
             companyDb.SetPlayersCompany(company);
     }
+
+    #region Selectable Characters
+
+    public void SetSelectedCharacter(NewGameSelectCharacter character)
+    {
+        if (m_SelectedCharacter != null)
+            m_SelectedCharacter.ToggleRect(false);
+
+        m_SelectedCharacter = character;
+        if (m_SelectedCharacter != null)
+            m_SelectedCharacter.ToggleRect(true);
+    }
+
+    public void SelectMaleOne()
+        => SetSelectedCharacter(m_MaleOne);
+    public void SelectMaleTwo()
+        => SetSelectedCharacter(m_MaleTwo); 
+    public void SelectMaleThree()
+        => SetSelectedCharacter(m_MaleThree);
+    public void SelectMaleFour()
+        => SetSelectedCharacter(m_MaleFour);
+
+    public void SelectFemaleOne()
+        => SetSelectedCharacter(m_FemaleOne);
+    public void SelectFemaleTwo()
+        => SetSelectedCharacter(m_FemaleTwo);
+    public void SelectFemaleThree()
+        => SetSelectedCharacter (m_FemaleThree);
+    public void SelectFemaleFour()
+        => SetSelectedCharacter(m_FemaleFour);
+
+    #endregion
 
     private void ClosePopup()
         => this.QueueFree();
