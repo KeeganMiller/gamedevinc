@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://c75djsxvf0tdm"]
+[gd_scene load_steps=23 format=4 uid="uid://c75djsxvf0tdm"]
 
 [ext_resource type="Script" path="res://Scripts/BuildingSystem/GridSystem.cs" id="1_52iae"]
 [ext_resource type="Texture2D" uid="uid://bmdgcmnc2f86t" path="res://Textures/WoodenFloor.png" id="1_jeplt"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://crsu68rnhijxc" path="res://Meshes/PointIndicator.fbx" id="2_ho2ig"]
 [ext_resource type="Script" path="res://Scripts/BuildingSystem/PlacementController.cs" id="3_kg0o3"]
 [ext_resource type="Script" path="res://Scripts/Controllers/CameraController.cs" id="3_nmql5"]
+[ext_resource type="PackedScene" uid="uid://bvwoii5bnxv5h" path="res://UserInterface/user_hud.tscn" id="7_jspq5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pte0c"]
 resource_name = "Trunk"
@@ -207,3 +208,6 @@ script = ExtResource("3_kg0o3")
 visible = false
 mesh = SubResource("SphereMesh_k3ird")
 surface_material_override/0 = SubResource("ORMMaterial3D_qu1tr")
+
+[node name="UserHUD" parent="." instance=ExtResource("7_jspq5")]
+visible = false
