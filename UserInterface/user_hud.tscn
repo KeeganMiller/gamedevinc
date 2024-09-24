@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvwoii5bnxv5h"]
+[gd_scene load_steps=6 format=3 uid="uid://bvwoii5bnxv5h"]
 
 [ext_resource type="Texture2D" uid="uid://bpwfhwv8c18gm" path="res://UserInterface/CompanyDetailsPanels.png" id="1_8c830"]
 [ext_resource type="FontFile" uid="uid://bejtufm8j63as" path="res://UserInterface/Roboto-Regular.ttf" id="2_ggmmw"]
 [ext_resource type="Texture2D" uid="uid://bpqf3x1kgmfif" path="res://UserInterface/YeahnahBackground.png" id="3_dup6y"]
+[ext_resource type="Texture2D" uid="uid://c23o684rhyqv5" path="res://UserInterface/ActionBar.png" id="4_emfsm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f1ndb"]
 font = ExtResource("2_ggmmw")
@@ -66,3 +67,16 @@ offset_top = -7.0
 offset_right = 206.0
 offset_bottom = 178.0
 texture = ExtResource("3_dup6y")
+
+[node name="ActionBar" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="ActionBar"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 979.0
+offset_right = 1863.0
+offset_bottom = 1054.0
+texture = ExtResource("4_emfsm")

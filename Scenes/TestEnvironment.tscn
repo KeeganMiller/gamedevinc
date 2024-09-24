@@ -210,4 +210,3 @@ mesh = SubResource("SphereMesh_k3ird")
 surface_material_override/0 = SubResource("ORMMaterial3D_qu1tr")
 
 [node name="UserHUD" parent="." instance=ExtResource("7_jspq5")]
-visible = false
