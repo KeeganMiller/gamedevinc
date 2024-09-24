@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace GameDevInc;
@@ -17,6 +18,8 @@ public class Company
 
     private List<Company> m_OwnedStudios = new List<Company>();                     // List of children studios
     // TODO: Add List of games
+
+    public Action<int> e_FundsChange;
 
     public Company(string name)
     {
@@ -59,8 +62,14 @@ public class Company
     }
 
     public virtual void TakeFunds(int amount)
-        => CompanyFunds -= amount;
+    {
+        CompanyFunds -= amount;
+        e_FundsChange?.Invoke(CompanyFunds);
+    }
     public virtual void AddFunds(int amount)
-        => CompanyFunds += amount;
+    {
+        CompanyFunds += amount;
+        e_FundsChange?.Invoke(CompanyFunds);
+    }
     
 }
