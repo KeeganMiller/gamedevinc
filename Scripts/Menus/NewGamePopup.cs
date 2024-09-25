@@ -9,6 +9,8 @@ public partial class NewGamePopup : Control
     [Export] private Button _exitBtn;
     [Export] private TextureButton _nextFormBtn;
     [Export] private Label _errorMessage;
+    [Export] private OptionButton _genderDropdown;
+    [Export] private TextureButton _EditCharacterBtn;
 
 
     #region Company Properties
@@ -57,6 +59,8 @@ public partial class NewGamePopup : Control
     [Export] private NewGameSelectCharacter _femaleFour;
 
     private NewGameSelectCharacter _selectedCharacter;
+
+    private int _currentlySelectedGenderIndex;                      // Index selected for the dropdown
 
     #endregion
 
@@ -130,6 +134,9 @@ public partial class NewGamePopup : Control
             _femaleFour.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleFour"));
             _femaleFour.HideWithSelfMod();
         }
+
+        if (_genderDropdown != null)
+            _genderDropdown.Connect("item_selected", new Callable(this, "OnChangeGender"));
     }
 
     #region Company Selection
@@ -248,6 +255,43 @@ public partial class NewGamePopup : Control
         => SetSelectedCharacter(_femaleFour);
 
     #endregion
+
+    public void OnChangeGender(int index)
+    {
+        if (_currentlySelectedGenderIndex == index)
+            return;
+
+        _currentlySelectedGenderIndex = index;
+
+        if(index == 0)
+        {
+            _maleCharacters.Visible = true;
+            _maleOne.FadeState = EFadeState.FADE_In;
+            _maleTwo.FadeState = EFadeState.FADE_In;
+            _maleThree.FadeState = EFadeState.FADE_In;
+            _maleFour.FadeState = EFadeState.FADE_In;
+
+            _femaleCharacters.Visible = false;
+            _femaleOne.FadeState = EFadeState.FADE_Out;
+            _femaleTwo.FadeState = EFadeState.FADE_Out;
+            _femaleThree.FadeState = EFadeState.FADE_Out;
+            _femaleFour.FadeState = EFadeState.FADE_Out;
+            
+        } else
+        {
+            _maleCharacters.Visible = false;
+            _maleOne.FadeState = EFadeState.FADE_Out;
+            _maleTwo.FadeState = EFadeState.FADE_Out;
+            _maleThree.FadeState = EFadeState.FADE_Out;
+            _maleFour.FadeState = EFadeState.FADE_Out;
+
+            _femaleCharacters.Visible = true;
+            _femaleOne.FadeState = EFadeState.FADE_In;
+            _femaleTwo.FadeState = EFadeState.FADE_In;
+            _femaleThree.FadeState = EFadeState.FADE_In;
+            _femaleFour.FadeState = EFadeState.FADE_In;
+        }
+    }
 
     private void ClosePopup()
         => this.QueueFree();

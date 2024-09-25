@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://npv0frxd00f8"]
+[gd_scene load_steps=35 format=3 uid="uid://npv0frxd00f8"]
 
 [ext_resource type="Texture2D" uid="uid://dgfhj0axjsd76" path="res://UserInterface/MainMenu/NewGame/MM_NewGameBackground.png" id="1_iw8bh"]
 [ext_resource type="Script" path="res://Scripts/Menus/NewGamePopup.cs" id="1_p6us3"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://jiv78im2qt42" path="res://UserInterface/GenreIcons/AdventureIcon.png" id="13_bh724"]
 [ext_resource type="Texture2D" uid="uid://dgax3ulq437pi" path="res://UserInterface/GenreIcons/PuzzleIcon.png" id="14_14vvw"]
 [ext_resource type="Texture2D" uid="uid://cj1e1jy1mop48" path="res://UserInterface/CharacterRenders/Male_01.png" id="20_3lt0o"]
+[ext_resource type="Script" path="res://Scripts/Menus/NewGameSelectCharacter.cs" id="20_relvc"]
 [ext_resource type="Texture2D" uid="uid://gf8tphep58lt" path="res://UserInterface/CharacterRenders/Male_02.png" id="21_77sst"]
 [ext_resource type="Texture2D" uid="uid://yy5g7a4wqsk8" path="res://UserInterface/CharacterRenders/Male_03.png" id="22_3ihhg"]
 [ext_resource type="Texture2D" uid="uid://4ifba6xq70qk" path="res://UserInterface/CharacterRenders/Male_04.png" id="23_d6ird"]
@@ -27,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://si777mrf4pyw" path="res://UserInterface/CharacterRenders/Female_02.png" id="25_q7b7l"]
 [ext_resource type="Texture2D" uid="uid://d3j3rt8glsiyw" path="res://UserInterface/CharacterRenders/Female_03.png" id="26_hni7b"]
 [ext_resource type="Texture2D" uid="uid://c72k0vkdwx2op" path="res://UserInterface/CharacterRenders/Female_04.png" id="27_j0yva"]
+[ext_resource type="PackedScene" uid="uid://c2k4wjg5oevik" path="res://Meshes/Characters/Female_Casual.fbx" id="29_fy52r"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_luyef"]
 font = ExtResource("2_ix7pq")
@@ -43,7 +45,13 @@ font = ExtResource("2_ix7pq")
 font_size = 32
 font_color = Color(0.612771, 0.0351491, 1.44392e-07, 1)
 
-[node name="NewGamePopup" type="Control" node_paths=PackedStringArray("m_ExitBtn", "m_CompanyLogoOne", "m_CompanyLogoTwo", "m_CompanyLogoThree", "m_ActionBtn", "m_RPGBtn", "m_SimulationBtn", "m_StrategyBtn", "m_PlatformerBtn", "m_CasualBtn", "m_AdventureBtn", "m_Puzzle")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_53egv"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Environment" id="Environment_qeefs"]
+background_mode = 2
+
+[node name="NewGamePopup" type="Control" node_paths=PackedStringArray("_exitBtn", "_nextFormBtn", "_errorMessage", "_genderDropdown", "_companyLogoOne", "_companyLogoTwo", "_companyLogoThree", "_actionBtn", "_rpgBtn", "_simulationBtn", "_strategyBtn", "_platformerBtn", "_casualBtn", "_adventureBtn", "_puzzle", "_companyNameInput", "_maleCharacters", "_femaleCharacters", "_maleOne", "_maleTwo", "_maleThree", "_maleFour", "_femaleOne", "_femaleTwo", "_femaleThree", "_femaleFour")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,18 +59,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p6us3")
-m_ExitBtn = NodePath("ExitBtn")
-m_CompanyLogoOne = NodePath("TextureRect/CompanyInformation/CompanyLogo1")
-m_CompanyLogoTwo = NodePath("TextureRect/CompanyInformation/CompanyLogo2")
-m_CompanyLogoThree = NodePath("TextureRect/CompanyInformation/CompanyLogo3")
-m_ActionBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/ActionBtn")
-m_RPGBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/RPGBtn")
-m_SimulationBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/SimBtn")
-m_StrategyBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/StrategyBtn")
-m_PlatformerBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/PlatfomerBtn")
-m_CasualBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/CasualBtn")
-m_AdventureBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/AdventureBtn")
-m_Puzzle = NodePath("TextureRect/CompanyInformation/GenreContainer/PuzzleBtn")
+_exitBtn = NodePath("ExitBtn")
+_nextFormBtn = NodePath("TextureRect/CompanyInformation/NextBtn")
+_errorMessage = NodePath("TextureRect/CompanyInformation/Label")
+_genderDropdown = NodePath("TextureRect/CEOSetup/GenderSelection")
+_companyLogoOne = NodePath("TextureRect/CompanyInformation/CompanyLogo1")
+_companyLogoTwo = NodePath("TextureRect/CompanyInformation/CompanyLogo2")
+_companyLogoThree = NodePath("TextureRect/CompanyInformation/CompanyLogo3")
+_actionBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/ActionBtn")
+_rpgBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/RPGBtn")
+_simulationBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/SimBtn")
+_strategyBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/StrategyBtn")
+_platformerBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/PlatfomerBtn")
+_casualBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/CasualBtn")
+_adventureBtn = NodePath("TextureRect/CompanyInformation/GenreContainer/AdventureBtn")
+_puzzle = NodePath("TextureRect/CompanyInformation/GenreContainer/PuzzleBtn")
+_companyNameInput = NodePath("TextureRect/CompanyInformation/LineEdit")
+_maleCharacters = NodePath("TextureRect/CEOSetup/MaleCharacters")
+_femaleCharacters = NodePath("TextureRect/CEOSetup/FemaleCharacters")
+_maleOne = NodePath("TextureRect/CEOSetup/MaleCharacters/MaleOne")
+_maleTwo = NodePath("TextureRect/CEOSetup/MaleCharacters/MaleTwo")
+_maleThree = NodePath("TextureRect/CEOSetup/MaleCharacters/MaleThree")
+_maleFour = NodePath("TextureRect/CEOSetup/MaleCharacters/MaleFour")
+_femaleOne = NodePath("TextureRect/CEOSetup/FemaleCharacters/FemaleOne")
+_femaleTwo = NodePath("TextureRect/CEOSetup/FemaleCharacters/FemaleTwo")
+_femaleThree = NodePath("TextureRect/CEOSetup/FemaleCharacters/FemaleThree")
+_femaleFour = NodePath("TextureRect/CEOSetup/FemaleCharacters/FemaleFour")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -423,14 +445,15 @@ label_settings = SubResource("LabelSettings_3t2b7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="TextureRect"]
+[node name="CEOSetup" type="Control" parent="TextureRect"]
+visible = false
 anchors_preset = 0
 offset_left = 107.0
 offset_top = 78.0
 offset_right = 828.0
 offset_bottom = 1091.0
 
-[node name="CompanyNameHeader" type="Label" parent="TextureRect/Control"]
+[node name="CompanyNameHeader" type="Label" parent="TextureRect/CEOSetup"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -444,7 +467,7 @@ text = "CEO Name"
 label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 1
 
-[node name="CompanyNameHeader2" type="Label" parent="TextureRect/Control"]
+[node name="CompanyNameHeader2" type="Label" parent="TextureRect/CEOSetup"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -458,7 +481,7 @@ text = "Select CEO"
 label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="TextureRect/Control"]
+[node name="LineEdit" type="LineEdit" parent="TextureRect/CEOSetup"]
 offset_left = 124.5
 offset_top = 144.0
 offset_right = 582.5
@@ -468,14 +491,14 @@ theme_override_font_sizes/font_size = 32
 placeholder_text = "Keegan Miller"
 alignment = 1
 
-[node name="TextureRect2" parent="TextureRect/Control" instance=ExtResource("3_86nte")]
+[node name="TextureRect2" parent="TextureRect/CEOSetup" instance=ExtResource("3_86nte")]
 layout_mode = 0
 offset_left = 489.5
 offset_top = 244.0
 offset_right = 533.5
 offset_bottom = 288.0
 
-[node name="OptionButton" type="OptionButton" parent="TextureRect/Control"]
+[node name="GenderSelection" type="OptionButton" parent="TextureRect/CEOSetup"]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 310.0
@@ -490,8 +513,7 @@ popup/item_0/text = "Male"
 popup/item_1/text = "Female"
 popup/item_1/id = 1
 
-[node name="MaleCharacters" type="GridContainer" parent="TextureRect/Control"]
-visible = false
+[node name="MaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -499,76 +521,85 @@ offset_right = 602.0
 offset_bottom = 727.0
 columns = 4
 
-[node name="Control" type="Control" parent="TextureRect/Control/MaleCharacters"]
+[node name="MaleOne" type="Control" parent="TextureRect/CEOSetup/MaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/MaleCharacters/MaleOne"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("20_3lt0o")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/MaleCharacters/MaleOne"]
 visible = false
 layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
 
-[node name="Control2" type="Control" parent="TextureRect/Control/MaleCharacters"]
+[node name="MaleTwo" type="Control" parent="TextureRect/CEOSetup/MaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control2"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/MaleCharacters/MaleTwo"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("21_77sst")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control2"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/MaleCharacters/MaleTwo"]
 visible = false
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
 
-[node name="Control3" type="Control" parent="TextureRect/Control/MaleCharacters"]
+[node name="MaleThree" type="Control" parent="TextureRect/CEOSetup/MaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control3"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/MaleCharacters/MaleThree"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("22_3ihhg")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control3"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/MaleCharacters/MaleThree"]
 visible = false
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
 
-[node name="Control4" type="Control" parent="TextureRect/Control/MaleCharacters"]
+[node name="MaleFour" type="Control" parent="TextureRect/CEOSetup/MaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/MaleCharacters/Control4"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/MaleCharacters/MaleFour"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("23_d6ird")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/MaleCharacters/Control4"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/MaleCharacters/MaleFour"]
 visible = false
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
 
-[node name="FemaleCharacters" type="GridContainer" parent="TextureRect/Control"]
+[node name="FemaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
+visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -576,74 +607,105 @@ offset_right = 602.0
 offset_bottom = 727.0
 columns = 4
 
-[node name="Control" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+[node name="FemaleOne" type="Control" parent="TextureRect/CEOSetup/FemaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleOne"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("24_ms3gb")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleOne"]
 visible = false
 layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
 
-[node name="Control2" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+[node name="FemaleTwo" type="Control" parent="TextureRect/CEOSetup/FemaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control2"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleTwo"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("25_q7b7l")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control2"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleTwo"]
 visible = false
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
 
-[node name="Control3" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+[node name="FemaleThree" type="Control" parent="TextureRect/CEOSetup/FemaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control3"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleThree"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("26_hni7b")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control3"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleThree"]
 visible = false
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
 
-[node name="Control4" type="Control" parent="TextureRect/Control/FemaleCharacters"]
+[node name="FemaleFour" type="Control" parent="TextureRect/CEOSetup/FemaleCharacters"]
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
+script = ExtResource("20_relvc")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/Control/FemaleCharacters/Control4"]
+[node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleFour"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("27_j0yva")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/Control/FemaleCharacters/Control4"]
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleFour"]
 visible = false
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
 border_color = Color(0, 0, 0, 1)
+editor_only = false
+
+[node name="NextBtn" type="TextureButton" parent="TextureRect/CEOSetup"]
+offset_left = 100.5
+offset_top = 884.0
+offset_right = 614.5
+offset_bottom = 952.0
+texture_normal = ExtResource("6_wkdwn")
+
+[node name="Label" type="Label" parent="TextureRect/CEOSetup/NextBtn"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 4.0
+offset_right = 483.0
+offset_bottom = 58.0
+text = "Edit Character"
+label_settings = SubResource("LabelSettings_3l4jb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CEOCharacterDesign" type="Control" parent="TextureRect"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="ExitBtn" type="Button" parent="."]
 layout_mode = 1
@@ -658,3 +720,39 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ix7pq")
 theme_override_font_sizes/font_size = 24
 text = "X"
+
+[node name="Female_Casual" parent="." instance=ExtResource("29_fy52r")]
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 685.0
+offset_top = -62.0
+offset_right = 1197.0
+offset_bottom = 450.0
+texture = SubResource("ViewportTexture_53egv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58941, 5.49606)
+environment = SubResource("Environment_qeefs")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.55987, 4.41328)
+spot_range = 5.858
+spot_attenuation = 0.24
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.55152, 0.365886)
+spot_range = 5.858
+spot_attenuation = 0.24
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.591985, 0.805949, 0, -0.805949, 0.591985, 0, 5.55152, 1.7546)
+spot_range = 5.858
+spot_attenuation = 0.24
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.824195, -0.566306, 0, 0.566306, 0.824195, 0, 0.0220363, 3.96248)
+spot_range = 5.858
+spot_attenuation = 0.24

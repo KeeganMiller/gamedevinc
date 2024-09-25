@@ -7,7 +7,7 @@ public enum EFadeState
 {
     FADE_In,
     FADE_Out,
-    FADE_Idle;
+    FADE_Idle
 }
 
 public partial class NewGameSelectCharacter : Control
@@ -39,7 +39,7 @@ public partial class NewGameSelectCharacter : Control
 
         if(FadeState == EFadeState.FADE_Out)
         {
-            _currentFadeAmount = Mathf.Lerp(_currentFadeAmount, 0, _fadeTime * (float)delta);
+            _currentFadeAmount = Mathf.Lerp(_currentFadeAmount, 0, (float)delta);
             SelfModulate = new Color(SelfModulate.R, SelfModulate.G, SelfModulate.B, _currentFadeAmount);
 
             if (_currentFadeAmount < 0.05f)
@@ -47,7 +47,7 @@ public partial class NewGameSelectCharacter : Control
         } else if(FadeState == EFadeState.FADE_In)
         {
             _currentFadeAmount = Mathf.Lerp(_currentFadeAmount, 1, _fadeTime * (float)delta);
-            SelfModulate = new Color(SelfModulate.R, SelfModulate.G, _currentFadeAmount, _fadeTime * (float)delta);
+            SelfModulate = new Color(SelfModulate.R, SelfModulate.G, _currentFadeAmount, (float)delta);
             if (_currentFadeAmount > 0.95)
                 FadeState = EFadeState.FADE_Idle;
         }

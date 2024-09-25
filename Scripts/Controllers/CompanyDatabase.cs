@@ -25,10 +25,14 @@ public partial class CompanyDatabase : Node3D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        // Update the companies
-        PlayersCompany._Update((float)delta);
-        foreach(var company in m_Companies)
-            company._Update((float)delta);
+
+        // Update the players company
+        if(PlayersCompany != null)
+            PlayersCompany._Update((float)delta);
+            foreach (var company in m_Companies)
+                company._Update((float)delta);
+
+        // TODO: Update all other companies
 
     }
 
