@@ -1,4 +1,6 @@
-[gd_scene load_steps=24 format=4 uid="uid://bxw70s0qg28v2"]
+[gd_scene load_steps=25 format=4 uid="uid://bxw70s0qg28v2"]
+
+[ext_resource type="Script" path="res://Scripts/Staff/StaffMemberController.cs" id="1_0w0b4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcgjk"]
 resource_name = "Skin"
@@ -3056,13 +3058,15 @@ _data = {
 }
 
 [node name="MaleTwo" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33514e-05, 0.00585151, -0.000889778)
+script = ExtResource("1_0w0b4")
 
-[node name="Male_LongSleeve" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
 
-[node name="HumanArmature" type="Node3D" parent="Male_LongSleeve"]
+[node name="HumanArmature" type="Node3D" parent="Model"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0, 0, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Male_LongSleeve/HumanArmature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Model/HumanArmature"]
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 9.9476e-14, 4.76837e-07, 4.76837e-07, -1.19209e-07, -1, 0, 1, -1.19209e-07, -3.19546e-05, 2.79434e-06, -5.88517e-05)
@@ -3358,7 +3362,7 @@ bones/41/position = Vector3(0, 0.00309121, 0)
 bones/41/rotation = Quaternion(0, 0, 0, 1)
 bones/41/scale = Vector3(1, 1, 1)
 
-[node name="BaseHuman" type="MeshInstance3D" parent="Male_LongSleeve/HumanArmature/Skeleton3D"]
+[node name="BaseHuman" type="MeshInstance3D" parent="Model/HumanArmature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_uo7e4")
 skin = SubResource("Skin_xv7d1")
 surface_material_override/0 = SubResource("ORMMaterial3D_6sn68")
@@ -3366,7 +3370,7 @@ surface_material_override/2 = SubResource("ORMMaterial3D_hji46")
 surface_material_override/3 = SubResource("ORMMaterial3D_vuhpr")
 surface_material_override/4 = SubResource("ORMMaterial3D_a6dmq")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Male_LongSleeve"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
 libraries = {
 "": SubResource("AnimationLibrary_ba5xh")
 }
