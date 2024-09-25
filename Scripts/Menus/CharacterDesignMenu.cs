@@ -23,34 +23,35 @@ public partial class CharacterDesignMenu : Control
 
         if (_colorPicker != null)
             _colorPicker.Connect("color_changed", new Callable(this, "UpdateColor"));
+    }
 
-        VisibilityChanged += () =>
+    public void Setup()
+    {
+        if (CompanyDatabase.Instance.PlayersStaffMember != null)
         {
-            if (CompanyDatabase.Instance.PlayersStaffMember != null)
+            var index = CompanyDatabase.Instance.PlayersStaffMember.ModelIndex;
+            var sex = CompanyDatabase.Instance.PlayersStaffMember.Sex;
+
+            var scene = StaffMember.GetCharacterModel(sex, index);
+            if (scene != null)
             {
-                var index = CompanyDatabase.Instance.PlayersStaffMember.ModelIndex;
-                var sex = CompanyDatabase.Instance.PlayersStaffMember.Sex;
-
-                var scene = StaffMember.GetCharacterModel(sex, index);
-                if (scene != null)
+                SelectedCharacterController = (StaffMemberController)scene.Instantiate();
+                if (SelectedCharacterController != null)
                 {
-                    var spawned = (StaffMemberController)scene.Instantiate();
-                    if (spawned != null)
-                    {
-                        _modelColors = new StaffMemberModelColors();
-                        _viewport.AddChild(spawned);
-                    }
-                        
+                    _modelColors = new StaffMemberModelColors();
+                    _viewport.AddChild(SelectedCharacterController);
                 }
 
-                foreach (var color in _selectedCharacterColors)
-                {
-                    color.UpdateColorsWithModelData();
-                }
-
-                
             }
-        };
+
+            foreach (var color in _selectedCharacterColors)
+            {
+                color.Setup();
+                color.UpdateColorsWithModelData();
+            }
+
+
+        }
     }
 
     private void UpdateColor(Color color)

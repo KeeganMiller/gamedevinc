@@ -242,8 +242,10 @@ albedo_color = Color(0.761829, 0.644454, 0.513052, 1)
 albedo_color = Color(0.240414, 0.165742, 0, 1)
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_k2bm0"]
+albedo_color = Color(0.555041, 0.255533, 0.137708, 1)
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_70jab"]
+albedo_color = Color(0.230315, 0.230315, 0.230315, 1)
 
 [sub_resource type="Animation" id="Animation_tcshs"]
 resource_name = "HumanArmature|Man_Clapping"

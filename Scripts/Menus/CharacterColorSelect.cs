@@ -23,6 +23,8 @@ public partial class CharacterColorSelect : Label
     [Export] private CharacterDesignMenu _designMenu;
     [Export] private EColorPropertyType _colorPropType;
 
+    public bool IsActive = true;
+
     public override void _Ready()
     {
         base._Ready();
@@ -33,6 +35,44 @@ public partial class CharacterColorSelect : Label
 
         if (_buttonRef != null)
             _buttonRef.Connect("pressed", new Callable(this, "OnSelectColor"));
+    }
+
+    public void Setup()
+    {
+        var model = _designMenu.SelectedCharacterController;
+        var index = CompanyDatabase.Instance.PlayersStaffMember.ModelIndex;
+        var sex = CompanyDatabase.Instance.PlayersStaffMember.Sex;
+
+        if(model != null)
+        {
+            if(sex == EStaffSex.SEX_Male)
+            {
+                switch(_colorPropType)
+                {
+                    case EColorPropertyType.COL_HairTwo:
+                        if(index == 0 || index == 1 || index == 3)
+                        {
+                            Modulate = new Color(1, 1, 1, 0.1f);
+                            IsActive = false;
+                        }
+                        break;
+                    case EColorPropertyType.COL_ShirtTwo:
+                        if(index == 0 || index == 1)
+                        {
+                            Modulate = new Color(1, 1, 1, 0.1f);
+                            IsActive = false;
+                        }
+                        break;
+                    case EColorPropertyType.COL_ShirtThree:
+                        if(index == 0 || index == 1 || index == 2)
+                        {
+                            Modulate = new Color(1, 1, 1, 0.1f);
+                            IsActive = false;
+                        }
+                        break;
+                }
+            }
+        }
     }
 
     public void SetColor(Color color)
@@ -123,6 +163,8 @@ public partial class CharacterColorSelect : Label
 
     public void OnSelectColor()
     {
+        if (!IsActive) return;
+
         if (_designMenu != null)
         {
             _designMenu.SetSelectedColorEdit(this);

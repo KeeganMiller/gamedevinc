@@ -108,9 +108,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -466.5
+offset_left = -483.0
 offset_top = -581.0
-offset_right = 466.5
+offset_right = 450.0
 offset_bottom = 641.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -559,6 +559,7 @@ editor_only = false
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
 script = ExtResource("20_relvc")
+ModelIndex = 1
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/MaleCharacters/MaleTwo"]
 layout_mode = 0
@@ -578,6 +579,7 @@ editor_only = false
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
 script = ExtResource("20_relvc")
+ModelIndex = 2
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/MaleCharacters/MaleThree"]
 layout_mode = 0
@@ -597,6 +599,7 @@ editor_only = false
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
 script = ExtResource("20_relvc")
+ModelIndex = 3
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/MaleCharacters/MaleFour"]
 layout_mode = 0
