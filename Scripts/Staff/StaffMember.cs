@@ -57,7 +57,7 @@ public abstract class StaffMember
 
     // == Model Properties == //
     protected StaffMemberModelColors _clothingColors;
-    protected int _modelIndex;
+    public int ModelIndex { get; protected set; }
     protected PackedScene _modelScene;
 
     public StaffMember(EModuleJobType jobType)
@@ -152,14 +152,14 @@ public abstract class StaffMember
     public void SetCharacterModel(StaffMemberModelColors colors, int modelIndex)
     {
         _clothingColors = colors;
-        _modelIndex = modelIndex;
+        ModelIndex = modelIndex;
         
         if(Sex == EStaffSex.SEX_Male)
         {
-            _modelScene = _maleModels[_modelIndex];
+            _modelScene = _maleModels[ModelIndex];
         } else if(Sex == EStaffSex.SEX_Female)
         {
-            _modelScene = _femaleModels[_modelIndex];
+            _modelScene = _femaleModels[ModelIndex];
         }
 
         if(_modelScene == null)
@@ -168,12 +168,13 @@ public abstract class StaffMember
         }
     }
 
-    public Node3D GetSpawnable()
+    public void CreateController()
     {
         if(_modelScene != null)
         {
-            var model = (Node3D)_modelScene.Instantiate();
-            
+            var spawned = (StaffMemberController)GameController.Instance.SpawnToWorld(_modelScene, null);
+            if (spawned != null)
+                spawned.Setup(this);
         }
     }
 
