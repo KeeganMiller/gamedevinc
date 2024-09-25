@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c2up7hpt3wmpa" path="res://UserInterface/MainMenu/Background.png" id="1_h2c2v"]
 [ext_resource type="Script" path="res://Scripts/Menus/MainMenuController.cs" id="1_n83ei"]
 [ext_resource type="FontFile" uid="uid://bfxiavdcx0g3i" path="res://UserInterface/Comic Shark.ttf" id="2_uhvx6"]
-[ext_resource type="PackedScene" uid="uid://npv0frxd00f8" path="res://UserInterface/MainMenu/new_game_popup.tscn" id="2_xpp3w"]
+[ext_resource type="PackedScene" uid="uid://npv0frxd00f8" path="res://UserInterface/new_game_popup.tscn" id="2_xpp3w"]
 [ext_resource type="Texture2D" uid="uid://btjxqrmcy5pjs" path="res://UserInterface/MainMenu/MenuButton.png" id="4_o5tb6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jvkot"]

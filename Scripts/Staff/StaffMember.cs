@@ -22,6 +22,8 @@ public abstract class StaffMember
     public const int c_MaxStatLevel = 25;
     public string Name { get; protected set; }                    // Name of the staff member
     public EModuleJobType JobType { get; protected set; }                 // Reference to the staff members job type
+    public EStaffSex Sex { get; protected set; }
+    
 
     // == Leveling Properties == //
     // XP Leveling
@@ -40,6 +42,8 @@ public abstract class StaffMember
     // == Generator Properties == //
     private const string c_NameResourcePath = "res://Data/Names.json";
     private static List<StaffNameData> Names = new List<StaffNameData>();
+    private static List<PackedScene> _maleModels;
+    private static List<PackedScene> _femaleModels;
 
     // == Current Task Data == //
     private List<BaseModule> m_CurrentWorkList = new List<BaseModule>();                    // List of current task queued
@@ -50,6 +54,11 @@ public abstract class StaffMember
     // Boss/Team
     // Burnout
     // Hours
+
+    // == Model Properties == //
+    protected StaffMemberModelColors _clothingColors;
+    protected int _modelIndex;
+    protected PackedScene _modelScene;
 
     public StaffMember(EModuleJobType jobType)
     {
@@ -138,6 +147,49 @@ public abstract class StaffMember
         {
             GD.PushError("StafFMember::LoadNames -> Failed to locate name json file");
         }
+    }
+
+    public void SetCharacterModel(StaffMemberModelColors colors, int modelIndex)
+    {
+        _clothingColors = colors;
+        _modelIndex = modelIndex;
+        
+        if(Sex == EStaffSex.SEX_Male)
+        {
+            _modelScene = _maleModels[_modelIndex];
+        } else if(Sex == EStaffSex.SEX_Female)
+        {
+            _modelScene = _femaleModels[_modelIndex];
+        }
+
+        if(_modelScene == null)
+        {
+            GD.PushWarning("StaffMember::SetCharacterModel -> Failed to select a model");
+        }
+    }
+
+    public Node3D GetSpawnable()
+    {
+        if(_modelScene != null)
+        {
+            var model = (Node3D)_modelScene.Instantiate();
+            
+        }
+    }
+
+    public static void GetCharacterModels()
+    {
+        // Load male models
+        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_Casual.fbx"));
+        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_LongSleeve.fbx"));
+        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_Shirt.fbx"));
+        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_Suit.fbx"));
+
+        // Load female models
+        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Alternative.fbx"));
+        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Casual.fbx"));
+        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Dress.fbx"));
+        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_TankTop.fbx"));
     }
 
     /// <summary>
@@ -229,6 +281,23 @@ public class GeneralStaffStats
             return true;
         }
 
+        var s = new StaffMemberModelColors
+        {
+            SkinColor = new Color()
+        }
+
         return false;
     }
+}
+
+public class StaffMemberModelColors
+{
+    public Color SkinColor;
+    public Color HairOne;
+    public Color HairTwo;
+    public Color ShirtOne;
+    public Color ShirtTwo;
+    public Color ShirtThree;
+    public Color Pants;
+
 }

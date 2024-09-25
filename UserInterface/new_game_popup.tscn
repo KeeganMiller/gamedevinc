@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://si777mrf4pyw" path="res://UserInterface/CharacterRenders/Female_02.png" id="25_q7b7l"]
 [ext_resource type="Texture2D" uid="uid://d3j3rt8glsiyw" path="res://UserInterface/CharacterRenders/Female_03.png" id="26_hni7b"]
 [ext_resource type="Texture2D" uid="uid://c72k0vkdwx2op" path="res://UserInterface/CharacterRenders/Female_04.png" id="27_j0yva"]
-[ext_resource type="PackedScene" uid="uid://c2k4wjg5oevik" path="res://Meshes/Characters/Female_Casual.fbx" id="29_fy52r"]
+[ext_resource type="PackedScene" uid="uid://g6jejsfis4ex" path="res://Meshes/Characters/Male_Casual.fbx" id="29_nk5fw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_luyef"]
 font = ExtResource("2_ix7pq")
@@ -514,6 +514,7 @@ popup/item_1/text = "Female"
 popup/item_1/id = 1
 
 [node name="MaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
+visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -599,7 +600,6 @@ border_color = Color(0, 0, 0, 1)
 editor_only = false
 
 [node name="FemaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
-visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -707,6 +707,69 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CharacterRenderTarget" type="TextureRect" parent="TextureRect/CEOCharacterDesign"]
+offset_left = 210.5
+offset_top = 85.0
+offset_right = 722.5
+offset_bottom = 597.0
+texture = SubResource("ViewportTexture_53egv")
+
+[node name="CompanyNameHeader" type="Label" parent="TextureRect/CEOCharacterDesign"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 81.5
+offset_top = 679.0
+offset_right = 807.5
+offset_bottom = 735.0
+grow_horizontal = 2
+text = "Hair Color"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 1
+
+[node name="CompanyNameHeader4" type="Label" parent="TextureRect/CEOCharacterDesign"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 81.5
+offset_top = 543.0
+offset_right = 807.5
+offset_bottom = 599.0
+grow_horizontal = 2
+text = "Skin Color"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 1
+
+[node name="CompanyNameHeader2" type="Label" parent="TextureRect/CEOCharacterDesign"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 81.5
+offset_top = 807.0
+offset_right = 807.5
+offset_bottom = 863.0
+grow_horizontal = 2
+text = "Shirt Color"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 1
+
+[node name="CompanyNameHeader3" type="Label" parent="TextureRect/CEOCharacterDesign"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 81.5
+offset_top = 935.0
+offset_right = 807.5
+offset_bottom = 991.0
+grow_horizontal = 2
+text = "Paints Color"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 1
+
 [node name="ExitBtn" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -720,15 +783,6 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ix7pq")
 theme_override_font_sizes/font_size = 24
 text = "X"
-
-[node name="Female_Casual" parent="." instance=ExtResource("29_fy52r")]
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-offset_left = 685.0
-offset_top = -62.0
-offset_right = 1197.0
-offset_bottom = 450.0
-texture = SubResource("ViewportTexture_53egv")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -756,3 +810,5 @@ spot_attenuation = 0.24
 transform = Transform3D(1, 0, 0, 0, 0.824195, -0.566306, 0, 0.566306, 0.824195, 0, 0.0220363, 3.96248)
 spot_range = 5.858
 spot_attenuation = 0.24
+
+[node name="Male_Casual" parent="SubViewport" instance=ExtResource("29_nk5fw")]
