@@ -276,7 +276,7 @@ albedo_color = Color(0.266575, 0.266575, 0.266575, 1)
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_jttwk"]
 albedo_color = Color(0.255659, 0.255659, 0.255659, 1)
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_hccuu"]
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_f4jq2"]
 
 [sub_resource type="Animation" id="Animation_j0grc"]
 resource_name = "HumanArmature|Man_Clapping"
@@ -3575,7 +3575,7 @@ surface_material_override/1 = SubResource("ORMMaterial3D_co5bn")
 surface_material_override/3 = SubResource("ORMMaterial3D_pwfea")
 surface_material_override/4 = SubResource("ORMMaterial3D_gisyv")
 surface_material_override/5 = SubResource("ORMMaterial3D_jttwk")
-surface_material_override/6 = SubResource("ORMMaterial3D_hccuu")
+surface_material_override/6 = SubResource("ORMMaterial3D_f4jq2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
 libraries = {

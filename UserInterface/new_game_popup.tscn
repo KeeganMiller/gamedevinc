@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://npv0frxd00f8"]
+[gd_scene load_steps=38 format=3 uid="uid://npv0frxd00f8"]
 
 [ext_resource type="Texture2D" uid="uid://dgfhj0axjsd76" path="res://UserInterface/MainMenu/NewGame/MM_NewGameBackground.png" id="1_iw8bh"]
 [ext_resource type="Script" path="res://Scripts/Menus/NewGamePopup.cs" id="1_p6us3"]
@@ -29,7 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://d3j3rt8glsiyw" path="res://UserInterface/CharacterRenders/Female_03.png" id="26_hni7b"]
 [ext_resource type="Texture2D" uid="uid://c72k0vkdwx2op" path="res://UserInterface/CharacterRenders/Female_04.png" id="27_j0yva"]
 [ext_resource type="Script" path="res://Scripts/Menus/CharacterDesignMenu.cs" id="29_fnvd1"]
-[ext_resource type="PackedScene" uid="uid://g6jejsfis4ex" path="res://Meshes/Characters/Male_Casual.fbx" id="29_nk5fw"]
 [ext_resource type="Script" path="res://Scripts/Menus/CharacterColorSelect.cs" id="30_lcq4j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_luyef"]
@@ -118,7 +117,6 @@ grow_vertical = 2
 texture = ExtResource("1_iw8bh")
 
 [node name="CompanyInformation" type="Control" parent="TextureRect"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -718,12 +716,15 @@ label_settings = SubResource("LabelSettings_3l4jb")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CEOCharacterDesign" type="Control" parent="TextureRect" node_paths=PackedStringArray("_colorPicker")]
+[node name="CEOCharacterDesign" type="Control" parent="TextureRect" node_paths=PackedStringArray("_colorPicker", "_selectedCharacterColors", "_viewport")]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("29_fnvd1")
 _colorPicker = NodePath("ColorPicker")
+_selectedCharacterColors = [NodePath("SkinColor"), NodePath("HairColorOne"), NodePath("HairColorTwo"), NodePath("ShirtColorOne"), NodePath("ShirtColorTwo"), NodePath("ShirtColorThree"), NodePath("Pants")]
+_viewport = NodePath("../../SubViewport")
 
 [node name="ColorPicker" type="ColorPicker" parent="TextureRect/CEOCharacterDesign"]
 layout_mode = 0
@@ -817,6 +818,7 @@ label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 2
 script = ExtResource("30_lcq4j")
 _designMenu = NodePath("..")
+_colorPropType = 1
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/HairColorOne"]
 offset_left = 440.5
@@ -869,6 +871,7 @@ label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 2
 script = ExtResource("30_lcq4j")
 _designMenu = NodePath("..")
+_colorPropType = 2
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/HairColorTwo"]
 offset_left = 440.5
@@ -921,6 +924,7 @@ label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 2
 script = ExtResource("30_lcq4j")
 _designMenu = NodePath("..")
+_colorPropType = 3
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorOne"]
 offset_left = 440.5
@@ -973,6 +977,7 @@ label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 2
 script = ExtResource("30_lcq4j")
 _designMenu = NodePath("..")
+_colorPropType = 4
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo"]
 offset_left = 440.5
@@ -1025,6 +1030,7 @@ label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 2
 script = ExtResource("30_lcq4j")
 _designMenu = NodePath("..")
+_colorPropType = 5
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorThree"]
 offset_left = 440.5
@@ -1077,6 +1083,7 @@ label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 2
 script = ExtResource("30_lcq4j")
 _designMenu = NodePath("..")
+_colorPropType = 6
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/Pants"]
 offset_left = 440.5
@@ -1172,5 +1179,3 @@ spot_attenuation = 0.24
 transform = Transform3D(1, 0, 0, 0, 0.824195, -0.566306, 0, 0.566306, 0.824195, 0, 0.0220363, 3.96248)
 spot_range = 5.858
 spot_attenuation = 0.24
-
-[node name="Male_Casual" parent="SubViewport" instance=ExtResource("29_nk5fw")]

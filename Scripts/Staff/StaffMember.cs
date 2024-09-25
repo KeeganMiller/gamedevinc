@@ -177,6 +177,9 @@ public abstract class StaffMember
         }
     }
 
+    public static PackedScene GetCharacterModel(EStaffSex sex, int index)
+        => sex == EStaffSex.SEX_Male ? _maleModels[index] : _femaleModels[index];
+
     public void CreateController()
     {
         if(_modelScene != null)
@@ -304,5 +307,40 @@ public class StaffMemberModelColors
     public Color ShirtTwo;
     public Color ShirtThree;
     public Color Pants;
+
+    public void SetColorProperties(MeshInstance3D characterMesh, EStaffSex sex, int modelIndex)
+    {
+        if(characterMesh != null)
+        {
+            if(sex == EStaffSex.SEX_Male)
+            {
+                if(characterMesh.GetActiveMaterial(0) is OrmMaterial3D skin)
+                {
+                    SkinColor = skin.AlbedoColor;
+                }
+
+                if(modelIndex == 0 || modelIndex == 1)
+                {
+                    if(characterMesh.GetActiveMaterial(2) is OrmMaterial3D hair) HairOne = hair.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(3) is OrmMaterial3D shirt) ShirtOne = shirt.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(4) is OrmMaterial3D pants) Pants = pants.AlbedoColor;
+                } else if(modelIndex == 2)
+                {
+                    if (characterMesh.GetActiveMaterial(2) is OrmMaterial3D hairOne) HairOne = hairOne.AlbedoColor;
+                    if(characterMesh.GetActiveMaterial(3) is OrmMaterial3D hairTwo) HairTwo = hairTwo.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(4) is OrmMaterial3D shirtOne) ShirtOne = shirtOne.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(5) is OrmMaterial3D shirtTwo) ShirtTwo = shirtTwo.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(6) is OrmMaterial3D pantsOne) Pants = pantsOne.AlbedoColor;
+                } else if(modelIndex == 3)
+                {
+                    if (characterMesh.GetActiveMaterial(1) is OrmMaterial3D shirtOne) ShirtOne = shirtOne.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(4) is OrmMaterial3D shirtTwo) ShirtTwo = shirtTwo.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(6) is OrmMaterial3D shirtThree) ShirtThree = shirtThree.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(5) is OrmMaterial3D pants) Pants = pants.AlbedoColor;
+                    if (characterMesh.GetActiveMaterial(3) is OrmMaterial3D hair) HairOne = hair.AlbedoColor;
+                }
+            }
+        }
+    }
 
 }
