@@ -3,17 +3,29 @@ using Godot;
 
 namespace GameDevInc.Menus;
 
+public enum EFadeState
+{
+    FADE_In,
+    FADE_Out,
+    FADE_Idle;
+}
+
 public partial class NewGameSelectCharacter : Control
 {
-    private ReferenceRect m_SelectedRect;                       // reference to the object that displays when selected
+    private ReferenceRect _selectionRect;                       // reference to the object that displays when selected
     public TextureButton ButtonRef { get; private set; }
+
+    public EFadeState FadeState = EFadeState.FADE_Idle;
+
+    private float _currentFadeAmount = 1;                      // The current amount of the fade
+    private float _fadeTime = 5f;                               // How long it takes to fade out
 
     public override void _Ready()
     {
         base._Ready();
 
-        m_SelectedRect = GetNode<ReferenceRect>("ReferenceRect");
-        if (m_SelectedRect == null)
+        _selectionRect = GetNode<ReferenceRect>("ReferenceRect");
+        if (_selectionRect == null)
             GD.PushWarning("NewGameSelectCharacter::_Ready -> Failed to get reference to select rect");
 
         ButtonRef = GetNode<TextureButton>("TextureButton");
@@ -21,6 +33,32 @@ public partial class NewGameSelectCharacter : Control
             GD.PushWarning("NewGameSelectCharacter::_Ready -> Failed to get reference to the button");
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if(FadeState == EFadeState.FADE_Out)
+        {
+            _currentFadeAmount = Mathf.Lerp(_currentFadeAmount, 0, _fadeTime * (float)delta);
+            SelfModulate = new Color(SelfModulate.R, SelfModulate.G, SelfModulate.B, _currentFadeAmount);
+
+            if (_currentFadeAmount < 0.05f)
+                FadeState = EFadeState.FADE_Idle;
+        } else if(FadeState == EFadeState.FADE_In)
+        {
+            _currentFadeAmount = Mathf.Lerp(_currentFadeAmount, 1, _fadeTime * (float)delta);
+            SelfModulate = new Color(SelfModulate.R, SelfModulate.G, _currentFadeAmount, _fadeTime * (float)delta);
+            if (_currentFadeAmount > 0.95)
+                FadeState = EFadeState.FADE_Idle;
+        }
+    }
+
     public void ToggleRect(bool active)
-        => m_SelectedRect.Visible = active;
+        => _selectionRect.Visible = active;
+
+    public void HideWithSelfMod()
+    {
+        SelfModulate = new Color(SelfModulate.R, SelfModulate.G, SelfModulate.B, 0);
+        _currentFadeAmount = 0f;
+    }
 }

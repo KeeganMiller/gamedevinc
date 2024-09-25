@@ -6,57 +6,57 @@ namespace GameDevInc.Menus;
 
 public partial class NewGamePopup : Control
 {
-    [Export] private Button m_ExitBtn;
-    [Export] private TextureButton m_NextFormBtn;
-    [Export] private Label m_ErrorMessage;
+    [Export] private Button _exitBtn;
+    [Export] private TextureButton _nextFormBtn;
+    [Export] private Label _errorMessage;
 
 
     #region Company Properties
     [ExportGroup("Logo's")]
-    [Export] private NewGameCompanyLogoSelect m_CompanyLogoOne;
-    [Export] private NewGameCompanyLogoSelect m_CompanyLogoTwo;
-    [Export] private NewGameCompanyLogoSelect m_CompanyLogoThree;
-    private NewGameCompanyLogoSelect m_SelectedCompanyLogo;
+    [Export] private NewGameCompanyLogoSelect _companyLogoOne;
+    [Export] private NewGameCompanyLogoSelect _companyLogoTwo;
+    [Export] private NewGameCompanyLogoSelect _companyLogoThree;
+    private NewGameCompanyLogoSelect _selectedCompanyLogo;
     
 
     [ExportGroup("Specialties")]
-    [Export] private NewGameSpecialitySelect m_ActionBtn;
-    [Export] private NewGameSpecialitySelect m_RPGBtn;
-    [Export] private NewGameSpecialitySelect m_SimulationBtn;
-    [Export] private NewGameSpecialitySelect m_StrategyBtn;
-    [Export] private NewGameSpecialitySelect m_PlatformerBtn;
-    [Export] private NewGameSpecialitySelect m_CasualBtn;
-    [Export] private NewGameSpecialitySelect m_AdventureBtn;
-    [Export] private NewGameSpecialitySelect m_Puzzle;
-    private NewGameSpecialitySelect? m_CurrentlySelected = null;
-    private ESpeciality m_CurrentlySelectedSpec;
+    [Export] private NewGameSpecialitySelect _actionBtn;
+    [Export] private NewGameSpecialitySelect _rpgBtn;
+    [Export] private NewGameSpecialitySelect _simulationBtn;
+    [Export] private NewGameSpecialitySelect _strategyBtn;
+    [Export] private NewGameSpecialitySelect _platformerBtn;
+    [Export] private NewGameSpecialitySelect _casualBtn;
+    [Export] private NewGameSpecialitySelect _adventureBtn;
+    [Export] private NewGameSpecialitySelect _puzzle;
+    private NewGameSpecialitySelect? _currentlySelected = null;
+    private ESpeciality _currentlySelectedSpec;
 
 
     [ExportGroup("Form Inputs")]
-    [Export] private LineEdit m_CompanyNameInput;
+    [Export] private LineEdit _companyNameInput;
 
     #endregion
 
 
     #region CEO Setup
 
-    [Export] private GridContainer m_MaleCharacters;
-    [Export] private GridContainer m_FemaleCharacters;
+    [Export] private GridContainer _maleCharacters;
+    [Export] private GridContainer _femaleCharacters;
 
     [ExportGroup("Selectable Characters")]
     [ExportCategory("Male")]
-    [Export] private NewGameSelectCharacter m_MaleOne;
-    [Export] private NewGameSelectCharacter m_MaleTwo;
-    [Export] private NewGameSelectCharacter m_MaleThree;
-    [Export] private NewGameSelectCharacter m_MaleFour;
+    [Export] private NewGameSelectCharacter _maleOne;
+    [Export] private NewGameSelectCharacter _maleTwo;
+    [Export] private NewGameSelectCharacter _maleThree;
+    [Export] private NewGameSelectCharacter _maleFour;
 
     [ExportCategory("Female")]
-    [Export] private NewGameSelectCharacter m_FemaleOne;
-    [Export] private NewGameSelectCharacter m_FemaleTwo;
-    [Export] private NewGameSelectCharacter m_FemaleThree;
-    [Export] private NewGameSelectCharacter m_FemaleFour;
+    [Export] private NewGameSelectCharacter _femaleOne;
+    [Export] private NewGameSelectCharacter _femaleTwo;
+    [Export] private NewGameSelectCharacter _femaleThree;
+    [Export] private NewGameSelectCharacter _femaleFour;
 
-    private NewGameSelectCharacter m_SelectedCharacter;
+    private NewGameSelectCharacter _selectedCharacter;
 
     #endregion
 
@@ -66,58 +66,70 @@ public partial class NewGamePopup : Control
     {
         base._Ready();
 
-        if (m_ExitBtn != null)
-            m_ExitBtn.Connect("pressed", new Callable(this, "ClosePopup"));
+        if (_exitBtn != null)
+            _exitBtn.Connect("pressed", new Callable(this, "ClosePopup"));
 
         // Link company logo to function
-        if (m_CompanyLogoOne != null)
-            m_CompanyLogoOne.Connect("pressed", new Callable(this, "SelectCompanyOne"));
-        if (m_CompanyLogoTwo != null)
-            m_CompanyLogoTwo.Connect("pressed", new Callable(this, "SelectCompanyTwo"));
-        if (m_CompanyLogoThree != null)
-            m_CompanyLogoThree.Connect("pressed", new Callable(this, "SelectCompanyThree"));
+        if (_companyLogoOne != null)
+            _companyLogoOne.Connect("pressed", new Callable(this, "SelectCompanyOne"));
+        if (_companyLogoTwo != null)
+            _companyLogoTwo.Connect("pressed", new Callable(this, "SelectCompanyTwo"));
+        if (_companyLogoThree != null)
+            _companyLogoThree.Connect("pressed", new Callable(this, "SelectCompanyThree"));
 
         // Link Specialty buttons to function 
-        if (m_ActionBtn != null && m_ActionBtn.ButtonRef != null)
-            m_ActionBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectActionSpec"));
-        if (m_RPGBtn != null && m_RPGBtn.ButtonRef != null)
-            m_RPGBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectRPGSpec"));
-        if (m_SimulationBtn != null && m_SimulationBtn.ButtonRef != null)
-            m_SimulationBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectSimulationSpec"));
-        if (m_StrategyBtn != null && m_StrategyBtn.ButtonRef != null)
-            m_StrategyBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectStrategySpec"));
-        if (m_PlatformerBtn != null && m_PlatformerBtn.ButtonRef != null)
-            m_PlatformerBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectPlatformerSpec"));
-        if (m_CasualBtn != null && m_CasualBtn.ButtonRef != null)
-            m_CasualBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectCasualSpec"));
-        if (m_AdventureBtn != null && m_AdventureBtn.ButtonRef != null)
-            m_AdventureBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectAdventureSpec"));
-        if (m_Puzzle != null && m_Puzzle.ButtonRef != null)
-            m_Puzzle.ButtonRef.Connect("pressed", new Callable(this, "SelectPuzzleSpec"));
+        if (_actionBtn != null && _actionBtn.ButtonRef != null)
+            _actionBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectActionSpec"));
+        if (_rpgBtn != null && _rpgBtn.ButtonRef != null)
+            _rpgBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectRPGSpec"));
+        if (_simulationBtn != null && _simulationBtn.ButtonRef != null)
+            _simulationBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectSimulationSpec"));
+        if (_strategyBtn != null && _strategyBtn.ButtonRef != null)
+            _strategyBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectStrategySpec"));
+        if (_platformerBtn != null && _platformerBtn.ButtonRef != null)
+            _platformerBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectPlatformerSpec"));
+        if (_casualBtn != null && _casualBtn.ButtonRef != null)
+            _casualBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectCasualSpec"));
+        if (_adventureBtn != null && _adventureBtn.ButtonRef != null)
+            _adventureBtn.ButtonRef.Connect("pressed", new Callable(this, "SelectAdventureSpec"));
+        if (_puzzle != null && _puzzle.ButtonRef != null)
+            _puzzle.ButtonRef.Connect("pressed", new Callable(this, "SelectPuzzleSpec"));
 
         // Complete form btn
-        if (m_NextFormBtn != null)
-            m_NextFormBtn.Connect("pressed", new Callable(this, "CompleteForm"));
+        if (_nextFormBtn != null)
+            _nextFormBtn.Connect("pressed", new Callable(this, "CompleteForm"));
 
 
         // Link the character selection buttons
-        if (m_MaleOne != null && m_MaleOne.ButtonRef != null)
-            m_MaleOne.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleOne"));
-        if (m_MaleTwo != null && m_MaleTwo.ButtonRef != null)
-            m_MaleTwo.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleTwo"));
-        if (m_MaleThree != null && m_MaleThree.ButtonRef != null)
-            m_MaleThree.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleThree"));
-        if (m_MaleFour != null && m_MaleFour.ButtonRef != null)
-            m_MaleFour.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleFour"));
+        if (_maleOne != null && _maleOne.ButtonRef != null)
+            _maleOne.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleOne"));
+        if (_maleTwo != null && _maleTwo.ButtonRef != null)
+            _maleTwo.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleTwo"));
+        if (_maleThree != null && _maleThree.ButtonRef != null)
+            _maleThree.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleThree"));
+        if (_maleFour != null && _maleFour.ButtonRef != null)
+            _maleFour.ButtonRef.Connect("pressed", new Callable(this, "SelectMaleFour"));
 
-        if (m_FemaleOne != null && m_FemaleOne.ButtonRef != null)
-            m_FemaleOne.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleOne"));
-        if (m_FemaleTwo != null && m_FemaleTwo.ButtonRef != null)
-            m_FemaleTwo.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleTwo"));
-        if (m_FemaleThree != null && m_FemaleThree.ButtonRef != null)
-            m_FemaleThree.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleThree"));
-        if (m_FemaleFour != null && m_FemaleFour.ButtonRef != null)
-            m_FemaleFour.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleFour"));
+        if (_femaleOne != null && _femaleOne.ButtonRef != null)
+        {
+            _femaleOne.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleOne"));
+            _femaleOne.HideWithSelfMod();
+        }
+        if (_femaleTwo != null && _femaleTwo.ButtonRef != null)
+        {
+            _femaleTwo.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleTwo"));
+            _femaleTwo.HideWithSelfMod();
+        }
+        if (_femaleThree != null && _femaleThree.ButtonRef != null)
+        {
+            _femaleThree.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleThree"));
+            _femaleThree.HideWithSelfMod();
+        }
+        if (_femaleFour != null && _femaleFour.ButtonRef != null)
+        {
+            _femaleFour.ButtonRef.Connect("pressed", new Callable(this, "SelectFemaleFour"));
+            _femaleFour.HideWithSelfMod();
+        }
     }
 
     #region Company Selection
@@ -125,20 +137,20 @@ public partial class NewGamePopup : Control
     private void SetSelectedCompanyLogo(NewGameCompanyLogoSelect selected)
     {
         GD.Print("Selecting company");
-        if (m_SelectedCompanyLogo != null)
-            m_SelectedCompanyLogo.ToggleSelectionRect(false);
+        if (_selectedCompanyLogo != null)
+            _selectedCompanyLogo.ToggleSelectionRect(false);
 
-        m_SelectedCompanyLogo = selected;
-        if (m_SelectedCompanyLogo != null)
-            m_SelectedCompanyLogo.ToggleSelectionRect(true);
+        _selectedCompanyLogo = selected;
+        if (_selectedCompanyLogo != null)
+            _selectedCompanyLogo.ToggleSelectionRect(true);
     }
 
     private void SelectCompanyOne()
-        => SetSelectedCompanyLogo(m_CompanyLogoOne);
+        => SetSelectedCompanyLogo(_companyLogoOne);
     private void SelectCompanyTwo()
-        => SetSelectedCompanyLogo(m_CompanyLogoTwo);
+        => SetSelectedCompanyLogo(_companyLogoTwo);
     private void SelectCompanyThree()
-        => SetSelectedCompanyLogo(m_CompanyLogoThree);
+        => SetSelectedCompanyLogo(_companyLogoThree);
 
 
     #endregion
@@ -148,58 +160,58 @@ public partial class NewGamePopup : Control
 
     private void SetSelectedSpecialty(ESpeciality specialty, NewGameSpecialitySelect selected)
     {
-        m_CurrentlySelectedSpec = specialty;
+        _currentlySelectedSpec = specialty;
 
-        if (m_CurrentlySelected != null)
-            m_CurrentlySelected.ToggleSelectionRect(false);
+        if (_currentlySelected != null)
+            _currentlySelected.ToggleSelectionRect(false);
 
-        m_CurrentlySelected = selected;
-        if (m_CurrentlySelected != null)
-            m_CurrentlySelected.ToggleSelectionRect(true);
+        _currentlySelected = selected;
+        if (_currentlySelected != null)
+            _currentlySelected.ToggleSelectionRect(true);
     }
 
     private void SelectActionSpec()
-        => SetSelectedSpecialty(ESpeciality.SPEC_Action, m_ActionBtn);
+        => SetSelectedSpecialty(ESpeciality.SPEC_Action, _actionBtn);
     private void SelectRPGSpec()
-        => SetSelectedSpecialty(ESpeciality.SPEC_RPGBtn, m_RPGBtn);
+        => SetSelectedSpecialty(ESpeciality.SPEC_RPGBtn, _rpgBtn);
     private void SelectSimulationSpec()
-        => SetSelectedSpecialty(ESpeciality.SPEC_Simulation, m_SimulationBtn);
+        => SetSelectedSpecialty(ESpeciality.SPEC_Simulation, _simulationBtn);
     private void SelectStrategySpec()
-        => SetSelectedSpecialty(ESpeciality.SPEC_Strategy, m_StrategyBtn);
+        => SetSelectedSpecialty(ESpeciality.SPEC_Strategy, _strategyBtn);
     private void SelectPlatformerSpec()
-        => SetSelectedSpecialty(ESpeciality.SPEC_Platformer, m_PlatformerBtn);
+        => SetSelectedSpecialty(ESpeciality.SPEC_Platformer, _platformerBtn);
     private void SelectCasualSped()
-        => SetSelectedSpecialty(ESpeciality.SPEC_Casual, m_CasualBtn);
+        => SetSelectedSpecialty(ESpeciality.SPEC_Casual, _casualBtn);
     private void SelectAdventureSpec()
-        => SetSelectedSpecialty(ESpeciality.SPEC_Adventure, m_AdventureBtn);
+        => SetSelectedSpecialty(ESpeciality.SPEC_Adventure, _adventureBtn);
     private void SelectPuzzleSpec()
-        => SetSelectedSpecialty(ESpeciality.SPEC_Puzzle, m_Puzzle);
+        => SetSelectedSpecialty(ESpeciality.SPEC_Puzzle, _puzzle);
 
     #endregion
 
     public void CompleteForm()
     {
         // Validate the form
-        if(m_CompanyNameInput.Text == null)
+        if(_companyNameInput.Text == null)
         {
-            m_ErrorMessage.Text = "Please enter a company name";
+            _errorMessage.Text = "Please enter a company name";
             return;
         }
 
-        if(m_SelectedCompanyLogo == null)
+        if(_selectedCompanyLogo == null)
         {
-            m_ErrorMessage.Text = ("Please select a logo for your company");
+            _errorMessage.Text = ("Please select a logo for your company");
             return;
         }
 
-        if(m_CurrentlySelected == null)
+        if(_currentlySelected == null)
         {
-            m_ErrorMessage.Text = "Please select a specialty for your company";
+            _errorMessage.Text = "Please select a specialty for your company";
             return;
         }
 
         // Form is valid so create and add the company
-        var company = new Company(m_CompanyNameInput.Text, m_SelectedCompanyLogo.TextureNormal, m_CurrentlySelectedSpec);
+        var company = new Company(_companyNameInput.Text, _selectedCompanyLogo.TextureNormal, _currentlySelectedSpec);
         var companyDb = GetNode<CompanyDatabase>("/root/CompanyDatabase");
         if (companyDb != null)
             companyDb.SetPlayersCompany(company);
@@ -209,31 +221,31 @@ public partial class NewGamePopup : Control
 
     public void SetSelectedCharacter(NewGameSelectCharacter character)
     {
-        if (m_SelectedCharacter != null)
-            m_SelectedCharacter.ToggleRect(false);
+        if (_selectedCharacter != null)
+            _selectedCharacter.ToggleRect(false);
 
-        m_SelectedCharacter = character;
-        if (m_SelectedCharacter != null)
-            m_SelectedCharacter.ToggleRect(true);
+        _selectedCharacter = character;
+        if (_selectedCharacter != null)
+            _selectedCharacter.ToggleRect(true);
     }
 
     public void SelectMaleOne()
-        => SetSelectedCharacter(m_MaleOne);
+        => SetSelectedCharacter(_maleOne);
     public void SelectMaleTwo()
-        => SetSelectedCharacter(m_MaleTwo); 
+        => SetSelectedCharacter(_maleTwo); 
     public void SelectMaleThree()
-        => SetSelectedCharacter(m_MaleThree);
+        => SetSelectedCharacter(_maleThree);
     public void SelectMaleFour()
-        => SetSelectedCharacter(m_MaleFour);
+        => SetSelectedCharacter(_maleFour);
 
     public void SelectFemaleOne()
-        => SetSelectedCharacter(m_FemaleOne);
+        => SetSelectedCharacter(_femaleOne);
     public void SelectFemaleTwo()
-        => SetSelectedCharacter(m_FemaleTwo);
+        => SetSelectedCharacter(_femaleTwo);
     public void SelectFemaleThree()
-        => SetSelectedCharacter (m_FemaleThree);
+        => SetSelectedCharacter (_femaleThree);
     public void SelectFemaleFour()
-        => SetSelectedCharacter(m_FemaleFour);
+        => SetSelectedCharacter(_femaleFour);
 
     #endregion
 
