@@ -174,17 +174,17 @@ public abstract class StaffMember
         {
             var spawned = (StaffMemberController)GameController.Instance.SpawnToWorld(_modelScene, null);
             if (spawned != null)
-                spawned.Setup(this);
+                spawned.Setup(this, _clothingColors);
         }
     }
 
     public static void GetCharacterModels()
     {
         // Load male models
-        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_Casual.fbx"));
-        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_LongSleeve.fbx"));
-        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_Shirt.fbx"));
-        _maleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Male_Suit.fbx"));
+        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_one.tscn"));
+        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_two.tscn"));
+        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_three.tscn"));
+        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_four.tscn"));
 
         // Load female models
         _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Alternative.fbx"));
@@ -280,11 +280,6 @@ public class GeneralStaffStats
         {
             WorkQuality += amount;
             return true;
-        }
-
-        var s = new StaffMemberModelColors
-        {
-            SkinColor = new Color()
         }
 
         return false;
