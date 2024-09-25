@@ -16,7 +16,8 @@ public enum EModuleJobType
     JOB_SoundEngineer,
     JOB_Marketing,
     JOB_Design,
-    JOB_UIUX
+    JOB_UIUX,
+    JOB_All
 }
 
 public enum EGameSize

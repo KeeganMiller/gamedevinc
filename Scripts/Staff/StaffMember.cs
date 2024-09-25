@@ -23,6 +23,8 @@ public abstract class StaffMember
     public string Name { get; protected set; }                    // Name of the staff member
     public EModuleJobType JobType { get; protected set; }                 // Reference to the staff members job type
     public EStaffSex Sex { get; protected set; }
+
+    public StaffMemberController Controller { get; protected set; }
     
 
     // == Leveling Properties == //
@@ -69,11 +71,18 @@ public abstract class StaffMember
 
         JobType = jobType;              // Set the job type
         GenerateLevelDetails();                 // Generate the staff members level
-        GenerateStats();                    // Call the generate stats method on the inheritied classes
+        GenerateStats();                    // Call the generate stats method on the inherited classes
 
         GeneralStats = new GeneralStaffStats();
 
         m_WorkTimer = new Timer(3f, WorkOnModules, true, true);
+    }
+
+    public StaffMember(string name, EStaffSex sex, EModuleJobType jobType = EModuleJobType.JOB_All)
+    {
+        Name = name;
+        Sex = sex;
+        JobType = jobType;
     }
 
     public void AddXP(float xp)
@@ -172,9 +181,9 @@ public abstract class StaffMember
     {
         if(_modelScene != null)
         {
-            var spawned = (StaffMemberController)GameController.Instance.SpawnToWorld(_modelScene, null);
-            if (spawned != null)
-                spawned.Setup(this, _clothingColors);
+            Controller = (StaffMemberController)GameController.Instance.SpawnToWorld(_modelScene, null);
+            if (Controller != null)
+                Controller.Setup(this, _clothingColors);
         }
     }
 

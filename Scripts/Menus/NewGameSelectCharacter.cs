@@ -12,6 +12,7 @@ public enum EFadeState
 
 public partial class NewGameSelectCharacter : Control
 {
+    [Export] public int ModelIndex;
     private ReferenceRect _selectionRect;                       // reference to the object that displays when selected
     public TextureButton ButtonRef { get; private set; }
 

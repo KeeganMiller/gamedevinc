@@ -13,6 +13,9 @@ public partial class CompanyDatabase : Node3D
 
     private static List<CompanyDataJson> s_CompanyNames = new List<CompanyDataJson>();
 
+    public static CompanyDatabase Instance { get; private set; }
+    public StaffMember PlayersStaffMember;
+
     // == Debug Properties == //
     private StaffMember staff;
     private BaseModule module;
@@ -20,6 +23,7 @@ public partial class CompanyDatabase : Node3D
     public override void _Ready()
     {
         base._Ready();
+        Instance = this;
     }
 
     public override void _Process(double delta)

@@ -11,6 +11,12 @@ public partial class NewGamePopup : Control
     [Export] private Label _errorMessage;
     [Export] private OptionButton _genderDropdown;
     [Export] private TextureButton _EditCharacterBtn;
+    [Export] private LineEdit _ceoNameInput;
+
+    [ExportCategory("Forms References")]
+    [Export] private Control _companyInformationContainer;
+    [Export] private Control _ceoInformationContainer;
+    [Export] private Control _characterCreationContainer;
 
 
     #region Company Properties
@@ -57,6 +63,8 @@ public partial class NewGamePopup : Control
     [Export] private NewGameSelectCharacter _femaleTwo;
     [Export] private NewGameSelectCharacter _femaleThree;
     [Export] private NewGameSelectCharacter _femaleFour;
+
+    
 
     private NewGameSelectCharacter _selectedCharacter;
 
@@ -222,6 +230,9 @@ public partial class NewGamePopup : Control
         var companyDb = GetNode<CompanyDatabase>("/root/CompanyDatabase");
         if (companyDb != null)
             companyDb.SetPlayersCompany(company);
+
+        _companyInformationContainer.Visible = false;
+        _ceoInformationContainer.Visible = true;
     }
 
     #region Selectable Characters
@@ -291,6 +302,32 @@ public partial class NewGamePopup : Control
             _femaleThree.FadeState = EFadeState.FADE_In;
             _femaleFour.FadeState = EFadeState.FADE_In;
         }
+    }
+
+    private void CreateCeoDetails()
+    {
+        if(ValidateCeoCreation())
+        {
+            CompanyDatabase.Instance.PlayersStaffMember = new CEO(_ceoNameInput.Text, (EStaffSex)_genderDropdown.Selected, EModuleJobType.JOB_All);
+            CompanyDatabase.Instance.PlayersStaffMember.SetCharacterModel(null, _selectedCharacter.ModelIndex);
+            _ceoInformationContainer.Visible = false;
+            _characterCreationContainer.Visible = true;
+        }
+    }
+
+    /// <summary>
+    /// Checks if all fields have been selected to create a ceo
+    /// </summary>
+    /// <returns></returns>
+    public bool ValidateCeoCreation()
+    {
+        if (_ceoNameInput == null || string.IsNullOrEmpty(_ceoNameInput.Text))
+            return false;
+
+        if (_selectedCharacter == null)
+            return false;
+
+        return true;
     }
 
     private void ClosePopup()
