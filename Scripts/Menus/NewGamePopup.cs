@@ -145,6 +145,9 @@ public partial class NewGamePopup : Control
 
         if (_genderDropdown != null)
             _genderDropdown.Connect("item_selected", new Callable(this, "OnChangeGender"));
+
+        if (_EditCharacterBtn != null)
+            _EditCharacterBtn.Connect("pressed", new Callable(this, "CreateCeoDetails"));
     }
 
     #region Company Selection
@@ -322,7 +325,9 @@ public partial class NewGamePopup : Control
     public bool ValidateCeoCreation()
     {
         if (_ceoNameInput == null || string.IsNullOrEmpty(_ceoNameInput.Text))
+        {
             return false;
+        }
 
         if (_selectedCharacter == null)
             return false;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://npv0frxd00f8"]
+[gd_scene load_steps=39 format=3 uid="uid://npv0frxd00f8"]
 
 [ext_resource type="Texture2D" uid="uid://dgfhj0axjsd76" path="res://UserInterface/MainMenu/NewGame/MM_NewGameBackground.png" id="1_iw8bh"]
 [ext_resource type="Script" path="res://Scripts/Menus/NewGamePopup.cs" id="1_p6us3"]
@@ -28,7 +28,9 @@
 [ext_resource type="Texture2D" uid="uid://si777mrf4pyw" path="res://UserInterface/CharacterRenders/Female_02.png" id="25_q7b7l"]
 [ext_resource type="Texture2D" uid="uid://d3j3rt8glsiyw" path="res://UserInterface/CharacterRenders/Female_03.png" id="26_hni7b"]
 [ext_resource type="Texture2D" uid="uid://c72k0vkdwx2op" path="res://UserInterface/CharacterRenders/Female_04.png" id="27_j0yva"]
+[ext_resource type="Script" path="res://Scripts/Menus/CharacterDesignMenu.cs" id="29_fnvd1"]
 [ext_resource type="PackedScene" uid="uid://g6jejsfis4ex" path="res://Meshes/Characters/Male_Casual.fbx" id="29_nk5fw"]
+[ext_resource type="Script" path="res://Scripts/Menus/CharacterColorSelect.cs" id="30_lcq4j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_luyef"]
 font = ExtResource("2_ix7pq")
@@ -48,10 +50,19 @@ font_color = Color(0.612771, 0.0351491, 1.44392e-07, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_53egv"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="LabelSettings" id="LabelSettings_cliff"]
+font = ExtResource("2_ix7pq")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4irpf"]
+font = ExtResource("2_ix7pq")
+font_size = 42
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Environment" id="Environment_qeefs"]
 background_mode = 2
 
-[node name="NewGamePopup" type="Control" node_paths=PackedStringArray("_exitBtn", "_nextFormBtn", "_errorMessage", "_genderDropdown", "_companyLogoOne", "_companyLogoTwo", "_companyLogoThree", "_actionBtn", "_rpgBtn", "_simulationBtn", "_strategyBtn", "_platformerBtn", "_casualBtn", "_adventureBtn", "_puzzle", "_companyNameInput", "_maleCharacters", "_femaleCharacters", "_maleOne", "_maleTwo", "_maleThree", "_maleFour", "_femaleOne", "_femaleTwo", "_femaleThree", "_femaleFour")]
+[node name="NewGamePopup" type="Control" node_paths=PackedStringArray("_exitBtn", "_nextFormBtn", "_errorMessage", "_genderDropdown", "_EditCharacterBtn", "_ceoNameInput", "_companyInformationContainer", "_ceoInformationContainer", "_characterCreationContainer", "_companyLogoOne", "_companyLogoTwo", "_companyLogoThree", "_actionBtn", "_rpgBtn", "_simulationBtn", "_strategyBtn", "_platformerBtn", "_casualBtn", "_adventureBtn", "_puzzle", "_companyNameInput", "_maleCharacters", "_femaleCharacters", "_maleOne", "_maleTwo", "_maleThree", "_maleFour", "_femaleOne", "_femaleTwo", "_femaleThree", "_femaleFour")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +74,11 @@ _exitBtn = NodePath("ExitBtn")
 _nextFormBtn = NodePath("TextureRect/CompanyInformation/NextBtn")
 _errorMessage = NodePath("TextureRect/CompanyInformation/Label")
 _genderDropdown = NodePath("TextureRect/CEOSetup/GenderSelection")
+_EditCharacterBtn = NodePath("TextureRect/CEOSetup/NextBtn")
+_ceoNameInput = NodePath("TextureRect/CEOSetup/LineEdit")
+_companyInformationContainer = NodePath("TextureRect/CompanyInformation")
+_ceoInformationContainer = NodePath("TextureRect/CEOSetup")
+_characterCreationContainer = NodePath("TextureRect/CEOCharacterDesign")
 _companyLogoOne = NodePath("TextureRect/CompanyInformation/CompanyLogo1")
 _companyLogoTwo = NodePath("TextureRect/CompanyInformation/CompanyLogo2")
 _companyLogoThree = NodePath("TextureRect/CompanyInformation/CompanyLogo3")
@@ -514,7 +530,6 @@ popup/item_1/text = "Female"
 popup/item_1/id = 1
 
 [node name="MaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
-visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -600,6 +615,7 @@ border_color = Color(0, 0, 0, 1)
 editor_only = false
 
 [node name="FemaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
+visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -702,73 +718,419 @@ label_settings = SubResource("LabelSettings_3l4jb")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CEOCharacterDesign" type="Control" parent="TextureRect"]
+[node name="CEOCharacterDesign" type="Control" parent="TextureRect" node_paths=PackedStringArray("_colorPicker")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("29_fnvd1")
+_colorPicker = NodePath("ColorPicker")
+
+[node name="ColorPicker" type="ColorPicker" parent="TextureRect/CEOCharacterDesign"]
+layout_mode = 0
+offset_left = 863.0
+offset_top = 537.0
+offset_right = 1161.0
+offset_bottom = 654.0
+edit_alpha = false
+picker_shape = 2
+can_add_swatches = false
+sampler_visible = false
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false
 
 [node name="CharacterRenderTarget" type="TextureRect" parent="TextureRect/CEOCharacterDesign"]
-offset_left = 210.5
-offset_top = 85.0
-offset_right = 722.5
-offset_bottom = 597.0
+offset_left = 230.5
+offset_top = -14.0
+offset_right = 742.5
+offset_bottom = 498.0
 texture = SubResource("ViewportTexture_53egv")
 
-[node name="CompanyNameHeader" type="Label" parent="TextureRect/CEOCharacterDesign"]
+[node name="SkinColor" type="Label" parent="TextureRect/CEOCharacterDesign" node_paths=PackedStringArray("_designMenu")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 81.5
-offset_top = 679.0
-offset_right = 807.5
-offset_bottom = 735.0
-grow_horizontal = 2
-text = "Hair Color"
-label_settings = SubResource("LabelSettings_luyef")
-horizontal_alignment = 1
-
-[node name="CompanyNameHeader4" type="Label" parent="TextureRect/CEOCharacterDesign"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 81.5
-offset_top = 543.0
-offset_right = 807.5
-offset_bottom = 599.0
+offset_left = 82.0
+offset_top = 447.0
+offset_right = 487.0
+offset_bottom = 503.0
 grow_horizontal = 2
 text = "Skin Color"
 label_settings = SubResource("LabelSettings_luyef")
-horizontal_alignment = 1
+horizontal_alignment = 2
+script = ExtResource("30_lcq4j")
+_designMenu = NodePath("..")
 
-[node name="CompanyNameHeader2" type="Label" parent="TextureRect/CEOCharacterDesign"]
+[node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/SkinColor"]
+layout_mode = 0
+offset_left = 439.5
+offset_top = 10.0
+offset_right = 479.5
+offset_bottom = 50.0
+color = Color(0.760784, 0.643137, 0.513726, 1)
+
+[node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/SkinColor"]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 826.0
+offset_bottom = 45.0
+texture_normal = ExtResource("6_wkdwn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/SkinColor/TextureRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 188.0
+offset_bottom = 23.0
+text = "Select Color"
+label_settings = SubResource("LabelSettings_cliff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/SkinColor"]
+visible = false
+layout_mode = 0
+offset_left = 440.5
+offset_top = 9.0
+offset_right = 480.5
+offset_bottom = 49.0
+border_color = Color(0, 0, 0, 1)
+border_width = 3.4
+editor_only = false
+
+[node name="HairColorOne" type="Label" parent="TextureRect/CEOCharacterDesign" node_paths=PackedStringArray("_designMenu")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 79.5
+offset_top = 521.0
+offset_right = 480.5
+offset_bottom = 577.0
+grow_horizontal = 2
+text = "Hair Color One"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 2
+script = ExtResource("30_lcq4j")
+_designMenu = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/HairColorOne"]
+offset_left = 440.5
+offset_top = 10.0
+offset_right = 480.5
+offset_bottom = 50.0
+color = Color(0.760784, 0.643137, 0.513726, 1)
+
+[node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/HairColorOne"]
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 826.0
+offset_bottom = 45.0
+texture_normal = ExtResource("6_wkdwn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/HairColorOne/TextureRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 188.0
+offset_bottom = 23.0
+text = "Select Color"
+label_settings = SubResource("LabelSettings_cliff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/HairColorOne"]
+visible = false
+offset_left = 440.5
+offset_top = 9.0
+offset_right = 480.5
+offset_bottom = 49.0
+border_color = Color(0, 0, 0, 1)
+border_width = 3.4
+editor_only = false
+
+[node name="HairColorTwo" type="Label" parent="TextureRect/CEOCharacterDesign" node_paths=PackedStringArray("_designMenu")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 80.5
+offset_top = 590.0
+offset_right = 481.5
+offset_bottom = 646.0
+grow_horizontal = 2
+text = "Hair Color Two"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 2
+script = ExtResource("30_lcq4j")
+_designMenu = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/HairColorTwo"]
+offset_left = 440.5
+offset_top = 10.0
+offset_right = 480.5
+offset_bottom = 50.0
+color = Color(0.760784, 0.643137, 0.513726, 1)
+
+[node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/HairColorTwo"]
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 826.0
+offset_bottom = 45.0
+texture_normal = ExtResource("6_wkdwn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/HairColorTwo/TextureRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 188.0
+offset_bottom = 23.0
+text = "Select Color"
+label_settings = SubResource("LabelSettings_cliff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/HairColorTwo"]
+visible = false
+offset_left = 440.5
+offset_top = 9.0
+offset_right = 480.5
+offset_bottom = 49.0
+border_color = Color(0, 0, 0, 1)
+border_width = 3.4
+editor_only = false
+
+[node name="ShirtColorOne" type="Label" parent="TextureRect/CEOCharacterDesign" node_paths=PackedStringArray("_designMenu")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 80.5
+offset_top = 663.0
+offset_right = 481.5
+offset_bottom = 719.0
+grow_horizontal = 2
+text = "Shirt Color One"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 2
+script = ExtResource("30_lcq4j")
+_designMenu = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorOne"]
+offset_left = 440.5
+offset_top = 10.0
+offset_right = 480.5
+offset_bottom = 50.0
+color = Color(0.760784, 0.643137, 0.513726, 1)
+
+[node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/ShirtColorOne"]
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 826.0
+offset_bottom = 45.0
+texture_normal = ExtResource("6_wkdwn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/ShirtColorOne/TextureRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 188.0
+offset_bottom = 23.0
+text = "Select Color"
+label_settings = SubResource("LabelSettings_cliff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/ShirtColorOne"]
+visible = false
+offset_left = 440.5
+offset_top = 9.0
+offset_right = 480.5
+offset_bottom = 49.0
+border_color = Color(0, 0, 0, 1)
+border_width = 3.4
+editor_only = false
+
+[node name="ShirtColorTwo" type="Label" parent="TextureRect/CEOCharacterDesign" node_paths=PackedStringArray("_designMenu")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 80.5
+offset_top = 735.0
+offset_right = 481.5
+offset_bottom = 791.0
+grow_horizontal = 2
+text = "Shirt Color Two"
+label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 2
+script = ExtResource("30_lcq4j")
+_designMenu = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo"]
+offset_left = 440.5
+offset_top = 10.0
+offset_right = 480.5
+offset_bottom = 50.0
+color = Color(0.760784, 0.643137, 0.513726, 1)
+
+[node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo"]
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 826.0
+offset_bottom = 45.0
+texture_normal = ExtResource("6_wkdwn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo/TextureRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 188.0
+offset_bottom = 23.0
+text = "Select Color"
+label_settings = SubResource("LabelSettings_cliff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo"]
+visible = false
+offset_left = 440.5
+offset_top = 9.0
+offset_right = 480.5
+offset_bottom = 49.0
+border_color = Color(0, 0, 0, 1)
+border_width = 3.4
+editor_only = false
+
+[node name="ShirtColorThree" type="Label" parent="TextureRect/CEOCharacterDesign" node_paths=PackedStringArray("_designMenu")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 81.5
 offset_top = 807.0
-offset_right = 807.5
+offset_right = 482.5
 offset_bottom = 863.0
 grow_horizontal = 2
-text = "Shirt Color"
+text = "Shirt Color Three"
 label_settings = SubResource("LabelSettings_luyef")
-horizontal_alignment = 1
+horizontal_alignment = 2
+script = ExtResource("30_lcq4j")
+_designMenu = NodePath("..")
 
-[node name="CompanyNameHeader3" type="Label" parent="TextureRect/CEOCharacterDesign"]
+[node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorThree"]
+offset_left = 440.5
+offset_top = 10.0
+offset_right = 480.5
+offset_bottom = 50.0
+color = Color(0.760784, 0.643137, 0.513726, 1)
+
+[node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/ShirtColorThree"]
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 826.0
+offset_bottom = 45.0
+texture_normal = ExtResource("6_wkdwn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/ShirtColorThree/TextureRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 188.0
+offset_bottom = 23.0
+text = "Select Color"
+label_settings = SubResource("LabelSettings_cliff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/ShirtColorThree"]
+visible = false
+offset_left = 440.5
+offset_top = 9.0
+offset_right = 480.5
+offset_bottom = 49.0
+border_color = Color(0, 0, 0, 1)
+border_width = 3.4
+editor_only = false
+
+[node name="Pants" type="Label" parent="TextureRect/CEOCharacterDesign" node_paths=PackedStringArray("_designMenu")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 81.5
-offset_top = 935.0
-offset_right = 807.5
-offset_bottom = 991.0
+offset_top = 879.0
+offset_right = 482.5
+offset_bottom = 935.0
 grow_horizontal = 2
-text = "Paints Color"
+text = "Pants"
 label_settings = SubResource("LabelSettings_luyef")
+horizontal_alignment = 2
+script = ExtResource("30_lcq4j")
+_designMenu = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/Pants"]
+offset_left = 440.5
+offset_top = 10.0
+offset_right = 480.5
+offset_bottom = 50.0
+color = Color(0.760784, 0.643137, 0.513726, 1)
+
+[node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/Pants"]
+offset_left = 501.0
+offset_top = 18.0
+offset_right = 826.0
+offset_bottom = 45.0
+texture_normal = ExtResource("6_wkdwn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/Pants/TextureRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 188.0
+offset_bottom = 23.0
+text = "Select Color"
+label_settings = SubResource("LabelSettings_cliff")
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/Pants"]
+visible = false
+offset_left = 440.5
+offset_top = 9.0
+offset_right = 480.5
+offset_bottom = 49.0
+border_color = Color(0, 0, 0, 1)
+border_width = 3.4
+editor_only = false
+
+[node name="CompleteCharacterDesign" type="TextureButton" parent="TextureRect/CEOCharacterDesign"]
+layout_mode = 0
+offset_left = 220.5
+offset_top = 983.0
+offset_right = 734.5
+offset_bottom = 1051.0
+texture_normal = ExtResource("6_wkdwn")
+
+[node name="Label" type="Label" parent="TextureRect/CEOCharacterDesign/CompleteCharacterDesign"]
+layout_mode = 0
+offset_left = 34.0
+offset_right = 483.0
+offset_bottom = 56.0
+text = "Edit Skills"
+label_settings = SubResource("LabelSettings_4irpf")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ExitBtn" type="Button" parent="."]
 layout_mode = 1

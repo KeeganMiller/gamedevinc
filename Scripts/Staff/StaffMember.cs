@@ -44,8 +44,8 @@ public abstract class StaffMember
     // == Generator Properties == //
     private const string c_NameResourcePath = "res://Data/Names.json";
     private static List<StaffNameData> Names = new List<StaffNameData>();
-    private static List<PackedScene> _maleModels;
-    private static List<PackedScene> _femaleModels;
+    private static List<PackedScene> _maleModels = new List<PackedScene>();
+    private static List<PackedScene> _femaleModels = new List<PackedScene>();
 
     // == Current Task Data == //
     private List<BaseModule> m_CurrentWorkList = new List<BaseModule>();                    // List of current task queued
