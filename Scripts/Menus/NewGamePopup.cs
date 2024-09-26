@@ -210,7 +210,7 @@ public partial class NewGamePopup : Control
     public void CompleteForm()
     {
         // Validate the form
-        if(_companyNameInput.Text == null)
+        if(string.IsNullOrEmpty(_companyNameInput.Text))
         {
             _errorMessage.Text = "Please enter a company name";
             return;
