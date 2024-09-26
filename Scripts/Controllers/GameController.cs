@@ -5,26 +5,16 @@ namespace GameDevInc;
 
 public partial class GameController : Node3D
 {
-    public ModuleDatabase ModuleDatabase { get; private set; }
 
     public static GameController Instance { get; private set; }
+    public const string PATH_TO_DATA_FILE = "res://Data/Data.json";
 
     public override void _Ready()
     {
         base._Ready();
 
         Instance = this;
-
-        CompanyDatabase.LoadCompanyDetails();
-
         StaffDatabase.Instance.GetCharacterModels();
-
-        // Load All Modules
-        ModuleDatabase = GetNode<ModuleDatabase>("/root/ModuleDatabase");
-        if (ModuleDatabase != null)
-            ModuleDatabase.LoadModules();
-        else
-            GD.PushError("ModuleDatabase::_Ready -> Failed to get reference to the module database");
 
         Genre.LoadGenres();
         Theme.LoadThemes();

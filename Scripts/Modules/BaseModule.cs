@@ -120,11 +120,12 @@ public class BaseModule
         CurrentPoints += rand.RandfRange(c_MinPointsProduced, c_MaxPointsProduced) * ((worker.GeneralStats.WorkSpeed / 100) + 1);
         ModuleQuality += rand.RandfRange(c_MinQualityProduced, c_MaxQualityProduced) * ((worker.GeneralStats.WorkQuality / 100) + 1);
 
-        if(CurrentPoints > RequiredPoints)
+        // TODO: Add module to the company inventory
+        /*if(CurrentPoints > RequiredPoints)
         {
             ModuleDatabase.ModuleInventory.Add(this);
             return true;
-        }
+        }*/
 
         return false;
     }

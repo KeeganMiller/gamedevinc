@@ -41,7 +41,8 @@ public class Game
     public bool HasAllModules()
     {
         bool hasModule = true;
-        foreach(var module in ModuleDatabase.ModuleInventory)
+        // TODO: Fix once the module inventory is created
+        /*foreach(var module in ModuleDatabase.ModuleInventory)
         {
             foreach(var reqMod in m_RequiredModules)
             {
@@ -54,7 +55,7 @@ public class Game
 
             if (!hasModule)
                 break;
-        }
+        }*/
 
         return hasModule;
     }

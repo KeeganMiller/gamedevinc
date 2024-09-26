@@ -7,18 +7,15 @@ namespace GameDevInc;
 
 public partial class CompanyDatabase : Node3D
 {
-    private const string c_CompanyResourcePath = "res://Data/CompanyData.json";
-    public Company PlayersCompany { get; private set; }
-    private List<Company> m_Companies = new List<Company>();
-
-    private static List<CompanyDataJson> s_CompanyNames = new List<CompanyDataJson>();
-
     public static CompanyDatabase Instance { get; private set; }
-    public StaffMember PlayersStaffMember;
+    public Company PlayersCompany { get; private set; }
+    private List<Company> _companies = new List<Company>();
 
-    // == Debug Properties == //
-    private StaffMember staff;
-    private BaseModule module;
+    private List<CompanyDataJson> _companyNames = new List<CompanyDataJson>();
+
+    
+    public StaffMember PlayersStaffMember;
+    
 
     public override void _Ready()
     {
@@ -33,33 +30,11 @@ public partial class CompanyDatabase : Node3D
         // Update the players company
         if(PlayersCompany != null)
             PlayersCompany._Update((float)delta);
-            foreach (var company in m_Companies)
+            foreach (var company in _companies)
                 company._Update((float)delta);
 
         // TODO: Update all other companies
 
-    }
-
-    public static void LoadCompanyDetails()
-    {
-        if(FileAccess.FileExists(c_CompanyResourcePath))
-        {
-            var file = FileAccess.Open(c_CompanyResourcePath, FileAccess.ModeFlags.Read);
-            if(file != null && file.IsOpen())
-            {
-                var text = file.GetAsText();
-                var tokens = JArray.Parse(text);
-
-                foreach(var token in tokens)
-                {
-                    var companyData = JsonConvert.DeserializeObject<CompanyDataJson>(token.ToString());
-                    if(companyData != null)
-                    {
-                        s_CompanyNames.Add(companyData);
-                    }
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -72,9 +47,9 @@ public partial class CompanyDatabase : Node3D
         for(var i = 0; i < 100; ++i)
         {
             rand.Randomize();
-            var company = s_CompanyNames[rand.RandiRange(0, s_CompanyNames.Count - 1)];
+            var company = _companyNames[rand.RandiRange(0, _companyNames.Count - 1)];
             bool hasCompany = false;
-            foreach(var c in m_Companies)
+            foreach(var c in _companies)
             {
                 if (c.CompanyName == company.CompanyName)
                 {
@@ -98,7 +73,7 @@ public partial class CompanyDatabase : Node3D
         if (PlayersCompany.CompanyName == companyName)
             return PlayersCompany;
 
-        foreach(var company in m_Companies)
+        foreach(var company in _companies)
         {
             if(company.CompanyName == companyName)
                 return company;
