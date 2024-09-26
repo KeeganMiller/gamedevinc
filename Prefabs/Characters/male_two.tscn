@@ -3362,7 +3362,7 @@ bones/41/position = Vector3(0, 0.00309121, 0)
 bones/41/rotation = Quaternion(0, 0, 0, 1)
 bones/41/scale = Vector3(1, 1, 1)
 
-[node name="BaseHuman" type="MeshInstance3D" parent="Model/HumanArmature/Skeleton3D"]
+[node name="Mesh" type="MeshInstance3D" parent="Model/HumanArmature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_uo7e4")
 skin = SubResource("Skin_xv7d1")
 surface_material_override/0 = SubResource("ORMMaterial3D_6sn68")

@@ -117,6 +117,7 @@ grow_vertical = 2
 texture = ExtResource("1_iw8bh")
 
 [node name="CompanyInformation" type="Control" parent="TextureRect"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -460,7 +461,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CEOSetup" type="Control" parent="TextureRect"]
-visible = false
 anchors_preset = 0
 offset_left = 107.0
 offset_top = 78.0
@@ -528,6 +528,7 @@ popup/item_1/text = "Female"
 popup/item_1/id = 1
 
 [node name="MaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
+visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -616,7 +617,6 @@ border_color = Color(0, 0, 0, 1)
 editor_only = false
 
 [node name="FemaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
-visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
