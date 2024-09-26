@@ -24,4 +24,5 @@ public partial class DataLoader : Node
 public class DataContent
 {
     public int Category;
+    public int JobType;
 }
