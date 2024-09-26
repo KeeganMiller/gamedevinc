@@ -140,7 +140,7 @@ public partial class CharacterColorSelect : Label
                 case EColorPropertyType.COL_Skin:
                     if (mesh.GetActiveMaterial(0) is OrmMaterial3D skinOrm)
                         materialToUpdate = skinOrm;
-                    return;
+                    break;
                 case EColorPropertyType.COL_HairOne:
                     if (modelSex == EStaffSex.SEX_Male)
                     {
