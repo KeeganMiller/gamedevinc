@@ -12,7 +12,7 @@ public partial class StaffMemberController : Node3D
     public override void _Ready()
     {
         base._Ready();
-        Mesh = GetNode<MeshInstance3D>("Model/HumanArmature/Skeleton3D/BaseHuman");
+        Mesh = GetNode<MeshInstance3D>("Model/HumanArmature/Skeleton3D/Mesh");
         if (Mesh == null)
             GD.PushWarning("StaffMemberController::_Ready -> Failed to get reference to the mesh");
     }
