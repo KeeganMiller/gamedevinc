@@ -206,6 +206,11 @@ public partial class CharacterColorSelect : Label
                     }
                     return;
             }
+            
+            if(materialToUpdate != null)
+                materialToUpdate.AlbedoColor = color;
+            else
+                GD.PushError("CharacterColorSelect::SetColor -> Failed to update color");
         }
     }
 
