@@ -22,5 +22,12 @@ public class ProgrammerSkills
         Networking = rand.RandiRange(1, GeneralSkills.MAX_SKILL_POINTS);
     }
 
-    public c
+    public ProgrammerSkills(int math, int debug, int graphics, int ai, int networking)
+    {
+        Mathematics = math;
+        Debugging = debug;
+        Graphics = graphics;
+        AI = ai;
+        Networking = networking;
+    }
 }
