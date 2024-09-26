@@ -63,7 +63,7 @@ public class GeneralSkills
 
         foreach(var skill in _skills)
         {
-            if (skill.SkillType == type)
+            if ((ESkillType)skill.SkillType == type)
                 skills.Add(skill);
         }
 
