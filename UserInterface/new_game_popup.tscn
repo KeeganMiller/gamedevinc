@@ -123,6 +123,10 @@ offset_bottom = 40.0
 
 [node name="TextureRect2" parent="TextureRect/CompanyInformation" instance=ExtResource("3_86nte")]
 layout_mode = 0
+offset_left = 756.0
+offset_top = 601.0
+offset_right = 800.0
+offset_bottom = 645.0
 
 [node name="TextureRect3" type="TextureRect" parent="TextureRect/CompanyInformation"]
 layout_mode = 0
@@ -216,6 +220,7 @@ script = ExtResource("5_n7pa8")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/CompanyLogo2"]
 visible = false
+layout_mode = 0
 offset_left = 5.0
 offset_top = 10.0
 offset_right = 188.0
@@ -234,6 +239,7 @@ script = ExtResource("5_n7pa8")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/CompanyLogo3"]
 visible = false
+layout_mode = 0
 offset_left = 5.0
 offset_top = 10.0
 offset_right = 188.0
@@ -324,6 +330,7 @@ stretch_mode = 4
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/RPGBtn"]
 visible = false
+layout_mode = 0
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
@@ -344,6 +351,7 @@ stretch_mode = 4
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/SimBtn"]
 visible = false
+layout_mode = 0
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
@@ -364,6 +372,7 @@ stretch_mode = 4
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/StrategyBtn"]
 visible = false
+layout_mode = 0
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
@@ -384,6 +393,7 @@ stretch_mode = 4
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/PlatfomerBtn"]
 visible = false
+layout_mode = 0
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
@@ -404,6 +414,7 @@ stretch_mode = 4
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/CasualBtn"]
 visible = false
+layout_mode = 0
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
@@ -424,6 +435,7 @@ stretch_mode = 4
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/AdventureBtn"]
 visible = false
+layout_mode = 0
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
@@ -444,6 +456,7 @@ stretch_mode = 4
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CompanyInformation/GenreContainer/PuzzleBtn"]
 visible = false
+layout_mode = 0
 offset_right = 101.0
 offset_bottom = 101.0
 border_color = Color(0, 0, 0, 1)
@@ -496,6 +509,7 @@ label_settings = SubResource("LabelSettings_luyef")
 horizontal_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="TextureRect/CEOSetup"]
+layout_mode = 0
 offset_left = 124.5
 offset_top = 144.0
 offset_right = 582.5
@@ -528,7 +542,6 @@ popup/item_1/text = "Female"
 popup/item_1/id = 1
 
 [node name="MaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
-visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -570,6 +583,7 @@ texture_normal = ExtResource("21_77sst")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/MaleCharacters/MaleTwo"]
 visible = false
+layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
@@ -590,6 +604,7 @@ texture_normal = ExtResource("22_3ihhg")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/MaleCharacters/MaleThree"]
 visible = false
+layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
@@ -610,6 +625,7 @@ texture_normal = ExtResource("23_d6ird")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/MaleCharacters/MaleFour"]
 visible = false
+layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
@@ -617,6 +633,7 @@ border_color = Color(0, 0, 0, 1)
 editor_only = false
 
 [node name="FemaleCharacters" type="GridContainer" parent="TextureRect/CEOSetup"]
+visible = false
 layout_mode = 0
 offset_left = 110.0
 offset_top = 394.0
@@ -658,6 +675,7 @@ texture_normal = ExtResource("25_q7b7l")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleTwo"]
 visible = false
+layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
@@ -678,6 +696,7 @@ texture_normal = ExtResource("26_hni7b")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleThree"]
 visible = false
+layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
@@ -698,6 +717,7 @@ texture_normal = ExtResource("27_j0yva")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleFour"]
 visible = false
+layout_mode = 0
 offset_left = -6.0
 offset_right = 105.0
 offset_bottom = 337.0
@@ -705,6 +725,7 @@ border_color = Color(0, 0, 0, 1)
 editor_only = false
 
 [node name="NextBtn" type="TextureButton" parent="TextureRect/CEOSetup"]
+layout_mode = 0
 offset_left = 100.5
 offset_top = 884.0
 offset_right = 614.5
@@ -748,6 +769,7 @@ hex_visible = false
 presets_visible = false
 
 [node name="CharacterRenderTarget" type="TextureRect" parent="TextureRect/CEOCharacterDesign"]
+layout_mode = 0
 offset_left = 230.5
 offset_top = -14.0
 offset_right = 742.5
@@ -827,6 +849,7 @@ _designMenu = NodePath("..")
 _colorPropType = 1
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/HairColorOne"]
+layout_mode = 0
 offset_left = 440.5
 offset_top = 10.0
 offset_right = 480.5
@@ -834,6 +857,7 @@ offset_bottom = 50.0
 color = Color(0.760784, 0.643137, 0.513726, 1)
 
 [node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/HairColorOne"]
+layout_mode = 0
 offset_left = 501.0
 offset_top = 18.0
 offset_right = 826.0
@@ -854,6 +878,7 @@ vertical_alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/HairColorOne"]
 visible = false
+layout_mode = 0
 offset_left = 440.5
 offset_top = 9.0
 offset_right = 480.5
@@ -880,6 +905,7 @@ _designMenu = NodePath("..")
 _colorPropType = 2
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/HairColorTwo"]
+layout_mode = 0
 offset_left = 440.5
 offset_top = 10.0
 offset_right = 480.5
@@ -887,6 +913,7 @@ offset_bottom = 50.0
 color = Color(0.760784, 0.643137, 0.513726, 1)
 
 [node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/HairColorTwo"]
+layout_mode = 0
 offset_left = 501.0
 offset_top = 18.0
 offset_right = 826.0
@@ -907,6 +934,7 @@ vertical_alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/HairColorTwo"]
 visible = false
+layout_mode = 0
 offset_left = 440.5
 offset_top = 9.0
 offset_right = 480.5
@@ -933,6 +961,7 @@ _designMenu = NodePath("..")
 _colorPropType = 3
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorOne"]
+layout_mode = 0
 offset_left = 440.5
 offset_top = 10.0
 offset_right = 480.5
@@ -940,6 +969,7 @@ offset_bottom = 50.0
 color = Color(0.760784, 0.643137, 0.513726, 1)
 
 [node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/ShirtColorOne"]
+layout_mode = 0
 offset_left = 501.0
 offset_top = 18.0
 offset_right = 826.0
@@ -960,6 +990,7 @@ vertical_alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/ShirtColorOne"]
 visible = false
+layout_mode = 0
 offset_left = 440.5
 offset_top = 9.0
 offset_right = 480.5
@@ -986,6 +1017,7 @@ _designMenu = NodePath("..")
 _colorPropType = 4
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo"]
+layout_mode = 0
 offset_left = 440.5
 offset_top = 10.0
 offset_right = 480.5
@@ -993,6 +1025,7 @@ offset_bottom = 50.0
 color = Color(0.760784, 0.643137, 0.513726, 1)
 
 [node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo"]
+layout_mode = 0
 offset_left = 501.0
 offset_top = 18.0
 offset_right = 826.0
@@ -1013,6 +1046,7 @@ vertical_alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/ShirtColorTwo"]
 visible = false
+layout_mode = 0
 offset_left = 440.5
 offset_top = 9.0
 offset_right = 480.5
@@ -1039,6 +1073,7 @@ _designMenu = NodePath("..")
 _colorPropType = 5
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/ShirtColorThree"]
+layout_mode = 0
 offset_left = 440.5
 offset_top = 10.0
 offset_right = 480.5
@@ -1046,6 +1081,7 @@ offset_bottom = 50.0
 color = Color(0.760784, 0.643137, 0.513726, 1)
 
 [node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/ShirtColorThree"]
+layout_mode = 0
 offset_left = 501.0
 offset_top = 18.0
 offset_right = 826.0
@@ -1066,6 +1102,7 @@ vertical_alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/ShirtColorThree"]
 visible = false
+layout_mode = 0
 offset_left = 440.5
 offset_top = 9.0
 offset_right = 480.5
@@ -1092,6 +1129,7 @@ _designMenu = NodePath("..")
 _colorPropType = 6
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect/CEOCharacterDesign/Pants"]
+layout_mode = 0
 offset_left = 440.5
 offset_top = 10.0
 offset_right = 480.5
@@ -1099,6 +1137,7 @@ offset_bottom = 50.0
 color = Color(0.760784, 0.643137, 0.513726, 1)
 
 [node name="TextureRect" type="TextureButton" parent="TextureRect/CEOCharacterDesign/Pants"]
+layout_mode = 0
 offset_left = 501.0
 offset_top = 18.0
 offset_right = 826.0
@@ -1119,6 +1158,7 @@ vertical_alignment = 1
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextureRect/CEOCharacterDesign/Pants"]
 visible = false
+layout_mode = 0
 offset_left = 440.5
 offset_top = 9.0
 offset_right = 480.5

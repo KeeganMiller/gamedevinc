@@ -123,7 +123,7 @@ public partial class CharacterColorSelect : Label
             {
                 case EColorPropertyType.COL_Skin:
                     if (mesh.GetActiveMaterial(0) is OrmMaterial3D skinOrm)
-                        skinOrm.AlbedoColor = color;
+                        materialToUpdate = skinOrm;
                     return;
                 case EColorPropertyType.COL_HairOne:
                     if (modelSex == EStaffSex.SEX_Male)
@@ -204,7 +204,8 @@ public partial class CharacterColorSelect : Label
                         if(modelIndex == 0 || modelIndex == 1 || modelIndex == 2)
                             materialToUpdate = mesh.GetActiveMaterial(4) as OrmMaterial3D;
                     }
-                    return;
+
+                    break;
             }
             
             if(materialToUpdate != null)
