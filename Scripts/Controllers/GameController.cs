@@ -17,9 +17,7 @@ public partial class GameController : Node3D
 
         CompanyDatabase.LoadCompanyDetails();
 
-        // Load the staff member details 
-        StaffMember.LoadNames();
-        StaffMember.GetCharacterModels();
+        StaffDatabase.Instance.GetCharacterModels();
 
         // Load All Modules
         ModuleDatabase = GetNode<ModuleDatabase>("/root/ModuleDatabase");

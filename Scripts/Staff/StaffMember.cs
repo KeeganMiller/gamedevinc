@@ -40,13 +40,6 @@ public abstract class StaffMember
     // == Stats == //
     public GeneralSkills GeneralStats { get; protected set; }
 
-
-    // == Generator Properties == //
-    private const string c_NameResourcePath = "res://Data/Names.json";
-    private static List<StaffNameData> Names = new List<StaffNameData>();
-    private static List<PackedScene> _maleModels = new List<PackedScene>();
-    private static List<PackedScene> _femaleModels = new List<PackedScene>();
-
     // == Current Task Data == //
     private List<BaseModule> m_CurrentWorkList = new List<BaseModule>();                    // List of current task queued
     private Timer m_WorkTimer;
@@ -67,7 +60,7 @@ public abstract class StaffMember
         // Generate Random Name
         RandomNumberGenerator rand = new RandomNumberGenerator();
         rand.Randomize();
-        Name = GetNewName(rand.Randi() > 0 ? EStaffSex.SEX_Male : EStaffSex.SEX_Female);
+        Name = StaffDatabase.Instance.GetNewName(rand.Randi() > 0 ? EStaffSex.SEX_Male : EStaffSex.SEX_Female);
 
         JobType = jobType;              // Set the job type
         GenerateLevelDetails();                 // Generate the staff members level
@@ -158,35 +151,7 @@ public abstract class StaffMember
     public void RemoveModule(BaseModule module)
         => m_CurrentWorkList.Remove(module);
 
-    /// <summary>
-    /// Handles loading in the names of the  
-    /// </summary>
-    public static void LoadNames()
-    {
-        if(FileAccess.FileExists(c_NameResourcePath))
-        {
-            var file = FileAccess.Open(c_NameResourcePath, FileAccess.ModeFlags.Read);
-            if(file != null && file.IsOpen())
-            {
-                var data = file.GetAsText();
-                var tokens = JArray.Parse(data);
-
-                foreach(var token in tokens )
-                {
-                    var name = JsonConvert.DeserializeObject<StaffNameData>(token.ToString());
-                    if (name != null)
-                        Names.Add(name);
-                    else
-                        GD.PushError("StaffMember::LoadNames -> Failed to load name");
-                }
-
-                file.Close();
-            }
-        } else
-        {
-            GD.PushError("StafFMember::LoadNames -> Failed to locate name json file");
-        }
-    }
+    
 
     /// <summary>
     /// Sets the colors of the model and the index of the model to select
@@ -202,10 +167,10 @@ public abstract class StaffMember
         // Get reference to the module
         if(Sex == EStaffSex.SEX_Male)
         {
-            _modelScene = _maleModels[ModelIndex];
+            _modelScene = StaffDatabase.Instance.MaleModels[ModelIndex];
         } else if(Sex == EStaffSex.SEX_Female)
         {
-            _modelScene = _femaleModels[ModelIndex];
+            _modelScene = StaffDatabase.Instance.FemaleModels[ModelIndex];
         }
 
         // If we failed to set reference let the editor know
@@ -222,7 +187,7 @@ public abstract class StaffMember
     /// <param name="index">Index point in the list</param>
     /// <returns></returns>
     public static PackedScene GetCharacterModel(EStaffSex sex, int index)
-        => sex == EStaffSex.SEX_Male ? _maleModels[index] : _femaleModels[index];
+        => sex == EStaffSex.SEX_Male ? StaffDatabase.Instance.MaleModels[index] : StaffDatabase.Instance.FemaleModels[index];
 
     /// <summary>
     /// Handles creating staff member controller
@@ -236,79 +201,6 @@ public abstract class StaffMember
                 Controller.Setup(this, _clothingColors);
         }
     }
-
-    /// <summary>
-    /// Retrieves all the character models
-    /// </summary>
-    public static void GetCharacterModels()
-    {
-        // Load male models
-        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_one.tscn"));
-        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_two.tscn"));
-        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_three.tscn"));
-        _maleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_four.tscn"));
-
-        // Load female models
-        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Alternative.fbx"));
-        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Casual.fbx"));
-        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Dress.fbx"));
-        _femaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_TankTop.fbx"));
-    }
-
-    /// <summary>
-    /// Generates a new name
-    /// </summary>
-    /// <param name="sex"></param>
-    /// <returns></returns>
-    public static string GetNewName(EStaffSex sex)
-        => GetFirstName(sex) + " " + GetLastName();
-
-    /// <summary>
-    /// Finds a first name with the specified sex
-    /// </summary>
-    /// <param name="sex">Sex of the first name</param>
-    /// <returns>First name</returns>
-    private static string GetFirstName(EStaffSex sex)
-    {
-        RandomNumberGenerator rand = new RandomNumberGenerator();
-        for(var i = 0; i < 100; ++i)
-        {
-            rand.Randomize();
-            var name = Names[rand.RandiRange(0, Names.Count - 1)];
-            if (sex == (EStaffSex)name.Sex && (ENameType)name.NameType != ENameType.NAME_Last) 
-                return name.Name;
-        }
-
-        return "Error";
-    }
-
-    /// <summary>
-    /// Finds a random last name
-    /// </summary>
-    /// <returns>Last name</returns>
-    private static string GetLastName()
-    {
-        RandomNumberGenerator rand = new RandomNumberGenerator();
-        for (var i = 0; i < 100; ++i)
-        {
-            rand.Randomize();
-            var name = Names[rand.RandiRange(0, Names.Count - 1)];
-            if ((ENameType)name.NameType == ENameType.NAME_Last)
-                return name.Name;
-        }
-
-        return "Error";
-    }
-}
-
-public class StaffNameData
-{
-    [JsonProperty]
-    public int Sex;
-    [JsonProperty]
-    public string Name;
-    [JsonProperty]
-    public int NameType;
 }
 
 public class GeneralStaffStats
