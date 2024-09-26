@@ -77,10 +77,10 @@ public partial class StaffDatabase : Node
         MaleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/male_four.tscn"));
 
         // Load female models
-        FemaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Alternative.fbx"));
-        FemaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Casual.fbx"));
-        FemaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_Dress.fbx"));
-        FemaleModels.Add(GD.Load<PackedScene>("res://Meshes/Characters/Female_TankTop.fbx"));
+        FemaleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/female_one.tscn"));
+        FemaleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/female_two.tscn"));
+        FemaleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/female_three.tscn"));
+        FemaleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/female_four.tscn"));
     }
 }
 
