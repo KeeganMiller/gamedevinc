@@ -28,16 +28,7 @@ public class GeneralSkills
 
     public GeneralSkills(EModuleJobType jobType)
     {
-        var rand = new RandomNumberGenerator();
-        rand.Randomize();
-        _skills = new List<Skill>
-        {
-            new Skill("Speed", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
-            new Skill("Quality", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
-            new Skill("AttentionToDetails", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
-            new Skill("Creativity", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
-            new Skill("Leadership", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General)
-        };
+
     }
 
     public GeneralSkills(List<Skill> skills)
@@ -97,35 +88,28 @@ public class GeneralSkills
             var file = FileAccess.Open(skillPath, FileAccess.ModeFlags.Read);
             if(file != null && file.IsOpen())
             {
-                var txt = file.GetAsText();
-                var tokens = JArray.Parse(txt);
+                var txtData = file.GetAsText();
+                var tokens = JArray.Parse(txtData);
 
                 foreach(var token in tokens)
                 {
-                    var dataCat = JsonConvert.DeserializeObject<DataContent>(token.ToString());
-                    if(jobType != EModuleJobType.JOB_All)
+                    var dataContent = JsonConvert.DeserializeObject<DataContent>(token.ToString());
+                    if((EDataCategory)dataContent.Category == EDataCategory.Skill)
                     {
-                        if (dataCat != null && (EDataCategory)dataCat.Category == EDataCategory.Skill)
+                        if((EModuleJobType)dataContent.JobType == EModuleJobType.JOB_All || (EModuleJobType)dataContent.JobType == jobType)
                         {
                             var skill = JsonConvert.DeserializeObject<Skill>(token.ToString());
-                            if (skill != null)
+                            if(skill != null)
                             {
                                 rand.Randomize();
                                 skill.SkillValue = rand.RandiRange(1, MAX_SKILL_POINTS);
                                 relatedSkills.Add(skill);
+                            } else
+                            {
+                                GD.PushWarning("GeneralSkills::CreateRelatedSkills -> Failed to create skill");
                             }
                         }
-                    } else
-                    {
-                        var skill = JsonConvert.DeserializeObject<Skill>(token.ToString());
-                        if(skill != null)
-                        {
-                            rand.Randomize();
-                            skill.SkillValue = rand.RandiRange(1, MAX_SKILL_POINTS);
-                            relatedSkills.Add(skill);
-                        }
                     }
-
                 }
 
                 file.Close();
@@ -133,7 +117,6 @@ public class GeneralSkills
         }
 
         return relatedSkills;
-        
     }
 }
 
@@ -144,5 +127,5 @@ public class Skill
     [JsonProperty]
     public int SkillValue;
     [JsonProperty]
-    public ESkillType SkillType;
+    public int SkillType;
 }
