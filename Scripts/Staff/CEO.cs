@@ -15,6 +15,6 @@ public class CEO : StaffMember
 
     protected override void GenerateStats()
     {
-        throw new System.NotImplementedException();
+        base.GenerateStats();
     }
 }
