@@ -72,6 +72,38 @@ public partial class CharacterColorSelect : Label
                         break;
                 }
             }
+            else
+            {
+                switch (_colorPropType)
+                {
+                    case EColorPropertyType.COL_ShirtTwo:
+                        if (index != 0)
+                        {
+                            Modulate = new Color(1, 1, 1, 0.1f);
+                            IsActive = false;
+                        }
+                        break;
+                    case EColorPropertyType.COL_ShirtThree:
+                        Modulate = new Color(1, 1, 1, 0.1f);
+                        IsActive = false;
+                        break;
+                    case EColorPropertyType.COL_HairTwo:
+                        if (index != 0)
+                        {
+                            Modulate = new Color(1, 1, 1, 0.1f);
+                            IsActive = false;
+                        }
+                        break;
+                    case EColorPropertyType.COL_Pants:
+                        if (index == 3)
+                        {
+                            Modulate = new Color(1, 1, 1, 0.1f);
+                            IsActive = false;
+                        }
+
+                        break;
+                }
+            }
         }
     }
 
@@ -85,6 +117,8 @@ public partial class CharacterColorSelect : Label
             var modelSex = CompanyDatabase.Instance.PlayersStaffMember.Sex;
             var mesh = model.Mesh;
 
+            OrmMaterial3D materialToUpdate = null;
+            
             switch(_colorPropType)
             {
                 case EColorPropertyType.COL_Skin:
@@ -92,69 +126,83 @@ public partial class CharacterColorSelect : Label
                         skinOrm.AlbedoColor = color;
                     return;
                 case EColorPropertyType.COL_HairOne:
-                    if(modelIndex == 0 || modelIndex == 1 || modelIndex == 2)
+                    if (modelSex == EStaffSex.SEX_Male)
                     {
-                        if (mesh.GetActiveMaterial(2) is OrmMaterial3D hairOneOrm)
-                            hairOneOrm.AlbedoColor = color;
-                    } else if(modelIndex == 3)
+                        if(modelIndex == 0 || modelIndex == 1 || modelIndex == 2)
+                            materialToUpdate = mesh.GetActiveMaterial(2) as OrmMaterial3D;
+                        else if(modelIndex == 3)
+                            materialToUpdate = mesh.GetActiveMaterial(3) as OrmMaterial3D;
+                    } else if (modelSex == EStaffSex.SEX_Female)
                     {
-                        if (mesh.GetActiveMaterial(3) is OrmMaterial3D hairOneOrm)
-                            hairOneOrm.AlbedoColor = color;
+                        if(modelIndex == 1 || modelIndex == 2 || modelIndex == 3)
+                            materialToUpdate = mesh.GetActiveMaterial(2) as OrmMaterial3D;
+                        else if(modelIndex == 0)
+                            materialToUpdate = mesh.GetActiveMaterial(6) as OrmMaterial3D;  
                     }
-                    return;
+
+                    break;
                 case EColorPropertyType.COL_HairTwo:
-                    if(modelIndex == 2)
+                    if (modelSex == EStaffSex.SEX_Male)
                     {
-                        if (mesh.GetActiveMaterial(3) is OrmMaterial3D hairTwoOrm)
-                            hairTwoOrm.AlbedoColor = color;
+                        if (modelIndex == 2)
+                            materialToUpdate = mesh.GetActiveMaterial(3) as OrmMaterial3D;
+                    } else if (modelSex == EStaffSex.SEX_Female)
+                    {
+                        if(modelIndex == 0)
+                            materialToUpdate = mesh.GetActiveMaterial(9) as OrmMaterial3D;
                     }
-                    return;
+
+                    break;
                 case EColorPropertyType.COL_ShirtOne:
-                    if(modelIndex == 0 || modelIndex == 1)
+                    if (modelSex == EStaffSex.SEX_Male)
                     {
-                        if(mesh.GetActiveMaterial(3) is OrmMaterial3D shirtOneOrm)
-                            shirtOneOrm.AlbedoColor = color;
-                    } else if(modelIndex ==  2)
+                        if(modelIndex == 0 || modelIndex == 1)
+                            materialToUpdate = mesh.GetActiveMaterial(3) as OrmMaterial3D;
+                        else if(modelIndex == 2)
+                            materialToUpdate = mesh.GetActiveMaterial(4) as OrmMaterial3D;
+                        else if(modelIndex == 3)
+                            materialToUpdate = mesh.GetActiveMaterial(1) as OrmMaterial3D;;
+                    } else if (modelSex == EStaffSex.SEX_Female)
                     {
-                        if (mesh.GetActiveMaterial(4) is OrmMaterial3D shirtOneOrm)
-                            shirtOneOrm.AlbedoColor = color;
-                    } else if(modelIndex == 3)
-                    {
-                        if (mesh.GetActiveMaterial(1) is OrmMaterial3D shirtOneOrm)
-                            shirtOneOrm.AlbedoColor = color;
+                        materialToUpdate = mesh.GetActiveMaterial(3) as OrmMaterial3D;
                     }
-                    return;
+
+                    break;
                 case EColorPropertyType.COL_ShirtTwo:
-                    if(modelIndex == 2)
+                    if (modelSex == EStaffSex.SEX_Male)
                     {
-                        if(mesh.GetActiveMaterial(5) is  OrmMaterial3D shirtTwoOrm)
-                            shirtTwoOrm.AlbedoColor = color;
-                    } else if (modelIndex == 3)
+                        if(modelIndex == 2)
+                            materialToUpdate = mesh.GetActiveMaterial(5) as OrmMaterial3D;
+                        else if(modelIndex == 3)
+                            materialToUpdate = mesh.GetActiveMaterial(3) as OrmMaterial3D;
+                    } else if (modelSex == EStaffSex.SEX_Female)
                     {
-                        if (mesh.GetActiveMaterial(3) is OrmMaterial3D shirtTwoOrm)
-                            shirtTwoOrm.AlbedoColor = color;
+                        if(modelIndex == 0)
+                            materialToUpdate = mesh.GetActiveMaterial(7) as OrmMaterial3D;
                     }
-                    return;
+
+                    break;
                 case EColorPropertyType.COL_ShirtThree:
-                    if(modelIndex == 3)
+                    if (modelSex == EStaffSex.SEX_Male)
                     {
-                        if(mesh.GetActiveMaterial(6) is OrmMaterial3D shirtThreeOrm)
-                            shirtThreeOrm.AlbedoColor = color;
+                        if(modelIndex == 3)
+                            materialToUpdate = mesh.GetActiveMaterial(6) as OrmMaterial3D;
                     }
-                    return;
+
+                    break;
                 case EColorPropertyType.COL_Pants:
-                    if(modelIndex == 0 || modelIndex == 1)
+                    if (modelSex == EStaffSex.SEX_Male)
                     {
-                        if(mesh.GetActiveMaterial(4) is OrmMaterial3D pantsOneOrm)
-                            pantsOneOrm.AlbedoColor = color;
-                    } else if(modelIndex == 2)
+                        if (modelIndex == 0 || modelIndex == 1)
+                            materialToUpdate = mesh.GetActiveMaterial(4) as OrmMaterial3D;
+                        else if(modelIndex == 2)
+                            materialToUpdate = mesh.GetActiveMaterial(6) as OrmMaterial3D;
+                        else if(modelIndex == 3)
+                            materialToUpdate = mesh.GetActiveMaterial(5) as OrmMaterial3D;
+                    } else if (modelSex == EStaffSex.SEX_Female)
                     {
-                        if (mesh.GetActiveMaterial(6) is OrmMaterial3D pantsOneOrm)
-                            pantsOneOrm.AlbedoColor = color;
-                    } else if(modelIndex == 3)
-                    {
-                        if (mesh.GetActiveMaterial(5) is OrmMaterial3D pantsOneOrm)
-                            pantsOneOrm.AlbedoColor = color;
+                        if(modelIndex == 0 || modelIndex == 1 || modelIndex == 2)
+                            materialToUpdate = mesh.GetActiveMaterial(4) as OrmMaterial3D;
                     }
                     return;
             }
