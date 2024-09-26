@@ -10,6 +10,7 @@ public class GeneralSkills
     public int Speed { get; private set; }
     public int Quality { get; private set; }
     public int AttentionToDetail { get; private set; }
+    public int Creativity { get; private set; }
 
     public bool AddSpeedPoints(int points = 1)
     {
@@ -38,6 +39,17 @@ public class GeneralSkills
         if(AttentionToDetail + points <= MAX_SKILL_POINTS)
         {
             AttentionToDetail += points;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool AddCreativity(int points = 1)
+    {
+        if(Creativity + points <= MAX_SKILL_POINTS)
+        {
+            Creativity += points;
             return true;
         }
 
