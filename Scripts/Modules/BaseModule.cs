@@ -17,10 +17,15 @@ public enum EModuleJobType
     JOB_Marketing,
     JOB_Design,
     JOB_UIUX,
+    JOB_QA,
+    JOB_HR,
+    JOB_Production,
+    JOB_Actor,
+    JOB_Writer,
     JOB_All
 }
 
-public enum EGameSize
+public enum EGameSizeq
 {
     GAME_Indie,
     GAME_III,

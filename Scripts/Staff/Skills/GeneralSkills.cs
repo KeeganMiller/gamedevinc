@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GameDevInc;
 
@@ -24,7 +26,7 @@ public class GeneralSkills
 
     private List<Skill> _skills = new List<Skill>();
 
-    public GeneralSkills()
+    public GeneralSkills(EModuleJobType jobType)
     {
         var rand = new RandomNumberGenerator();
         rand.Randomize();
@@ -33,7 +35,8 @@ public class GeneralSkills
             new Skill("Speed", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
             new Skill("Quality", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
             new Skill("AttentionToDetails", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
-            new Skill("Creativity", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General)
+            new Skill("Creativity", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General),
+            new Skill("Leadership", rand.RandiRange(1, MAX_SKILL_POINTS), ESkillType.General)
         };
     }
 
@@ -75,18 +78,71 @@ public class GeneralSkills
 
         return skills;
     }
+
+    /// <summary>
+    /// Gets the list of skills in the data file, related to the passed in job type
+    /// Will also generate random stat values if required
+    /// </summary>
+    /// <param name="jobType">Type of job to get the skills for</param>
+    /// <param name="randomSkillValues">If we want to use the current values otherwise</param>
+    /// <returns></returns>
+    public List<Skill> CreateRelatedSkills(EModuleJobType jobType)
+    {
+        var rand = new RandomNumberGenerator();                 // Create random
+        var skillPath = "res://Data/Data.json";                     // reference to the data path
+        var relatedSkills = new List<Skill>();                  // Pre-define list of skills to return
+        // Check the file exist
+        if(FileAccess.FileExists(skillPath))
+        {
+            var file = FileAccess.Open(skillPath, FileAccess.ModeFlags.Read);
+            if(file != null && file.IsOpen())
+            {
+                var txt = file.GetAsText();
+                var tokens = JArray.Parse(txt);
+
+                foreach(var token in tokens)
+                {
+                    var dataCat = JsonConvert.DeserializeObject<DataContent>(token.ToString());
+                    if(jobType != EModuleJobType.JOB_All)
+                    {
+                        if (dataCat != null && (EDataCategory)dataCat.Category == EDataCategory.Skill)
+                        {
+                            var skill = JsonConvert.DeserializeObject<Skill>(token.ToString());
+                            if (skill != null)
+                            {
+                                rand.Randomize();
+                                skill.SkillValue = rand.RandiRange(1, MAX_SKILL_POINTS);
+                                relatedSkills.Add(skill);
+                            }
+                        }
+                    } else
+                    {
+                        var skill = JsonConvert.DeserializeObject<Skill>(token.ToString());
+                        if(skill != null)
+                        {
+                            rand.Randomize();
+                            skill.SkillValue = rand.RandiRange(1, MAX_SKILL_POINTS);
+                            relatedSkills.Add(skill);
+                        }
+                    }
+
+                }
+
+                file.Close();
+            }
+        }
+
+        return relatedSkills;
+        
+    }
 }
 
 public class Skill
 {
-    public string SkillName { get; private set; }
+    [JsonProperty]
+    public string SkillName;
+    [JsonProperty]
     public int SkillValue;
-    public ESkillType SkillType { get; private set; }
-
-    public Skill(string name, int value = 1, ESkillType type)
-    {
-        SkillName = name;
-        SkillValue = value;
-        SkillType = type;
-    }
+    [JsonProperty]
+    public ESkillType SkillType;
 }
