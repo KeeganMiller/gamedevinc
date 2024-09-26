@@ -26,6 +26,12 @@ public class GeneralSkills
 
     private List<Skill> _skills = new List<Skill>();
 
+    // == Common General Skills == //
+    public float WorkSpeed => GetSkill("Speed").SkillValue;
+    public float WorkQuality => GetSkill("Quality").SkillValue;
+    public float AttentionToDetails => GetSkill("AttentionToDetails").SkillValue;
+    public float Creativity => GetSkill(("Creativity")).SkillValue;
+
     public GeneralSkills(EModuleJobType jobType)
     {
 

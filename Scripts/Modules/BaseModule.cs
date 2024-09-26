@@ -25,7 +25,7 @@ public enum EModuleJobType
     JOB_All
 }
 
-public enum EGameSizeq
+public enum EGameSize
 {
     GAME_Indie,
     GAME_III,

@@ -104,7 +104,7 @@ public abstract class StaffMember
     /// </summary>
     protected virtual void GenerateStats()
     {
-        GeneralStats = new GeneralSkills();
+        GeneralStats = new GeneralSkills(JobType);
     }
 
     /// <summary>
