@@ -38,7 +38,7 @@ public abstract class StaffMember
     public float XP_Modifier = 1f;
 
     // == Stats == //
-    public GeneralStaffStats GeneralStats { get; protected set; }
+    public GeneralSkills GeneralStats { get; protected set; }
 
 
     // == Generator Properties == //
@@ -73,8 +73,6 @@ public abstract class StaffMember
         GenerateLevelDetails();                 // Generate the staff members level
         GenerateStats();                    // Call the generate stats method on the inherited classes
 
-        GeneralStats = new GeneralStaffStats();
-
         m_WorkTimer = new Timer(3f, WorkOnModules, true, true);
     }
 
@@ -85,6 +83,10 @@ public abstract class StaffMember
         JobType = jobType;
     }
 
+    /// <summary>
+    /// Adds XP to the staff member and than determines if they level up
+    /// </summary>
+    /// <param name="xp">Experience Points</param>
     public void AddXP(float xp)
     {
         var lastXP = XP;
@@ -97,7 +99,17 @@ public abstract class StaffMember
         }
     }
 
-    protected abstract void GenerateStats();
+    /// <summary>
+    /// Handles generating of the stats
+    /// </summary>
+    protected virtual void GenerateStats()
+    {
+        GeneralStats = new GeneralSkills();
+    }
+
+    /// <summary>
+    /// Determines the initial stats for the staff member when created
+    /// </summary>
     protected virtual void GenerateLevelDetails()
     {
         RandomNumberGenerator rand = new RandomNumberGenerator();
@@ -105,14 +117,25 @@ public abstract class StaffMember
         AddXP(rand.RandfRange(1, 1000));
     }
 
+    /// <summary>
+    /// Called each frame
+    /// </summary>
+    /// <param name="deltaTime"></param>
     public virtual void _Update(float deltaTime)
     {
         if (m_WorkTimer != null)
             m_WorkTimer._Update(deltaTime);
     }
 
+    /// <summary>
+    /// Handles working on a modules as the staff member
+    /// It's called on the completion of the work timer
+    /// This functions is called every frame even if there is no module assigned
+    /// </summary>
     public void WorkOnModules()
     {
+        // Check if there are task in the work list
+        // If not don't continue with this module
         if (m_CurrentWorkList.Count <= 0)
             return;
 
@@ -120,17 +143,24 @@ public abstract class StaffMember
         if (m_CurrentWorkList[0].WorkOnModule(this))
             m_CurrentWorkList.RemoveAt(0);
 
+        // Generate the length of time to work
         RandomNumberGenerator rand = new RandomNumberGenerator();
         rand.Randomize();
         if (m_WorkTimer != null)
             m_WorkTimer.TimerLength = rand.RandfRange(1, 7);
+
+        // TODO: Determine work time based on the module requirements itself
     }
 
+    // Add and remove modules from the work list
     public void AddModule(BaseModule module)
         => m_CurrentWorkList.Add(module);
     public void RemoveModule(BaseModule module)
         => m_CurrentWorkList.Remove(module);
 
+    /// <summary>
+    /// Handles loading in the names of the  
+    /// </summary>
     public static void LoadNames()
     {
         if(FileAccess.FileExists(c_NameResourcePath))
@@ -158,11 +188,18 @@ public abstract class StaffMember
         }
     }
 
+    /// <summary>
+    /// Sets the colors of the model and the index of the model to select
+    /// </summary>
+    /// <param name="colors">Colors of the staff member</param>
+    /// <param name="modelIndex">Index of the model</param>
     public void SetCharacterModel(StaffMemberModelColors colors, int modelIndex)
     {
+        // Set valies
         _clothingColors = colors;
         ModelIndex = modelIndex;
         
+        // Get reference to the module
         if(Sex == EStaffSex.SEX_Male)
         {
             _modelScene = _maleModels[ModelIndex];
@@ -171,15 +208,25 @@ public abstract class StaffMember
             _modelScene = _femaleModels[ModelIndex];
         }
 
+        // If we failed to set reference let the editor know
         if(_modelScene == null)
         {
             GD.PushWarning("StaffMember::SetCharacterModel -> Failed to select a model");
         }
     }
 
+    /// <summary>
+    /// Returns a character model
+    /// </summary>
+    /// <param name="sex">Sex of the character model</param>
+    /// <param name="index">Index point in the list</param>
+    /// <returns></returns>
     public static PackedScene GetCharacterModel(EStaffSex sex, int index)
         => sex == EStaffSex.SEX_Male ? _maleModels[index] : _femaleModels[index];
 
+    /// <summary>
+    /// Handles creating staff member controller
+    /// </summary>
     public void CreateController()
     {
         if(_modelScene != null)
@@ -190,6 +237,9 @@ public abstract class StaffMember
         }
     }
 
+    /// <summary>
+    /// Retrieves all the character models
+    /// </summary>
     public static void GetCharacterModels()
     {
         // Load male models
@@ -265,15 +315,6 @@ public class GeneralStaffStats
 {
     public float WorkSpeed { get; private set; }
     public float WorkQuality { get; private set; }
-    
-    public GeneralStaffStats()
-    {
-        RandomNumberGenerator rand = new RandomNumberGenerator();
-        rand.Randomize();
-
-        WorkSpeed = rand.RandiRange(1, StaffMember.c_MaxStatLevel);
-        WorkQuality = rand.RandiRange(1, StaffMember.c_MaxStatLevel);
-    }
 
     public bool IncreaseWorkSpeed(int amount = 1)
     {
