@@ -648,6 +648,7 @@ editor_only = false
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
 script = ExtResource("20_relvc")
+ModelIndex = 1
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleTwo"]
 layout_mode = 0
@@ -667,6 +668,7 @@ editor_only = false
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
 script = ExtResource("20_relvc")
+ModelIndex = 2
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleThree"]
 layout_mode = 0
@@ -686,6 +688,7 @@ editor_only = false
 custom_minimum_size = Vector2(120, 333)
 layout_mode = 2
 script = ExtResource("20_relvc")
+ModelIndex = 3
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect/CEOSetup/FemaleCharacters/FemaleFour"]
 layout_mode = 0
