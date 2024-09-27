@@ -108,7 +108,7 @@ public class GeneralSkills
             EModuleJobType.JOB_Writer => ESkillType.Writer,
             EModuleJobType.JOB_Production => ESkillType.Production,
             EModuleJobType.JOB_SoundEngineer => ESkillType.Sound,
-            EModuleJobType.JOB_Programmer => ESkillType.Programming
+            EModuleJobType.JOB_Programmer => ESkillType.Programming,
             _ => ESkillType.General
         };
     }
