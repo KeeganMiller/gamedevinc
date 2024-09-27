@@ -17,7 +17,8 @@ public enum ESkillType
     Writer = 7,
     Designer = 8,
     Sound = 9,
-    General = 10
+    General = 10,
+    HR = 11
 }
 
 public class GeneralSkills
@@ -25,6 +26,7 @@ public class GeneralSkills
     public const int MAX_SKILL_POINTS = 25;                           // Max skill points any category can have
 
     private List<Skill> _skills = new List<Skill>();
+    public List<Skill> Skills => _skills;
 
     // == Common General Skills == //
     public float WorkSpeed => GetSkill("Speed").SkillValue;
@@ -40,6 +42,7 @@ public class GeneralSkills
     public GeneralSkills(List<Skill> skills)
     {
         _skills = skills;
+        
     }
 
     /// <summary>
@@ -82,8 +85,32 @@ public class GeneralSkills
     /// <param name="characterSkillType">Type of skills to generate</param>
     private void GenerateSkills(ESkillType characterSkillType)
     {
+        var generalSkills = StaffDatabase.Instance.GetAllSkillsOfJob(ESkillType.General);
+        foreach(var skill in generalSkills)
+            _skills.Add(skill);
 
-        return relatedSkills;
+        var jobRelatedSkills = StaffDatabase.Instance.GetAllSkillsOfJob(characterSkillType);
+        foreach(var skill in jobRelatedSkills)
+            _skills.Add(skill);
+    }
+
+    public static ESkillType ConvertJopTypeToSkillType(EModuleJobType jobType)
+    {
+        return jobType switch
+        {
+            EModuleJobType.JOB_2DArtist => ESkillType.Artist2D,
+            EModuleJobType.JOB_HR => ESkillType.HR,
+            EModuleJobType.JOB_QA => ESkillType.QA,
+            EModuleJobType.JOB_3DArtist => ESkillType.Artist2D,
+            EModuleJobType.JOB_Actor => ESkillType.Actor,
+            EModuleJobType.JOB_Design => ESkillType.Designer,
+            EModuleJobType.JOB_Marketing => ESkillType.Marketing,
+            EModuleJobType.JOB_Writer => ESkillType.Writer,
+            EModuleJobType.JOB_Production => ESkillType.Production,
+            EModuleJobType.JOB_SoundEngineer => ESkillType.Sound,
+            EModuleJobType.JOB_Programmer => ESkillType.Programming
+            _ => ESkillType.General
+        };
     }
 }
 
