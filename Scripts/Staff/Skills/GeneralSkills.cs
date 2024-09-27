@@ -94,7 +94,7 @@ public class GeneralSkills
             _skills.Add(skill);
     }
 
-    public static ESkillType ConvertJopTypeToSkillType(EModuleJobType jobType)
+    public static ESkillType ConvertJobTypeToSkillType(EModuleJobType jobType)
     {
         return jobType switch
         {
