@@ -14,7 +14,7 @@ public partial class CharacterDesignMenu : Control
     public StaffMemberController SelectedCharacterController { get; private set; }
     [Export] private SubViewport _viewport;
 
-    private StaffMemberModelColors _modelColors;
+    public StaffMemberModelColors ModelColors;
    
 
     public override void _Ready()
@@ -38,7 +38,7 @@ public partial class CharacterDesignMenu : Control
                 SelectedCharacterController = (StaffMemberController)scene.Instantiate();
                 if (SelectedCharacterController != null)
                 {
-                    _modelColors = new StaffMemberModelColors();
+                    ModelColors = new StaffMemberModelColors();
                     _viewport.AddChild(SelectedCharacterController);
                 }
 
@@ -51,6 +51,15 @@ public partial class CharacterDesignMenu : Control
             }
 
 
+        }
+    }
+
+    public void CompleteForm()
+    {
+        var player = CompanyDatabase.Instance.PlayersStaffMember;
+        if (player != null)
+        {
+            player.ClothingColors = ModelColors;
         }
     }
 

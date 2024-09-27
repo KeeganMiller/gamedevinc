@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://dji42e732y5j"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/SkillUpdateController.cs" id="1_4houo"]
+[ext_resource type="FontFile" uid="uid://bfxiavdcx0g3i" path="res://UserInterface/Comic Shark.ttf" id="2_rcnj0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_omnfp"]
+line_spacing = 2.0
+font = ExtResource("2_rcnj0")
+font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bs1f7"]
+
+[sub_resource type="Theme" id="Theme_3ldj2"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 48
+Button/fonts/font = ExtResource("2_rcnj0")
+Button/styles/normal = SubResource("StyleBoxEmpty_bs1f7")
+
+[sub_resource type="LabelSettings" id="LabelSettings_4005u"]
+font = ExtResource("2_rcnj0")
+font_size = 32
+
+[node name="SkillContainer" type="Control"]
+custom_minimum_size = Vector2(682, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 682.0
+offset_bottom = 40.0
+script = ExtResource("1_4houo")
+
+[node name="SkillName" type="Label" parent="."]
+layout_mode = 0
+offset_right = 302.0
+offset_bottom = 38.0
+text = "Creativity"
+label_settings = SubResource("LabelSettings_omnfp")
+horizontal_alignment = 2
+
+[node name="IncreaseBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 639.0
+offset_top = -20.0
+offset_right = 677.0
+offset_bottom = 36.0
+theme = SubResource("Theme_3ldj2")
+text = ">"
+
+[node name="DecreaseBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 559.0
+offset_top = -20.0
+offset_right = 597.0
+offset_bottom = 36.0
+theme = SubResource("Theme_3ldj2")
+text = "<"
+
+[node name="SkillValue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 596.0
+offset_top = -2.0
+offset_right = 636.0
+offset_bottom = 36.0
+text = "25"
+label_settings = SubResource("LabelSettings_4005u")
+horizontal_alignment = 1
+vertical_alignment = 1

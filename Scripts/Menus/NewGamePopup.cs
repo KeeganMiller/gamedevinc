@@ -12,11 +12,14 @@ public partial class NewGamePopup : Control
     [Export] private OptionButton _genderDropdown;
     [Export] private TextureButton _EditCharacterBtn;
     [Export] private LineEdit _ceoNameInput;
+    [Export] private TextureButton _completeCharacterDesignBtn;
+    [Export] private CharacterDesignMenu _designMenu;
 
     [ExportCategory("Forms References")]
     [Export] private Control _companyInformationContainer;
     [Export] private Control _ceoInformationContainer;
     [Export] private Control _characterCreationContainer;
+    [Export] private Control _skillSetupContainer;
 
 
     #region Company Properties
@@ -148,6 +151,12 @@ public partial class NewGamePopup : Control
 
         if (_EditCharacterBtn != null)
             _EditCharacterBtn.Connect("pressed", new Callable(this, "CreateCeoDetails"));
+
+        if (_completeCharacterDesignBtn != null)
+            _completeCharacterDesignBtn.Pressed += CompleteColorSetup;
+        
+        // REFACTOR: Update to use events instead of signals
+        
     }
 
     #region Company Selection
@@ -335,6 +344,16 @@ public partial class NewGamePopup : Control
             return false;
 
         return true;
+    }
+
+    private void CompleteColorSetup()
+    {
+        if (_designMenu != null)
+        {
+            _designMenu.CompleteForm();
+            _characterCreationContainer.Visible = false;
+            _skillSetupContainer.Visible = true;
+        }
     }
 
     private void ClosePopup()

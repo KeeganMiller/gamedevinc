@@ -85,12 +85,14 @@ public partial class StaffDatabase : Node
         FemaleModels.Add(GD.Load<PackedScene>("res://Prefabs/Characters/female_four.tscn"));
     }
 
-    public List<Skill> GetAllSkillsOfJob(ESkillType jobType)
+    public List<Skill> GetAllSkillsOfJob(ESkillType skillType)
     {
         var skills = new List<Skill>(); 
         foreach (var skill in Skills)
         {
-            if (skill.SkillTypeAsEnum == jobType)
+            
+            // Add if it matches the job type
+            if (skill.SkillTypeAsEnum == skillType)
             {
                 skills.Add(new Skill(skill));
             }

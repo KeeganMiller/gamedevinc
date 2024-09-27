@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://npv0frxd00f8"]
+[gd_scene load_steps=40 format=3 uid="uid://npv0frxd00f8"]
 
 [ext_resource type="Texture2D" uid="uid://dgfhj0axjsd76" path="res://UserInterface/MainMenu/NewGame/MM_NewGameBackground.png" id="1_iw8bh"]
 [ext_resource type="Script" path="res://Scripts/Menus/NewGamePopup.cs" id="1_p6us3"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://c72k0vkdwx2op" path="res://UserInterface/CharacterRenders/Female_04.png" id="27_j0yva"]
 [ext_resource type="Script" path="res://Scripts/Menus/CharacterDesignMenu.cs" id="29_fnvd1"]
 [ext_resource type="Script" path="res://Scripts/Menus/CharacterColorSelect.cs" id="30_lcq4j"]
+[ext_resource type="Script" path="res://Scripts/Menus/SkillSetupController.cs" id="31_2ndtn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_luyef"]
 font = ExtResource("2_ix7pq")
@@ -58,32 +59,20 @@ font = ExtResource("2_ix7pq")
 font_size = 42
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_omnfp"]
-line_spacing = 2.0
-font = ExtResource("2_ix7pq")
-font_size = 32
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bs1f7"]
-
-[sub_resource type="Theme" id="Theme_3ldj2"]
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/icon_normal_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 48
-Button/fonts/font = ExtResource("2_ix7pq")
-Button/styles/normal = SubResource("StyleBoxEmpty_bs1f7")
-
-[sub_resource type="LabelSettings" id="LabelSettings_4005u"]
+[sub_resource type="LabelSettings" id="LabelSettings_fxl63"]
 font = ExtResource("2_ix7pq")
 font_size = 32
 
 [sub_resource type="Environment" id="Environment_qeefs"]
 background_mode = 2
 
-[node name="NewGamePopup" type="Control" node_paths=PackedStringArray("_exitBtn", "_nextFormBtn", "_errorMessage", "_genderDropdown", "_EditCharacterBtn", "_ceoNameInput", "_companyInformationContainer", "_ceoInformationContainer", "_characterCreationContainer", "_companyLogoOne", "_companyLogoTwo", "_companyLogoThree", "_actionBtn", "_rpgBtn", "_simulationBtn", "_strategyBtn", "_platformerBtn", "_casualBtn", "_adventureBtn", "_puzzle", "_companyNameInput", "_maleCharacters", "_femaleCharacters", "_maleOne", "_maleTwo", "_maleThree", "_maleFour", "_femaleOne", "_femaleTwo", "_femaleThree", "_femaleFour")]
+[node name="NewGamePopup" type="Control" node_paths=PackedStringArray("_exitBtn", "_nextFormBtn", "_errorMessage", "_genderDropdown", "_EditCharacterBtn", "_ceoNameInput", "_completeCharacterDesignBtn", "_designMenu", "_companyInformationContainer", "_ceoInformationContainer", "_characterCreationContainer", "_skillSetupContainer", "_companyLogoOne", "_companyLogoTwo", "_companyLogoThree", "_actionBtn", "_rpgBtn", "_simulationBtn", "_strategyBtn", "_platformerBtn", "_casualBtn", "_adventureBtn", "_puzzle", "_companyNameInput", "_maleCharacters", "_femaleCharacters", "_maleOne", "_maleTwo", "_maleThree", "_maleFour", "_femaleOne", "_femaleTwo", "_femaleThree", "_femaleFour")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -26.0
+offset_right = -26.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p6us3")
@@ -93,9 +82,12 @@ _errorMessage = NodePath("TextureRect/CompanyInformation/Label")
 _genderDropdown = NodePath("TextureRect/CEOSetup/GenderSelection")
 _EditCharacterBtn = NodePath("TextureRect/CEOSetup/NextBtn")
 _ceoNameInput = NodePath("TextureRect/CEOSetup/LineEdit")
+_completeCharacterDesignBtn = NodePath("TextureRect/CEOCharacterDesign/CompleteCharacterDesign")
+_designMenu = NodePath("TextureRect/CEOCharacterDesign")
 _companyInformationContainer = NodePath("TextureRect/CompanyInformation")
 _ceoInformationContainer = NodePath("TextureRect/CEOSetup")
 _characterCreationContainer = NodePath("TextureRect/CEOCharacterDesign")
+_skillSetupContainer = NodePath("TextureRect/CEOSkills")
 _companyLogoOne = NodePath("TextureRect/CompanyInformation/CompanyLogo1")
 _companyLogoTwo = NodePath("TextureRect/CompanyInformation/CompanyLogo2")
 _companyLogoThree = NodePath("TextureRect/CompanyInformation/CompanyLogo3")
@@ -135,7 +127,6 @@ grow_vertical = 2
 texture = ExtResource("1_iw8bh")
 
 [node name="CompanyInformation" type="Control" parent="TextureRect"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1215,53 +1206,36 @@ hex_visible = false
 presets_visible = false
 
 [node name="CEOSkills" type="Control" parent="TextureRect"]
+visible = false
 anchors_preset = 0
 offset_left = 126.0
 offset_top = 185.0
 offset_right = 808.0
 offset_bottom = 1045.0
+script = ExtResource("31_2ndtn")
 
-[node name="Control" type="Control" parent="TextureRect/CEOSkills"]
-anchors_preset = 0
-offset_right = 682.0
-offset_bottom = 40.0
-
-[node name="SkillName" type="Label" parent="TextureRect/CEOSkills/Control"]
+[node name="VScrollBar" type="VScrollBar" parent="TextureRect/CEOSkills"]
 layout_mode = 0
-offset_right = 302.0
-offset_bottom = 38.0
-text = "Creativity"
-label_settings = SubResource("LabelSettings_omnfp")
-horizontal_alignment = 2
+offset_right = 691.0
+offset_bottom = 884.0
+max_value = 0.0
 
-[node name="IncreaseBtn" type="Button" parent="TextureRect/CEOSkills/Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/CEOSkills/VScrollBar"]
 layout_mode = 0
-offset_left = 639.0
-offset_top = -20.0
-offset_right = 677.0
-offset_bottom = 36.0
-theme = SubResource("Theme_3ldj2")
-text = ">"
+offset_right = 693.0
+offset_bottom = 884.0
 
-[node name="DecreaseBtn" type="Button" parent="TextureRect/CEOSkills/Control"]
-layout_mode = 0
-offset_left = 559.0
-offset_top = -20.0
-offset_right = 597.0
-offset_bottom = 36.0
-theme = SubResource("Theme_3ldj2")
-text = "<"
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/CEOSkills/VScrollBar/ScrollContainer"]
+layout_mode = 2
 
-[node name="SkillValue" type="Label" parent="TextureRect/CEOSkills/Control"]
+[node name="SkillPointLabel" type="Label" parent="TextureRect/CEOSkills"]
 layout_mode = 0
-offset_left = 596.0
-offset_top = -2.0
-offset_right = 636.0
-offset_bottom = 36.0
-text = "25"
-label_settings = SubResource("LabelSettings_4005u")
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 479.0
+offset_top = -47.0
+offset_right = 683.0
+offset_bottom = -9.0
+text = "Skill Points: 2"
+label_settings = SubResource("LabelSettings_fxl63")
 
 [node name="ExitBtn" type="Button" parent="."]
 layout_mode = 1

@@ -51,7 +51,7 @@ public abstract class StaffMember
     // Hours
 
     // == Model Properties == //
-    protected StaffMemberModelColors _clothingColors;
+    public StaffMemberModelColors ClothingColors;
     public int ModelIndex { get; protected set; }
     protected PackedScene _modelScene;
 
@@ -161,7 +161,7 @@ public abstract class StaffMember
     public void SetCharacterModel(StaffMemberModelColors colors, int modelIndex)
     {
         // Set valies
-        _clothingColors = colors;
+        ClothingColors = colors;
         ModelIndex = modelIndex;
         
         // Get reference to the module
@@ -198,7 +198,7 @@ public abstract class StaffMember
         {
             Controller = (StaffMemberController)GameController.Instance.SpawnToWorld(_modelScene, null);
             if (Controller != null)
-                Controller.Setup(this, _clothingColors);
+                Controller.Setup(this, ClothingColors);
         }
     }
 }

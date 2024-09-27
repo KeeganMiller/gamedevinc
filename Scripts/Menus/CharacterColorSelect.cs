@@ -223,11 +223,40 @@ public partial class CharacterColorSelect : Label
 
                     break;
             }
-            
-            if(materialToUpdate != null)
-                materialToUpdate.AlbedoColor = color;
+
+            if (materialToUpdate != null)
+            {
+                materialToUpdate.AlbedoColor = color;                   // Update display model
+                // Update the model colors class
+                switch (_colorPropType)
+                {
+                    case EColorPropertyType.COL_Skin:
+                        _designMenu.ModelColors.SkinColor = color;
+                        break;
+                    case EColorPropertyType.COL_HairOne:
+                        _designMenu.ModelColors.HairOne = color;
+                        break;
+                    case EColorPropertyType.COL_HairTwo:
+                        _designMenu.ModelColors.HairTwo = color;
+                        break;
+                    case EColorPropertyType.COL_ShirtOne:
+                        _designMenu.ModelColors.ShirtOne = color;
+                        break;
+                    case EColorPropertyType.COL_ShirtTwo:
+                        _designMenu.ModelColors.ShirtTwo = color;
+                        break;
+                    case EColorPropertyType.COL_ShirtThree:
+                        _designMenu.ModelColors.ShirtThree = color;
+                        break;
+                    case EColorPropertyType.COL_Pants:
+                        _designMenu.ModelColors.Pants = color;
+                        break;
+                }
+            }
             else
+            {
                 GD.PushError("CharacterColorSelect::SetColor -> Failed to update color");
+            }
         }
     }
 

@@ -15,6 +15,9 @@ public partial class SkillUpdateController : Control
     private Label _skillValue;
 
     private Skill _skillRef;                        // Store reference to the skill
+
+    private SkillSetupController _skillController;
+    
     public override void _Ready()
     {
         _skillName = GetNode<Label>("SkillName");
@@ -29,9 +32,10 @@ public partial class SkillUpdateController : Control
             _increaseBtn.Pressed += OnIncreasePressed;
     }
 
-    public void Setup(Skill skill)
+    public void Setup(Skill skill, SkillSetupController skillController)
     {
         _skillRef = skill;
+        _skillController = skillController;
         if (_skillName != null)
             _skillName.Text = skill.SkillName;
         if (_skillValue != null)
@@ -41,10 +45,23 @@ public partial class SkillUpdateController : Control
     private void OnDecreasePressed()
     {
 
+        if (_skillRef.SkillValue > 0)
+        {
+            _skillRef.SkillValue -= 1;
+            _skillController.AddSkillPoint(_skillRef);
+        }
+        
     }
 
     private void OnIncreasePressed()
     {
-
+        if (_skillRef.SkillValue < 25)
+        {
+            if (_skillController.CanUseSkillPoint)
+            {
+                _skillRef.SkillValue += 1;
+                _skillController.UseSkillPoint(_skillRef);
+            }
+        }
     }
 }
