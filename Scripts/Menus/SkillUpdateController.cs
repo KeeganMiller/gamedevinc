@@ -13,6 +13,8 @@ public partial class SkillUpdateController : Control
     private Button _increaseBtn;
     // Value of the skills
     private Label _skillValue;
+
+    private Skill _skillRef;                        // Store reference to the skill
     public override void _Ready()
     {
         _skillName = GetNode<Label>("SkillName");
@@ -25,6 +27,15 @@ public partial class SkillUpdateController : Control
 
         if (_increaseBtn != null)
             _increaseBtn.Pressed += OnIncreasePressed;
+    }
+
+    public void Setup(Skill skill)
+    {
+        _skillRef = skill;
+        if (_skillName != null)
+            _skillName.Text = skill.SkillName;
+        if (_skillValue != null)
+            _skillValue.Text = skill.SkillValue.ToString();
     }
 
     private void OnDecreasePressed()
