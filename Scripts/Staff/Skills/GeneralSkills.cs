@@ -77,50 +77,11 @@ public class GeneralSkills
     }
 
     /// <summary>
-    /// Gets the list of skills in the data file, related to the passed in job type
-    /// Will also generate random stat values if required
+    /// Generates the skills for a character
     /// </summary>
-    /// <param name="jobType">Type of job to get the skills for</param>
-    /// <param name="randomSkillValues">If we want to use the current values otherwise</param>
-    /// <returns></returns>
-    public List<Skill> CreateRelatedSkills(EModuleJobType jobType)
+    /// <param name="characterSkillType">Type of skills to generate</param>
+    private void GenerateSkills(ESkillType characterSkillType)
     {
-        var rand = new RandomNumberGenerator();                 // Create random
-        var skillPath = "res://Data/Data.json";                     // reference to the data path
-        var relatedSkills = new List<Skill>();                  // Pre-define list of skills to return
-        // Check the file exist
-        if(FileAccess.FileExists(skillPath))
-        {
-            var file = FileAccess.Open(skillPath, FileAccess.ModeFlags.Read);
-            if(file != null && file.IsOpen())
-            {
-                var txtData = file.GetAsText();
-                var tokens = JArray.Parse(txtData);
-
-                foreach(var token in tokens)
-                {
-                    var dataContent = JsonConvert.DeserializeObject<DataContent>(token.ToString());
-                    if((EDataCategory)dataContent.Category == EDataCategory.Skill)
-                    {
-                        if((EModuleJobType)dataContent.JobType == EModuleJobType.JOB_All || (EModuleJobType)dataContent.JobType == jobType)
-                        {
-                            var skill = JsonConvert.DeserializeObject<Skill>(token.ToString());
-                            if(skill != null)
-                            {
-                                rand.Randomize();
-                                skill.SkillValue = rand.RandiRange(1, MAX_SKILL_POINTS);
-                                relatedSkills.Add(skill);
-                            } else
-                            {
-                                GD.PushWarning("GeneralSkills::CreateRelatedSkills -> Failed to create skill");
-                            }
-                        }
-                    }
-                }
-
-                file.Close();
-            }
-        }
 
         return relatedSkills;
     }
