@@ -22,6 +22,7 @@ public partial class DataLoader : Node
     {
         base._Ready();
         Instance = this;
+        LoadAllData();
     }
 
     private void LoadAllData()

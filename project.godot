@@ -21,6 +21,7 @@ ModuleDatabase="*res://Scripts/Modules/ModuleDatabase.cs"
 StaffDatabase="*res://Scripts/Controllers/StaffDatabase.cs"
 CompanyDatabase="*res://Scripts/Controllers/CompanyDatabase.cs"
 GameController="*res://Scripts/Controllers/GameController.cs"
+DataLoader="*res://Scripts/Controllers/DataLoader.cs"
 
 [display]
 
