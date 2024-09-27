@@ -5,8 +5,8 @@ namespace GameDevInc;
 
 public partial class SkillSetupController : Control
 {
-    private GeneralSkills _generalSkills;                       // Reference to the players skills
     private int SkillPoints = 8;
+    [Export] private int _maxSkillPoints;
     public bool CanUseSkillPoint => SkillPoints > 0;
 
     private GeneralSkills _playerSkills;
@@ -20,8 +20,11 @@ public partial class SkillSetupController : Control
         _skillContainer = GD.Load<PackedScene>("res://UserInterface/skill_container.tscn");
         _skillsDisplayContainer =
             GetNode<VBoxContainer>("VScrollBar/ScrollContainer/VBoxContainer");
+
         _skillPointsLabel = GetNode<Label>("SkillPointLabel");
-        _skillPointsLabel.Text = "Skill Points: " + SkillPoints;
+        SkillPoints = _maxSkillPoints;  
+        if(_skillPointsLabel != null)
+            _skillPointsLabel.Text = "Skill Points: " + SkillPoints;
     }
 
     public void Setup()
@@ -29,7 +32,7 @@ public partial class SkillSetupController : Control
         var player = CompanyDatabase.Instance.PlayersStaffMember;
         if (player != null)
         {
-            _playerSkills = player.GeneralStats;
+            _playerSkills = CompanyDatabase.Instance.PlayersStaffMember.GeneralStats;
             if (_playerSkills != null)
             {
                 foreach (var skill in _playerSkills.Skills)
@@ -51,12 +54,19 @@ public partial class SkillSetupController : Control
     public void UseSkillPoint(Skill skillName)
     {
         SkillPoints -= 1;
-        _skillPointsLabel.Text = "Skill Points: " + SkillPoints;
+        if (SkillPoints < 0)
+            SkillPoints = 0;
+        else
+            _skillPointsLabel.Text = "Skill Points: " + SkillPoints;
+
     }
 
     public void AddSkillPoint(Skill skillName)
     {
         SkillPoints += 1;
-        _skillPointsLabel.Text = "Skill Points: " + SkillPoints;
+        if (SkillPoints > _maxSkillPoints)
+            SkillPoints = _maxSkillPoints;
+        else
+            _skillPointsLabel.Text = "Skill Points: " + SkillPoints;
     }
 }

@@ -9,7 +9,7 @@ public class CEO : StaffMember
     {
     }
 
-    public CEO(string name, EStaffSex sex, EModuleJobType jobType = EModuleJobType.JOB_All) : base(name, sex, jobType)
+    public CEO(string name, EStaffSex sex, EModuleJobType jobType = EModuleJobType.JOB_All, bool generateStats = false) : base(name, sex, jobType, generateStats)
     {
     }
 

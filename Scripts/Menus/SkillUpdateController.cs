@@ -49,6 +49,7 @@ public partial class SkillUpdateController : Control
         {
             _skillRef.SkillValue -= 1;
             _skillController.AddSkillPoint(_skillRef);
+            _skillValue.Text = _skillRef.SkillValue.ToString();
         }
         
     }
@@ -61,6 +62,7 @@ public partial class SkillUpdateController : Control
             {
                 _skillRef.SkillValue += 1;
                 _skillController.UseSkillPoint(_skillRef);
+                _skillValue.Text = _skillRef.SkillValue.ToString();
             }
         }
     }

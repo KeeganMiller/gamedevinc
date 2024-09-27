@@ -320,7 +320,7 @@ public partial class NewGamePopup : Control
     {
         if(ValidateCeoCreation())
         {
-            CompanyDatabase.Instance.PlayersStaffMember = new CEO(_ceoNameInput.Text, (EStaffSex)_genderDropdown.Selected, EModuleJobType.JOB_All);
+            CompanyDatabase.Instance.PlayersStaffMember = new CEO(_ceoNameInput.Text, (EStaffSex)_genderDropdown.Selected, EModuleJobType.JOB_All, true);
             CompanyDatabase.Instance.PlayersStaffMember.SetCharacterModel(null, _selectedCharacter.ModelIndex);
             if (_characterCreationContainer is CharacterDesignMenu designMenu)
                 designMenu.Setup();
@@ -353,6 +353,8 @@ public partial class NewGamePopup : Control
             _designMenu.CompleteForm();
             _characterCreationContainer.Visible = false;
             _skillSetupContainer.Visible = true;
+            if(_skillSetupContainer is SkillSetupController setupCtrl)
+                setupCtrl.Setup();
         }
     }
 

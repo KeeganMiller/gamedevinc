@@ -69,11 +69,19 @@ public abstract class StaffMember
         m_WorkTimer = new Timer(3f, WorkOnModules, true, true);
     }
 
-    public StaffMember(string name, EStaffSex sex, EModuleJobType jobType = EModuleJobType.JOB_All)
+    public StaffMember(string name, EStaffSex sex, EModuleJobType jobType = EModuleJobType.JOB_All, bool generateStats = false)
     {
         Name = name;
         Sex = sex;
         JobType = jobType;
+
+        if (generateStats)
+        {
+            GenerateLevelDetails();
+            GenerateStats();
+        }
+
+        m_WorkTimer = new Timer(3f, WorkOnModules, true, true);
     }
 
     /// <summary>

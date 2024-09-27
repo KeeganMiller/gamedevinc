@@ -90,7 +90,6 @@ public partial class StaffDatabase : Node
         var skills = new List<Skill>(); 
         foreach (var skill in Skills)
         {
-            
             // Add if it matches the job type
             if (skill.SkillTypeAsEnum == skillType)
             {

@@ -36,7 +36,7 @@ public partial class DataLoader : Node
                 var dataContent = JsonConvert.DeserializeObject<DataContent>(token.ToString());
                 if (dataContent != null)
                 {
-                    switch ((EDataCategory)dataContent.Category)
+                    switch ((EDataCategory)dataContent.DataCategory)
                     {
                         case EDataCategory.Skill:
                             var skill = JsonConvert.DeserializeObject<Skill>(token.ToString());
@@ -52,6 +52,6 @@ public partial class DataLoader : Node
 
 public class DataContent
 {
-    public int Category;
+    public int DataCategory;
     public int JobType;
 }

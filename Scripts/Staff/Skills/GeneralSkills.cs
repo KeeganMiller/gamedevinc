@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -84,10 +85,6 @@ public class GeneralSkills
     {
         var generalSkills = StaffDatabase.Instance.GetAllSkillsOfJob(ESkillType.General);
         foreach(var skill in generalSkills)
-            _skills.Add(skill);
-
-        var jobRelatedSkills = StaffDatabase.Instance.GetAllSkillsOfJob(characterSkillType);
-        foreach(var skill in jobRelatedSkills)
             _skills.Add(skill);
     }
 
