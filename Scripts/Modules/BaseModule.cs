@@ -10,19 +10,19 @@ namespace GameDevInc;
 
 public enum EModuleJobType
 {
-    JOB_Programmer,
-    JOB_2DArtist,
-    JOB_3DArtist,
-    JOB_SoundEngineer,
-    JOB_Marketing,
-    JOB_Design,
-    JOB_UIUX,
-    JOB_QA,
-    JOB_HR,
-    JOB_Production,
-    JOB_Actor,
-    JOB_Writer,
-    JOB_All
+    JOB_Programmer = 0,
+    JOB_2DArtist = 1,
+    JOB_3DArtist = 2,
+    JOB_SoundEngineer = 3,
+    JOB_Marketing = 4,
+    JOB_Design = 5,
+    JOB_UIUX = 6,
+    JOB_QA = 7,
+    JOB_HR = 8,
+    JOB_Production = 9,
+    JOB_Actor = 10,
+    JOB_Writer = 11,
+    JOB_All = 12
 }
 
 public enum EGameSize

@@ -8,6 +8,8 @@ public partial class StaffDatabase : Node
 {
     
     public static StaffDatabase Instance { get; private set; }
+
+    public List<Skill> Skills = new List<Skill>();
     
     // == Generator Properties == //
     private List<StaffNameData> Names = new List<StaffNameData>();

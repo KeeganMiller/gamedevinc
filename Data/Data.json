@@ -1,0 +1,33 @@
+[
+	{
+		"DataCategory": 1,
+		"JobType": 12,
+		"SkillName": "Creativity",
+		"SkillType": 10,
+		"SkillValue": 4,
+	},
+	{
+		"DataCategory": 1,
+		"JobType": 12,
+		"SkillName": "Work Speed",
+		"SkillValue": 4,
+	},
+	{
+		"DataCategory": 1,
+		"JobType": 12,
+		"SkillName": "Work Quality",
+		"SkillValue": 4
+	},
+	{
+		"DataCategory": 1,
+		"JobType": 12,
+		"SkillName": "AttentionToDetail",
+		"SkillValue": 4,
+	},
+	{
+		"DataCategory": 1,
+		"JobType": 12,
+		"SkillName": "Creativity",
+		"SkillValue": 4
+	}
+]

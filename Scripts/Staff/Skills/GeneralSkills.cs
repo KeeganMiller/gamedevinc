@@ -7,17 +7,17 @@ namespace GameDevInc;
 
 public enum ESkillType
 {
-    Programming,
-    Artist2D,
-    Artist3D,
-    Marketing,
-    Actor, 
-    Production,
-    QA,
-    Writer,
-    Designer,
-    Sound,
-    General
+    Programming = 0,
+    Artist2D = 1,
+    Artist3D = 2,
+    Marketing = 3,
+    Actor = 4, 
+    Production = 5,
+    QA = 6,
+    Writer = 7,
+    Designer = 8,
+    Sound = 9,
+    General = 10
 }
 
 public class GeneralSkills
@@ -134,4 +134,18 @@ public class Skill
     public int SkillValue;
     [JsonProperty]
     public int SkillType;
+    
+    public ESkillType SkillTypeAsEnum => (ESkillType)SkillType;
+
+    public Skill()
+    {
+        
+    }
+
+    public Skill(Skill skill)
+    {
+        SkillName = skill.SkillName;
+        SkillValue = skill.SkillValue;
+        SkillType = skill.SkillType;
+    }
 }

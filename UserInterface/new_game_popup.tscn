@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://npv0frxd00f8"]
+[gd_scene load_steps=42 format=3 uid="uid://npv0frxd00f8"]
 
 [ext_resource type="Texture2D" uid="uid://dgfhj0axjsd76" path="res://UserInterface/MainMenu/NewGame/MM_NewGameBackground.png" id="1_iw8bh"]
 [ext_resource type="Script" path="res://Scripts/Menus/NewGamePopup.cs" id="1_p6us3"]
@@ -57,6 +57,24 @@ font_color = Color(0, 0, 0, 1)
 font = ExtResource("2_ix7pq")
 font_size = 42
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_omnfp"]
+line_spacing = 2.0
+font = ExtResource("2_ix7pq")
+font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bs1f7"]
+
+[sub_resource type="Theme" id="Theme_3ldj2"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 48
+Button/fonts/font = ExtResource("2_ix7pq")
+Button/styles/normal = SubResource("StyleBoxEmpty_bs1f7")
+
+[sub_resource type="LabelSettings" id="LabelSettings_4005u"]
+font = ExtResource("2_ix7pq")
+font_size = 32
 
 [sub_resource type="Environment" id="Environment_qeefs"]
 background_mode = 2
@@ -745,11 +763,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CEOCharacterDesign" type="Control" parent="TextureRect" node_paths=PackedStringArray("_colorPicker", "_selectedCharacterColors", "_viewport")]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("29_fnvd1")
-_colorPicker = NodePath("TextureRect/ColorPicker")
+_colorPicker = NodePath("ColorPickerContainer/ColorPicker")
 _selectedCharacterColors = [NodePath("SkinColor"), NodePath("HairColorOne"), NodePath("HairColorTwo"), NodePath("ShirtColorOne"), NodePath("ShirtColorTwo"), NodePath("ShirtColorThree"), NodePath("Pants")]
 _viewport = NodePath("../../SubViewport")
 
@@ -1170,7 +1189,7 @@ label_settings = SubResource("LabelSettings_4irpf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/CEOCharacterDesign"]
+[node name="ColorPickerContainer" type="TextureRect" parent="TextureRect/CEOCharacterDesign"]
 layout_mode = 0
 offset_left = 801.0
 offset_top = 352.0
@@ -1180,7 +1199,7 @@ texture = ExtResource("1_iw8bh")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ColorPicker" type="ColorPicker" parent="TextureRect/CEOCharacterDesign/TextureRect"]
+[node name="ColorPicker" type="ColorPicker" parent="TextureRect/CEOCharacterDesign/ColorPickerContainer"]
 layout_mode = 0
 offset_left = 94.0
 offset_top = 164.0
@@ -1194,6 +1213,55 @@ color_modes_visible = false
 sliders_visible = false
 hex_visible = false
 presets_visible = false
+
+[node name="CEOSkills" type="Control" parent="TextureRect"]
+anchors_preset = 0
+offset_left = 126.0
+offset_top = 185.0
+offset_right = 808.0
+offset_bottom = 1045.0
+
+[node name="Control" type="Control" parent="TextureRect/CEOSkills"]
+anchors_preset = 0
+offset_right = 682.0
+offset_bottom = 40.0
+
+[node name="SkillName" type="Label" parent="TextureRect/CEOSkills/Control"]
+layout_mode = 0
+offset_right = 302.0
+offset_bottom = 38.0
+text = "Creativity"
+label_settings = SubResource("LabelSettings_omnfp")
+horizontal_alignment = 2
+
+[node name="IncreaseBtn" type="Button" parent="TextureRect/CEOSkills/Control"]
+layout_mode = 0
+offset_left = 639.0
+offset_top = -20.0
+offset_right = 677.0
+offset_bottom = 36.0
+theme = SubResource("Theme_3ldj2")
+text = ">"
+
+[node name="DecreaseBtn" type="Button" parent="TextureRect/CEOSkills/Control"]
+layout_mode = 0
+offset_left = 559.0
+offset_top = -20.0
+offset_right = 597.0
+offset_bottom = 36.0
+theme = SubResource("Theme_3ldj2")
+text = "<"
+
+[node name="SkillValue" type="Label" parent="TextureRect/CEOSkills/Control"]
+layout_mode = 0
+offset_left = 596.0
+offset_top = -2.0
+offset_right = 636.0
+offset_bottom = 36.0
+text = "25"
+label_settings = SubResource("LabelSettings_4005u")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ExitBtn" type="Button" parent="."]
 layout_mode = 1
